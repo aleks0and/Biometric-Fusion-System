@@ -1,0 +1,12 @@
+C:\Users\aleks\Downloads\ImageSaveInDataBase\bin\Debug\ImageSaveInDataBase.exe.config
+C:\Users\aleks\Downloads\ImageSaveInDataBase\obj\Debug\ImageSaveInDataBase.csprojResolveAssemblyReference.cache
+C:\Users\aleks\Downloads\ImageSaveInDataBase\obj\Debug\ImageSaveInDataBase.frmImageInput.resources
+C:\Users\aleks\Downloads\ImageSaveInDataBase\obj\Debug\ImageSaveInDataBase.frmImageReport.resources
+C:\Users\aleks\Downloads\ImageSaveInDataBase\obj\Debug\ImageSaveInDataBase.csproj.GenerateResource.Cache
+C:\Users\aleks\Downloads\ImageSaveInDataBase\bin\Debug\ImageSaveInDataBase.exe
+C:\Users\aleks\Downloads\ImageSaveInDataBase\bin\Debug\ImageSaveInDataBase.pdb
+C:\Users\aleks\Downloads\ImageSaveInDataBase\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
+C:\Users\aleks\Downloads\ImageSaveInDataBase\bin\Debug\CrystalDecisions.ReportSource.dll
+C:\Users\aleks\Downloads\ImageSaveInDataBase\bin\Debug\CrystalDecisions.Windows.Forms.dll
+C:\Users\aleks\Downloads\ImageSaveInDataBase\obj\Debug\ImageSaveInDataBase.exe
+C:\Users\aleks\Downloads\ImageSaveInDataBase\obj\Debug\ImageSaveInDataBase.pdb
