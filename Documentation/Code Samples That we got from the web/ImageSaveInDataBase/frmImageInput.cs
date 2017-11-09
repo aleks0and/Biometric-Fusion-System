@@ -144,7 +144,7 @@ namespace ImageSaveInDataBase
             // sqlConnection1
             // 
             //this.sqlConnection1.ConnectionString = ((string)(configurationAppSettings.GetValue("ConString", typeof(string))));
-            this.sqlConnection1.ConnectionString = "Server=localhost\\MSSQLSERVER;Data Source=DESKTOP-TVN9FHA;Initial Catalog = BiometricDB; User ID = sa; Password = 1234qwerAS";
+            this.sqlConnection1.ConnectionString = "Server=localhost\\MSSQLSERVER;Data Source=NameOfYourServer;Initial Catalog = BiometricDB; User ID = yourUser; Password = yourPassword";
             //this.sqlConnection1.ConnectionString = "Data Source=MSSQL1;Initial Catalog=AdventureWorks;" + "Integrated Security=true;";
             //Server=myServerName\myInstanceName;Database=myDataBase;User Id=myUsername;Password = myPassword;
             // 
