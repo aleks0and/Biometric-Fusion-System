@@ -12,3 +12,6 @@ C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Documentation\Code Samples T
 C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Documentation\Code Samples That we got from the web\WavFileReader\WavFileReader\obj\Debug\WavFileReader.csproj.CoreCompileInputs.cache
 C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Documentation\Code Samples That we got from the web\WavFileReader\WavFileReader\obj\Debug\WavFileReader.exe
 C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Documentation\Code Samples That we got from the web\WavFileReader\WavFileReader\obj\Debug\WavFileReader.pdb
+C:\Users\aleks\Desktop\Engineering Thesis\Documentation\Code Samples That we got from the web\WavFileReader\WavFileReader\bin\Debug\WavFileReader.exe.config
+C:\Users\aleks\Desktop\Engineering Thesis\Documentation\Code Samples That we got from the web\WavFileReader\WavFileReader\obj\Debug\WavFileReader.exe
+C:\Users\aleks\Desktop\Engineering Thesis\Documentation\Code Samples That we got from the web\WavFileReader\WavFileReader\obj\Debug\WavFileReader.pdb

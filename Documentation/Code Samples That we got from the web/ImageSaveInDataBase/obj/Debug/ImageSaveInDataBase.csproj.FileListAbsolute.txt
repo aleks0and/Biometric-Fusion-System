@@ -10,3 +10,15 @@ C:\Users\aleks\Downloads\ImageSaveInDataBase\bin\Debug\CrystalDecisions.ReportSo
 C:\Users\aleks\Downloads\ImageSaveInDataBase\bin\Debug\CrystalDecisions.Windows.Forms.dll
 C:\Users\aleks\Downloads\ImageSaveInDataBase\obj\Debug\ImageSaveInDataBase.exe
 C:\Users\aleks\Downloads\ImageSaveInDataBase\obj\Debug\ImageSaveInDataBase.pdb
+C:\Users\aleks\Desktop\Engineering Thesis\Documentation\Code Samples That we got from the web\ImageSaveInDataBase\bin\Debug\ImageSaveInDataBase.exe.config
+C:\Users\aleks\Desktop\Engineering Thesis\Documentation\Code Samples That we got from the web\ImageSaveInDataBase\obj\Debug\ImageSaveInDataBase.exe
+C:\Users\aleks\Desktop\Engineering Thesis\Documentation\Code Samples That we got from the web\ImageSaveInDataBase\obj\Debug\ImageSaveInDataBase.pdb
+C:\Users\aleks\Desktop\Engineering Thesis\Documentation\Code Samples That we got from the web\ImageSaveInDataBase\bin\Debug\ImageSaveInDataBase.exe
+C:\Users\aleks\Desktop\Engineering Thesis\Documentation\Code Samples That we got from the web\ImageSaveInDataBase\bin\Debug\ImageSaveInDataBase.pdb
+C:\Users\aleks\Desktop\Engineering Thesis\Documentation\Code Samples That we got from the web\ImageSaveInDataBase\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
+C:\Users\aleks\Desktop\Engineering Thesis\Documentation\Code Samples That we got from the web\ImageSaveInDataBase\bin\Debug\CrystalDecisions.ReportSource.dll
+C:\Users\aleks\Desktop\Engineering Thesis\Documentation\Code Samples That we got from the web\ImageSaveInDataBase\bin\Debug\CrystalDecisions.Windows.Forms.dll
+C:\Users\aleks\Desktop\Engineering Thesis\Documentation\Code Samples That we got from the web\ImageSaveInDataBase\obj\Debug\ImageSaveInDataBase.csprojResolveAssemblyReference.cache
+C:\Users\aleks\Desktop\Engineering Thesis\Documentation\Code Samples That we got from the web\ImageSaveInDataBase\obj\Debug\ImageSaveInDataBase.frmImageInput.resources
+C:\Users\aleks\Desktop\Engineering Thesis\Documentation\Code Samples That we got from the web\ImageSaveInDataBase\obj\Debug\ImageSaveInDataBase.frmImageReport.resources
+C:\Users\aleks\Desktop\Engineering Thesis\Documentation\Code Samples That we got from the web\ImageSaveInDataBase\obj\Debug\ImageSaveInDataBase.csproj.GenerateResource.Cache
