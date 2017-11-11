@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2008
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WavFileReader", "WavFileReader\WavFileReader.csproj", "{CBDF12A1-5CF8-4FE7-A06A-E2B2FCC425BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBDF12A1-5CF8-4FE7-A06A-E2B2FCC425BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBDF12A1-5CF8-4FE7-A06A-E2B2FCC425BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBDF12A1-5CF8-4FE7-A06A-E2B2FCC425BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBDF12A1-5CF8-4FE7-A06A-E2B2FCC425BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {83B2F118-A481-4E3C-92C0-1A08BD1FB033}
+	EndGlobalSection
+EndGlobal

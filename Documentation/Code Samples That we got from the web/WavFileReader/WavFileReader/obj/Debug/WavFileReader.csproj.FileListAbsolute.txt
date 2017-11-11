@@ -1,0 +1,14 @@
+C:\Users\Kornel\source\repos\WavFileReader\WavFileReader\bin\Debug\WavFileReader.exe.config
+C:\Users\Kornel\source\repos\WavFileReader\WavFileReader\bin\Debug\WavFileReader.exe
+C:\Users\Kornel\source\repos\WavFileReader\WavFileReader\bin\Debug\WavFileReader.pdb
+C:\Users\Kornel\source\repos\WavFileReader\WavFileReader\obj\Debug\WavFileReader.csprojResolveAssemblyReference.cache
+C:\Users\Kornel\source\repos\WavFileReader\WavFileReader\obj\Debug\WavFileReader.csproj.CoreCompileInputs.cache
+C:\Users\Kornel\source\repos\WavFileReader\WavFileReader\obj\Debug\WavFileReader.exe
+C:\Users\Kornel\source\repos\WavFileReader\WavFileReader\obj\Debug\WavFileReader.pdb
+C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Documentation\Code Samples That we got from the web\WavFileReader\WavFileReader\bin\Debug\WavFileReader.exe.config
+C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Documentation\Code Samples That we got from the web\WavFileReader\WavFileReader\bin\Debug\WavFileReader.exe
+C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Documentation\Code Samples That we got from the web\WavFileReader\WavFileReader\bin\Debug\WavFileReader.pdb
+C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Documentation\Code Samples That we got from the web\WavFileReader\WavFileReader\obj\Debug\WavFileReader.csprojResolveAssemblyReference.cache
+C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Documentation\Code Samples That we got from the web\WavFileReader\WavFileReader\obj\Debug\WavFileReader.csproj.CoreCompileInputs.cache
+C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Documentation\Code Samples That we got from the web\WavFileReader\WavFileReader\obj\Debug\WavFileReader.exe
+C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Documentation\Code Samples That we got from the web\WavFileReader\WavFileReader\obj\Debug\WavFileReader.pdb
