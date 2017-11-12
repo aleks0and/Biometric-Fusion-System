@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpeechRecognition;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -94,10 +95,8 @@ namespace WavFileReader
             }
             Console.WriteLine(Header);
 
-            List<short> lNewDataList = lDataList;
-            List<short> rNewDataList = rDataList;
-
-            Header.dataSize = (uint)Math.Max(lNewDataList.Count, rNewDataList.Count) * 4;
+            FrameMaker frameMaker = new FrameMaker(frameLength: 0.05f, frameInterval: 0.025f);
+            var frame = frameMaker.ToFrames(lDataList, (int)Header.sampleRate);
 
             return;
         }

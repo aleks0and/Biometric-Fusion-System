@@ -1,0 +1,6 @@
+C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Project\BiometricFusionSystem\BiometricFusionSystem\bin\Debug\BiometricFusionSystem.dll
+C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Project\BiometricFusionSystem\BiometricFusionSystem\bin\Debug\BiometricFusionSystem.pdb
+C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Project\BiometricFusionSystem\BiometricFusionSystem\obj\Debug\BiometricFusionSystem.csprojResolveAssemblyReference.cache
+C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Project\BiometricFusionSystem\BiometricFusionSystem\obj\Debug\BiometricFusionSystem.csproj.CoreCompileInputs.cache
+C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Project\BiometricFusionSystem\BiometricFusionSystem\obj\Debug\BiometricFusionSystem.dll
+C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Project\BiometricFusionSystem\BiometricFusionSystem\obj\Debug\BiometricFusionSystem.pdb

@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace SpeechRecognition
 {
-    public class Class1
+    public class Frame
     {
+       public List<short> Samples { get; set; }
+
+       public Frame(List<short> _samples)
+       {
+            Samples = _samples;
+       }
     }
 }
