@@ -4,3 +4,7 @@ C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Project\BiometricFusionSyste
 C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Project\BiometricFusionSystem\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
 C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Project\BiometricFusionSystem\Common\obj\Debug\Common.dll
 C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Project\BiometricFusionSystem\Common\obj\Debug\Common.pdb
+C:\Users\aleks\Desktop\Engineering Thesis\Project\BiometricFusionSystem\Common\bin\Debug\Common.dll
+C:\Users\aleks\Desktop\Engineering Thesis\Project\BiometricFusionSystem\Common\bin\Debug\Common.pdb
+C:\Users\aleks\Desktop\Engineering Thesis\Project\BiometricFusionSystem\Common\obj\Debug\Common.dll
+C:\Users\aleks\Desktop\Engineering Thesis\Project\BiometricFusionSystem\Common\obj\Debug\Common.pdb

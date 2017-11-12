@@ -4,3 +4,7 @@ C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Project\BiometricFusionSyste
 C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Project\BiometricFusionSystem\SpeechRecognition\obj\Debug\SpeechRecognition.csproj.CoreCompileInputs.cache
 C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Project\BiometricFusionSystem\SpeechRecognition\obj\Debug\SpeechRecognition.dll
 C:\Users\Kornel\Desktop\Git\Biometric-Fusion-System\Project\BiometricFusionSystem\SpeechRecognition\obj\Debug\SpeechRecognition.pdb
+C:\Users\aleks\Desktop\Engineering Thesis\Project\BiometricFusionSystem\SpeechRecognition\bin\Debug\SpeechRecognition.dll
+C:\Users\aleks\Desktop\Engineering Thesis\Project\BiometricFusionSystem\SpeechRecognition\bin\Debug\SpeechRecognition.pdb
+C:\Users\aleks\Desktop\Engineering Thesis\Project\BiometricFusionSystem\SpeechRecognition\obj\Debug\SpeechRecognition.dll
+C:\Users\aleks\Desktop\Engineering Thesis\Project\BiometricFusionSystem\SpeechRecognition\obj\Debug\SpeechRecognition.pdb

@@ -1,0 +1,8 @@
+C:\Users\aleks\Desktop\Engineering Thesis\Project\BiometricFusionSystem\UnitTests\obj\Debug\UnitTests.csprojResolveAssemblyReference.cache
+C:\Users\aleks\Desktop\Engineering Thesis\Project\BiometricFusionSystem\UnitTests\bin\Debug\UnitTests.dll
+C:\Users\aleks\Desktop\Engineering Thesis\Project\BiometricFusionSystem\UnitTests\bin\Debug\UnitTests.pdb
+C:\Users\aleks\Desktop\Engineering Thesis\Project\BiometricFusionSystem\UnitTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\aleks\Desktop\Engineering Thesis\Project\BiometricFusionSystem\UnitTests\bin\Debug\SpeechRecognition.dll
+C:\Users\aleks\Desktop\Engineering Thesis\Project\BiometricFusionSystem\UnitTests\bin\Debug\SpeechRecognition.pdb
+C:\Users\aleks\Desktop\Engineering Thesis\Project\BiometricFusionSystem\UnitTests\obj\Debug\UnitTests.dll
+C:\Users\aleks\Desktop\Engineering Thesis\Project\BiometricFusionSystem\UnitTests\obj\Debug\UnitTests.pdb

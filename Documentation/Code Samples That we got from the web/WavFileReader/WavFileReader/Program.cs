@@ -97,7 +97,24 @@ namespace WavFileReader
 
             FrameMaker frameMaker = new FrameMaker(frameLength: 0.05f, frameInterval: 0.025f);
             var frame = frameMaker.ToFrames(lDataList, (int)Header.sampleRate);
-
+            Frame sampleCopy = new Frame(frame[120].Samples);
+            Window windowFunction = new GaussWindow();
+            
+            for (int i = 0; i < frame.Count; i++)
+            {
+                windowFunction.ApplyWindow(frame[i]);
+            }
+            Frame sampleCheck = new Frame(frame[120].Samples);
+            foreach (var sample in frame)
+            {
+                foreach (var f in sample.Samples)
+                {
+                    if (f > 0)
+                    {
+                        Console.WriteLine("f =" + f);
+                    }
+                }
+            }
             return;
         }
     }

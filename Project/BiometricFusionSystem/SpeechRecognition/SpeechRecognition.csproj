@@ -42,8 +42,10 @@
   <ItemGroup>
     <Compile Include="FrameMaker.cs" />
     <Compile Include="Frame.cs" />
+    <Compile Include="GaussWindow.cs" />
     <Compile Include="HammingWindow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Window.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
