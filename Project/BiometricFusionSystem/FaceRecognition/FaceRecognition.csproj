@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GaborFilter.cs" />
     <Compile Include="HistogramEqualization.cs" />
     <Compile Include="INormalization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

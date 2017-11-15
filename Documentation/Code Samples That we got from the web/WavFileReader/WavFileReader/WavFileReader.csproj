@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Frame.cs" />
     <Compile Include="FrameMaker.cs" />
+    <Compile Include="GaborFilter.cs" />
     <Compile Include="GaussWindow.cs" />
     <Compile Include="HammingWindow.cs" />
     <Compile Include="Program.cs" />
