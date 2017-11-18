@@ -9,8 +9,7 @@ namespace SpeechRecognition
 {
     public class Periodogram
     {
-
-        public List<double> GetEstimate(Frame frame)
+        public static List<double> GetEstimate(Frame frame)
         {
             var fourierCoeffs = FourierTransform.Apply(frame.Samples);
 
