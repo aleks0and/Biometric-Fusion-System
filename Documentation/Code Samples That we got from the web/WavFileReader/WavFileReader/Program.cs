@@ -90,6 +90,19 @@ namespace WavFileReader
                 estimates.Add(estimate);
             }
 
+            MelFilterbank melFilterbank = new MelFilterbank(300, 8000, 10, (int)Header.sampleRate, estimates[0].Count);
+
+            melFilterbank.GenerateFilterbanks();
+            melFilterbank.ConvertFilterbanks();
+            melFilterbank.CalculateFilters();
+            List<List<double>> dct = new List<List<double>>();
+            foreach (var est in estimates)
+            {
+                melFilterbank.CalculateFilterbanksEnergies(est);
+                dct.Add(melFilterbank.DiscreteCosineTransform());
+            }
+
+            Console.WriteLine("THE END------------------------------------");
         }
     
         private static void GaborTest()

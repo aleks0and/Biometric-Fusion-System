@@ -48,7 +48,7 @@ namespace SpeechRecognition
 
         public void ConvertFilterbanks()
         {
-            for(int i = 0; i < _filterbanksCount; i++)
+            for(int i = 0; i < _filterbanks.Count; i++)
             {
                 _filterbanks[i] = MelConverter.ToFrequency(_filterbanks[i]);
             }
