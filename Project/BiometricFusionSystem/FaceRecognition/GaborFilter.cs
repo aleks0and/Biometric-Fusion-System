@@ -26,9 +26,16 @@ namespace FaceRecognition
             _kernelSize = kernelSize;
         }
 
+        //private void CalculateStdDev(Bitmap b)
+        //{
+
+        //}
+
 
         public Bitmap CalculateGaborFilter(Bitmap b, int k, double lambda)
         {
+            //CalculateStdDev(b);
+
             int max = _kernelSize - 1;
             Bitmap bmp = new Bitmap(b.Width - max, b.Height - max);
             var kernel = GetKernel(k, lambda);

@@ -44,8 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FaceFeatureExtractor.cs" />
     <Compile Include="GaborFilter.cs" />
+    <Compile Include="GaborFilterMagnitudes.cs" />
+    <Compile Include="Histogram.cs" />
     <Compile Include="HistogramEqualization.cs" />
+    <Compile Include="HistogramFeatureExtraction.cs" />
     <Compile Include="INormalization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
