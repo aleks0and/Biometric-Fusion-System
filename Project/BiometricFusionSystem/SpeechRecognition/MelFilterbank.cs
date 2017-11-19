@@ -8,7 +8,7 @@ using MathNet.Numerics;
 
 namespace SpeechRecognition
 {
-    class MelFilterbank
+    public class MelFilterbank
     {
         private double _lowerFreq;
         private double _upperFreq;
@@ -48,7 +48,7 @@ namespace SpeechRecognition
 
         public void ConvertFilterbanks()
         {
-            for(int i = 0; i < _filterbanksCount; i++)
+            for(int i = 0; i < _filterbanks.Count; i++)
             {
                 _filterbanks[i] = MelConverter.ToFrequency(_filterbanks[i]);
             }
@@ -84,7 +84,7 @@ namespace SpeechRecognition
         public List<List<double>> CreateFilterbanks()
         {
             List<List<double>> fbs = new List<List<double>>();
-            for(int i = 1; i < _filterbanksCount - 1; i++)
+            for(int i = 1; i < _filterbanks.Count - 1; i++)
             {
                 List<double> f = CreateFilterbank(i);
                 fbs.Add(f);
@@ -92,10 +92,8 @@ namespace SpeechRecognition
             return fbs;
         }
 
-        public void CalculateFilterbanksEnergies(List<double> est)
+        public void CalculateFilterbanksEnergies(List<double> est, List<List<double>> fbs)
         {
-            var fbs = CreateFilterbanks();
-
             for(int i = 0; i < fbs.Count; i++)
             {
                 double energy = 0;
@@ -121,6 +119,7 @@ namespace SpeechRecognition
                 }
                 dct.Add(sum);
             }
+            _energies.Clear();
             return dct;
         }
     }

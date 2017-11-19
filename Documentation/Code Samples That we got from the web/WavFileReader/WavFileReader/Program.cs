@@ -95,10 +95,11 @@ namespace WavFileReader
             melFilterbank.GenerateFilterbanks();
             melFilterbank.ConvertFilterbanks();
             melFilterbank.CalculateFilters();
+            var fbs = melFilterbank.CreateFilterbanks();
             List<List<double>> dct = new List<List<double>>();
-            foreach (var est in estimates)
+            for(int k = 0; k < estimates.Count; k++)
             {
-                melFilterbank.CalculateFilterbanksEnergies(est);
+                melFilterbank.CalculateFilterbanksEnergies(estimates[k], fbs);
                 dct.Add(melFilterbank.DiscreteCosineTransform());
             }
 
