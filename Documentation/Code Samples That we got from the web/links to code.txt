@@ -1,3 +1,5 @@
 ImageSaveInDataBase: https://www.codeproject.com/Articles/10861/Storing-and-Retrieving-Images-from-SQL-Server-usin
 
 WavFileReader: https://gist.github.com/yomakkkk/2290864
+
+Voice feature extraction: http://practicalcryptography.com/miscellaneous/machine-learning/guide-mel-frequency-cepstral-coefficients-mfccs/

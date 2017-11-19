@@ -15,7 +15,7 @@ namespace FaceRecognition
             var pmfR = new int[Max];
             var pmfG = new int[Max];
             var pmfB = new int[Max];
-            FindPmf(bmp, pmfR, pmfG, pmfB);
+            Histogram.GetHistogram(bmp, pmfR, pmfG, pmfB);
 
             var cdfR = new double[Max];
             var cdfG = new double[Max];
@@ -29,19 +29,7 @@ namespace FaceRecognition
             return Equalize(bmp, equalizedColors);
         }
 
-        private void FindPmf(Bitmap bmp, int[] r, int[] g, int[] b)
-        {
-            for(int i = 0; i < bmp.Width; i++)
-            {
-                for(int j = 0; j < bmp.Height; j++)
-                {
-                    var p = bmp.GetPixel(i, j);
-                    r[p.R]++;
-                    g[p.G]++;
-                    b[p.B]++;
-                }
-            }
-        }
+
 
         private void FindCdf(Bitmap bmp, int[] pmfR, int[] pmfG, int[] pmfB,
             double[] cdfR, double[] cdfG, double[] cdfB)

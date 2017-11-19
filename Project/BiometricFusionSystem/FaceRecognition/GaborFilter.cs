@@ -72,7 +72,6 @@ namespace FaceRecognition
             double yTheta = y * Math.Cos(angle * Math.PI / _n) - x * Math.Sin(angle * Math.PI / _n);
             double exp = -(Math.Pow(xTheta, 2) / Math.Pow(_stdDevX, 2) + Math.Pow(yTheta, 2) / Math.Pow(_stdDevY, 2));
             double cos = 2 * Math.PI * (xTheta / waveLength) + _phase;
-
             return Math.Exp(exp) * Math.Cos(cos);
         }
 
