@@ -37,5 +37,27 @@ namespace Common
             }
             return face;
         }
+
+        public void SaveFace(byte[] img, List<double> featureVector)
+        {
+            try
+            {
+                var cmdInsert = new SqlCommand("INSERT INTO FaceBiometric (Picture,FeatureVector) values(@Picture,@FeatureVector");
+                cmdInsert.Parameters.Add("@Picture", System.Data.SqlDbType.Image);
+                cmdInsert.Parameters.Add("@FeatureVector", System.Data.SqlDbType.VarBinary);
+                cmdInsert.Parameters["@Picture"].Value = img;
+                cmdInsert.Parameters["@FeatureVector"].Value = featureVector.ToArray();
+                _connection.SqlConnection.Open();
+                cmdInsert.ExecuteNonQuery();
+            }
+            catch(SqlException ex)
+            {
+
+            }
+            finally
+            {
+                _connection.SqlConnection.Close();
+            }
+        }
     }
 }
