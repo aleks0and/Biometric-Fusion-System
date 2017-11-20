@@ -16,6 +16,10 @@ namespace WavFileReader
         {
             PeriodogramTest();
         }
+        private static void DbTest()
+        {
+
+        }
         private static void PeriodogramTest()
         {
             WavHeader Header = new WavHeader();
