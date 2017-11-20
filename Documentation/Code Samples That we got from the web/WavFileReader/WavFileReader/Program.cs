@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FaceRecognition;
+using System.Drawing.Imaging;
 
 namespace WavFileReader
 {
@@ -14,11 +15,31 @@ namespace WavFileReader
     {
         static void Main(string[] args)
         {
-            PeriodogramTest();
+            DbTest();
         }
         private static void DbTest()
         {
+            //face
+            Bitmap b = new Bitmap(@"../../im-grayscale.bmp");
+            byte[] img = b.ToByteArray(ImageFormat.Bmp);
 
+            Common.DbConnection dbc = new Common.DbConnection();
+
+            Common.FaceRepository fr = new Common.FaceRepository(dbc);
+
+            List<double> fv = new List<double>{ 1.0, 2.0, 3.0 };
+
+            string strfv = "1.0,1.1,1.2,1.3";
+
+            fr.SaveFace(img, strfv, "first", "last");
+
+
+            //voice
+            byte[] speech = { 0, 100, 45, 34 };
+
+            Common.SpeechRepository sr = new Common.SpeechRepository(dbc);
+
+            sr.SaveSpeech(speech, strfv, "first", "last");
         }
         private static void PeriodogramTest()
         {
@@ -144,4 +165,19 @@ namespace WavFileReader
             superpos.Save("super.bmp");
         }
     }
+
+    public static class ImageExtensions
+    {
+        public static byte[] ToByteArray(this Image image, ImageFormat format)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, format);
+                return ms.ToArray();
+            }
+        }
+    }
+
 }
+
+

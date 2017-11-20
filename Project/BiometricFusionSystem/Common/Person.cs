@@ -15,5 +15,34 @@ namespace Common
         public List<double> FaceFeatureVector { get; set; }
         public byte[] VoiceRecording { get; set; }
         public List<double> VoiceFeatureVector { get; set; }
+
+        public string FaceFeatureVectorToString()
+        {
+            string ffv = "";
+
+            for(int i = 0; i < FaceFeatureVector.Count; i++)
+            {
+                ffv += FaceFeatureVector[i] + ",";
+            }
+
+            return ffv;
+        }
+
+        public List<double> FaceFeatureVectorToList(string strffv)
+        {
+            List<double> ffv = new List<double>();
+
+            string[] q = strffv.Split(',');
+
+            for(int i = 0; i < q.Length; i++)
+            {
+                double w = double.Parse(q[i]);
+                ffv.Add(w);
+            }
+
+            return ffv;
+        }
     }
+
+
 }

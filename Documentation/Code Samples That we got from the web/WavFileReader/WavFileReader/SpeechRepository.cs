@@ -13,7 +13,7 @@ namespace Common
     {
         private DbConnection _connection;
         private const int MaxNameLength = 50;
-        SpeechRepository(DbConnection connection)
+        public SpeechRepository(DbConnection connection)
         {
             _connection = connection;
         }
@@ -46,18 +46,19 @@ namespace Common
             }
             return person;
         }
-        public void SaveSpeech(byte[] speech, List<double> featureVector, string firstName, string lastName)
+        public void SaveSpeech(byte[] speech, string featureVector, string firstName, string lastName)
         {
             try
             {
-                var cmdInsert = new SqlCommand("INSERT INTO FaceBiometric (Speech,FeatureVector,FirstName,LastName)" +
-                    " values(@Speech,@FeatureVector,@FirstName,@LastName");
-                cmdInsert.Parameters.Add("@Speech", System.Data.SqlDbType.Image);
-                cmdInsert.Parameters.Add("@FeatureVector", System.Data.SqlDbType.VarBinary);
+                var cmdInsert = new SqlCommand("INSERT INTO VoiceBiometric (Speech,FeatureVector,FirstName,LastName)" +
+                    " values(@Speech,@FeatureVector,@FirstName,@LastName)");
+                cmdInsert.Connection = _connection.SqlConnection;
+                cmdInsert.Parameters.Add("@Speech", System.Data.SqlDbType.VarBinary);
+                cmdInsert.Parameters.Add("@FeatureVector", System.Data.SqlDbType.VarChar);
                 cmdInsert.Parameters.Add("@FirstName", System.Data.SqlDbType.VarChar, MaxNameLength);
                 cmdInsert.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar, MaxNameLength);
                 cmdInsert.Parameters["@Speech"].Value = speech;
-                cmdInsert.Parameters["@FeatureVector"].Value = featureVector.ToArray();
+                cmdInsert.Parameters["@FeatureVector"].Value = featureVector;
                 cmdInsert.Parameters["@FirstName"].Value = firstName;
                 cmdInsert.Parameters["@LastName"].Value = lastName;
                 _connection.SqlConnection.Open();

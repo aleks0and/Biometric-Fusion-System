@@ -47,18 +47,18 @@ namespace Common
             return person;
         }
 
-        public void SaveFace(byte[] img, List<double> featureVector, string firstName, string lastName)
+        public void SaveFace(byte[] img, string featureVector, string firstName, string lastName)
         {
             try
             {
-                var cmdInsert = new SqlCommand("INSERT INTO FaceBiometric (Picture,FeatureVector,FirstName,LastName)" +
-                    " values(@Picture,@FeatureVector,@FirstName,@LastName");
+                var cmdInsert = new SqlCommand("INSERT INTO FaceBiometric (Picture,FeatureVector,FirstName,LastName) values(@Picture,@FeatureVector,@FirstName,@LastName)");
+                cmdInsert.Connection = _connection.SqlConnection;
                 cmdInsert.Parameters.Add("@Picture", System.Data.SqlDbType.Image);
-                cmdInsert.Parameters.Add("@FeatureVector", System.Data.SqlDbType.VarBinary);
+                cmdInsert.Parameters.Add("@FeatureVector", System.Data.SqlDbType.VarChar);
                 cmdInsert.Parameters.Add("@FirstName", System.Data.SqlDbType.VarChar, MaxNameLength);
                 cmdInsert.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar, MaxNameLength);
                 cmdInsert.Parameters["@Picture"].Value = img;
-                cmdInsert.Parameters["@FeatureVector"].Value = featureVector.ToArray();
+                cmdInsert.Parameters["@FeatureVector"].Value = featureVector;
                 cmdInsert.Parameters["@FirstName"].Value = firstName;
                 cmdInsert.Parameters["@LastName"].Value = lastName;
                 _connection.SqlConnection.Open();
