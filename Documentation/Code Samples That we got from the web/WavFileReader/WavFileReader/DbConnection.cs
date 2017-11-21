@@ -15,7 +15,7 @@ namespace Common
         {
             //"Server=localhost\\MSSQLSERVER; Data Source=ServerName; Initial Catalog = BiometricDB; User ID = userId; Password = password";
             _sqlConnection = new SqlConnection();
-            _sqlConnection.ConnectionString = "Server=localhost\\instancename; Data Source=servername; Initial Catalog = BiometricDB; User ID = user; Password = password";
+            _sqlConnection.ConnectionString = "Server=localhost\\MSSQLSERVER; Data Source=DESKTOP-TVN9FHA\\MSSQLSERVER; Initial Catalog = BiometricDB; User ID = sa; Password = 1234qwerAS";
             _sqlConnection.FireInfoMessageEventOnUserErrors = false;
         }
 

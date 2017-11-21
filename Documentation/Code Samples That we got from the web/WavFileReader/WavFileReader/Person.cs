@@ -16,23 +16,23 @@ namespace Common
         public byte[] VoiceRecording { get; set; }
         public List<double> VoiceFeatureVector { get; set; }
 
-        public string FaceFeatureVectorToString()
+        public static string FeatureVectorToString(List<double> vector)
         {
             string ffv = "";
 
-            for(int i = 0; i < FaceFeatureVector.Count; i++)
+            for(int i = 0; i < vector.Count; i++)
             {
-                ffv += FaceFeatureVector[i] + ",";
+                ffv += vector[i] + ",";
             }
 
             return ffv;
         }
 
-        public List<double> FaceFeatureVectorToList(string strffv)
+        public static List<double> FeatureVectorToList(string vector)
         {
             List<double> ffv = new List<double>();
 
-            string[] q = strffv.Split(',');
+            string[] q = vector.Split(',');
 
             for(int i = 0; i < q.Length; i++)
             {

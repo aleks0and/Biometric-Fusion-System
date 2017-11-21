@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using FaceRecognition;
 using System.Drawing.Imaging;
+using Common;
+
 
 namespace WavFileReader
 {
@@ -20,33 +22,35 @@ namespace WavFileReader
         private static void DbTest()
         {
             //face
-            Bitmap b = new Bitmap(@"../../im-grayscale.bmp");
-            byte[] img = b.ToByteArray(ImageFormat.Bmp);
+            //Bitmap b = new Bitmap(@"../../im-grayscale.bmp");
+            //byte[] img = b.ToByteArray(ImageFormat.Bmp);
 
             Common.DbConnection dbc = new Common.DbConnection();
 
-            Common.FaceRepository fr = new Common.FaceRepository(dbc);
+            //Common.FaceRepository fr = new Common.FaceRepository(dbc);
 
-            List<double> fv = new List<double>{ 1.0, 2.0, 3.0 };
+            //List<double> fv = new List<double>{ 1.0, 2.0, 3.0 };
 
-            string strfv = "1.0,1.1,1.2,1.3";
+            //string strfv = "1.0,1.1,1.2,1.3";
 
-            fr.SaveFace(img, strfv, "first", "last");
+            //fr.SaveFace(img, strfv, "first", "last");
 
 
             //voice
-            byte[] speech = { 0, 100, 45, 34 };
-
+            byte[] speech = { 0, 1, 2, 3};
+            string path = "../../Samples/Aleks_kurczak.wav";
+            List<double> periodogramResult = PeriodogramTest(path);
+            string featureVector = Person.FeatureVectorToString(periodogramResult);
             Common.SpeechRepository sr = new Common.SpeechRepository(dbc);
 
-            sr.SaveSpeech(speech, strfv, "first", "last");
+            sr.SaveSpeech(speech, featureVector, "Aleks", "Kurczak?");
         }
-        private static void PeriodogramTest()
+        private static List<double> PeriodogramTest(string path)
         {
             WavHeader Header = new WavHeader();
             List<short> lDataList = new List<short>();
             List<short> rDataList = new List<short>();
-            string path = "../../Samples/0_0_0_0_1_1_1_1.wav";
+            
             using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
             using (BinaryReader br = new BinaryReader(fs))
             {
@@ -127,8 +131,10 @@ namespace WavFileReader
                 melFilterbank.CalculateFilterbanksEnergies(estimates[k], fbs);
                 dct.Add(melFilterbank.DiscreteCosineTransform());
             }
-
+            var result = dct.SelectMany(n => n).ToList();
             Console.WriteLine("THE END------------------------------------");
+            return result;
+            
         }
     
         private static void GaborTest()
