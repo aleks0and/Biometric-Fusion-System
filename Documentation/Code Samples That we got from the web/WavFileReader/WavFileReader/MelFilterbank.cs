@@ -58,7 +58,7 @@ namespace SpeechRecognition
         {
             for(int i = 0; i < _filterbanks.Count; i++)
             {
-                _filters.Add((int)Math.Floor((_fourierLength + 1) * _filterbanks[i] / _samplerate));
+                _filters.Add((int)Math.Floor((2 * _fourierLength + 1) * _filterbanks[i] / _samplerate));
             }
         }
         

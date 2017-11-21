@@ -14,7 +14,8 @@ namespace SpeechRecognition
             var fourierCoeffs = FourierTransform.Apply(frame.Samples);
 
             var estimates = new List<double>();
-            for(int i = 0; i < fourierCoeffs.Length; i++)
+            //take just first half of fourier coefficients
+            for(int i = 0; i < fourierCoeffs.Length / 2; i++)
             {
                 var powerSpectrum = Math.Pow(fourierCoeffs[i].Magnitude, 2) / frame.Samples.Count;
                 estimates.Add(powerSpectrum);

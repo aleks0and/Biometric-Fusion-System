@@ -24,12 +24,9 @@ namespace SpeechRecognition
             var frames = new List<Frame>();
 
             int index = 0;
-            while(index + step < audioStream.Count)
+            while(index + step < audioStream.Count && index + samplesPerFrame < audioStream.Count)
             {
-                if (index + samplesPerFrame < audioStream.Count)
-                {
-                    frames.Add(new Frame(audioStream.GetRange(index, samplesPerFrame)));
-                }
+                frames.Add(new Frame(audioStream.GetRange(index, samplesPerFrame)));
                 index += step;
                 
             }
