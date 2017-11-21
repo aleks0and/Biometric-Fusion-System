@@ -10,7 +10,7 @@ namespace SpeechRecognition
     {
         private double _threshold;
 
-        public DynamicTimeWarping(int threshold)
+        public DynamicTimeWarping(double threshold)
         {
             _threshold = threshold;
         }
@@ -37,7 +37,7 @@ namespace SpeechRecognition
             {
                 for(int j = 1; j < template.Count + 1; j++)
                 {
-                    distances[i, j] = GetDistance(input[i], template[j]) +
+                    distances[i, j] = GetDistance(input[i - 1], template[j - 1]) +
                         Math.Min(distances[i - 1, j], Math.Min(distances[i, j - 1],
                         distances[i - 1, j - 1]));
                 }
@@ -45,7 +45,7 @@ namespace SpeechRecognition
 
             var total = template.Sum();
 
-            return (distances[input.Count + 1, template.Count + 1] / total) < _threshold;
+            return (distances[input.Count, template.Count] / total) < _threshold;
         }
     }
 }
