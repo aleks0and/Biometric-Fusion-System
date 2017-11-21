@@ -44,12 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DynamicTimeWarping.cs" />
     <Compile Include="FrameMaker.cs" />
     <Compile Include="Frame.cs" />
     <Compile Include="GaussWindow.cs" />
     <Compile Include="HammingWindow.cs" />
-    <Compile Include="IVerifier.cs" />
     <Compile Include="MelConverter.cs" />
     <Compile Include="MelFilterbank.cs" />
     <Compile Include="Periodogram.cs" />

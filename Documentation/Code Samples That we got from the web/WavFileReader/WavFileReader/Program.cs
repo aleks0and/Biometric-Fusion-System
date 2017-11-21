@@ -43,7 +43,31 @@ namespace WavFileReader
             string featureVector = Person.FeatureVectorToString(periodogramResult);
             Common.SpeechRepository sr = new Common.SpeechRepository(dbc);
 
-            sr.SaveSpeech(speech, featureVector, "Aleks", "Kurczak?");
+            //sr.SaveSpeech(speech, featureVector, "Aleks", "Kurczak?");
+
+            //porownanie Aleks do Aleks
+            string path2 = "../../Samples/Aleks_kurczak2.wav";
+            List<double> periodogramResult2 = PeriodogramTest(path2);
+
+            DynamicTimeWarping dtw = new DynamicTimeWarping(0.1);
+            bool answer = dtw.Verify(periodogramResult2, periodogramResult);
+            Console.WriteLine("ANSWER Aleks=Aleks: " + answer);
+
+            //porownanie Aleks do Martyna
+            string path3 = "../../Samples/martyna_kurczak.wav";
+            List<double> periodogramResult3 = PeriodogramTest(path3);
+            
+            bool answer3 = dtw.Verify(periodogramResult3, periodogramResult);
+            Console.WriteLine("ANSWER Aleks=Martyna: " + answer3);
+
+            //porownanie Aleks do Kornel
+            string path4 = "../../Samples/kornel_kurczak.wav";
+            List<double> periodogramResult4 = PeriodogramTest(path4);
+            
+            bool answer4 = dtw.Verify(periodogramResult4, periodogramResult);
+            Console.WriteLine("ANSWER Aleks=Kornel: " + answer4);
+
+            Console.Read();
         }
         private static List<double> PeriodogramTest(string path)
         {
@@ -93,21 +117,21 @@ namespace WavFileReader
 
             FrameMaker frameMaker = new FrameMaker(frameLength: 0.05f, frameInterval: 0.025f);
             var frames = frameMaker.ToFrames(lDataList, (int)Header.sampleRate);
-            Frame sampleCopy = new Frame(frames[120].Samples);
+            //Frame sampleCopy = new Frame(frames[120].Samples);
             Window windowFunction = new GaussWindow();
 
             for (int i = 0; i < frames.Count; i++)
             {
                 windowFunction.ApplyWindow(frames[i]);
             }
-            Frame sampleCheck = new Frame(frames[120].Samples);
+            //Frame sampleCheck = new Frame(frames[120].Samples);
             foreach (var sample in frames)
             {
                 foreach (var f in sample.Samples)
                 {
                     if (f > 0)
                     {
-                        Console.WriteLine("f =" + f);
+                        //Console.WriteLine("f =" + f);
                     }
                 }
             }
