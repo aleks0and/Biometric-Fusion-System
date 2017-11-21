@@ -10,6 +10,7 @@ namespace SpeechRecognition
 {
     public class MelFilterbank
     {
+        private const double LogErr = 1E-10;
         private double _lowerFreq;
         private double _upperFreq;
         int _filterbanksCount = 10;
@@ -100,6 +101,10 @@ namespace SpeechRecognition
                 for (int j = 0; j < est.Count; j++)
                 {
                     energy += fbs[i][j] * est[j];
+                }
+                if(energy < LogErr)
+                {
+                    energy += LogErr;
                 }
                 energy = Math.Log(energy);
                 _energies.Add(energy);
