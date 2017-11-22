@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FaceRecognition
 {
-    class GaborFilter
+    public class GaborFilter
     {
         private double _stdDevX;
         private double _stdDevY;
@@ -30,7 +30,6 @@ namespace FaceRecognition
         //{
 
         //}
-
 
         public Bitmap CalculateGaborFilter(Bitmap b, int k, double lambda)
         {
@@ -73,7 +72,7 @@ namespace FaceRecognition
             return lb;
         }
 
-        private double GetGaborValue(int x, int y, int angle, double waveLength)
+        public double GetGaborValue(int x, int y, int angle, double waveLength)
         {
             double xTheta = x * Math.Cos(angle * Math.PI / _n) + y * Math.Sin(angle * Math.PI / _n);
             double yTheta = y * Math.Cos(angle * Math.PI / _n) - x * Math.Sin(angle * Math.PI / _n);

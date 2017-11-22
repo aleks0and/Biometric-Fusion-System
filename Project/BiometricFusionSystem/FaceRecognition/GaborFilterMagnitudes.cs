@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FaceRecognition
 {
-    class GaborFilterMagnitudes
+    public class GaborFilterMagnitudes
     {
         Bitmap _bmpAfterGabor;
 
@@ -69,7 +69,7 @@ namespace FaceRecognition
             {
                 for (int j = 0; j < _bmpAfterGabor.Height; j++)
                 {
-                    skew = Math.Pow((_bmpAfterGabor.GetPixel(i, j).R - mean) / std, 3);
+                    skew += Math.Pow((_bmpAfterGabor.GetPixel(i, j).R - mean) / std, 3);
                 }
             }
             skew /= (_bmpAfterGabor.Width * _bmpAfterGabor.Height);

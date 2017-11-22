@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="DynamicTimeWarpingTest.cs" />
     <Compile Include="FrameMakerTest.cs" />
+    <Compile Include="GaborFilterTest.cs" />
     <Compile Include="HistogramTest.cs" />
     <Compile Include="MelConverterTest.cs" />
     <Compile Include="MelFilterbankTest.cs" />
