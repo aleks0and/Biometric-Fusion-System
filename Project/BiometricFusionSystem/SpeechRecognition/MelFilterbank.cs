@@ -13,12 +13,13 @@ namespace SpeechRecognition
         private const double LogErr = 1E-10;
         private double _lowerFreq;
         private double _upperFreq;
-        int _filterbanksCount = 10;
+        int _filterbanksCount;
         int _samplerate;
         int _fourierLength;
-        List<double> _filterbanks;
-        List<int> _filters;
-        List<double> _energies;
+        public List<double> Filterbanks { get; private set; }
+        public List<int> Filters { get; private set; }
+        public List<double> Energies { get; private set; }
+
 
         public MelFilterbank(double lowerFreq, double upperFreq, int filterbanksCount, int samplerate, int fourierLength)
         {
@@ -29,37 +30,35 @@ namespace SpeechRecognition
             _samplerate = samplerate;
             _fourierLength = fourierLength;
 
-            _filterbanks = new List<double>();
-            _filters = new List<int>();
-            _energies = new List<double>();
+            Filterbanks = new List<double>();
+            Filters = new List<int>();
+            Energies = new List<double>();
         }
 
-        public void GenerateFilterbanks()
+        public void GenerateFilterbankIntervals()
         {
-            int space = (int)((_upperFreq - _lowerFreq) / 10);
+            double space = (_upperFreq - _lowerFreq) / (_filterbanksCount + 1);
             var freq = _lowerFreq;
-            _filterbanks.Add(_lowerFreq);
-            for (int i = 0; i < _filterbanksCount; i++)
+            for (int i = 0; i < _filterbanksCount+2; i++)
             {
+                Filterbanks.Add(freq);
                 freq += space;
-                _filterbanks.Add(freq);
             }
-            _filterbanks.Add(_upperFreq);
         }
 
         public void ConvertFilterbanks()
         {
-            for(int i = 0; i < _filterbanks.Count; i++)
+            for(int i = 0; i < Filterbanks.Count; i++)
             {
-                _filterbanks[i] = MelConverter.ToFrequency(_filterbanks[i]);
+                Filterbanks[i] = MelConverter.ToFrequency(Filterbanks[i]);
             }
         }
 
         public void CalculateFilters()
         {
-            for(int i = 0; i < _filterbanks.Count; i++)
+            for(int i = 0; i < Filterbanks.Count; i++)
             {
-                _filters.Add((int)Math.Floor((2 * _fourierLength + 1) * _filterbanks[i] / _samplerate));
+                Filters.Add((int)Math.Floor((2 * _fourierLength + 1) * Filterbanks[i] / _samplerate));
             }
         }
         
@@ -67,14 +66,24 @@ namespace SpeechRecognition
         {
             List<double> fb = new List<double>();
             double f;
-            for(int k = 0; k <= _filters.Max(); k++)
+            for(int k = 0; k <= Filters.Max(); k++)
             {
-                if (k < _filters[m - 1])
+                if (k < Filters[m - 1])
                     f = 0;
-                else if (_filters[m - 1] <= k && _filters[m] >= k)
-                    f = (k - _filters[m - 1]) / (_filters[m] - _filters[m - 1]);
-                else if (_filters[m] <= k && _filters[m + 1] >= k)
-                    f = (_filters[m + 1] - k) / (_filters[m + 1] - _filters[m]);
+                else if (Filters[m - 1] <= k && Filters[m] >= k)
+                {
+                    if ((Filters[m] - Filters[m - 1]) != 0)
+                        f = (k - Filters[m - 1]) / (Filters[m] - Filters[m - 1]);
+                    else
+                        f = 0;
+                }
+                else if (Filters[m] <= k && Filters[m + 1] >= k)
+                {
+                    if ((Filters[m + 1] - Filters[m]) != 0)
+                        f = (Filters[m + 1] - k) / (Filters[m + 1] - Filters[m]);
+                    else
+                        f = 0;
+                }
                 else
                     f = 0;
                 fb.Add(f);
@@ -85,7 +94,7 @@ namespace SpeechRecognition
         public List<List<double>> CreateFilterbanks()
         {
             List<List<double>> fbs = new List<List<double>>();
-            for(int i = 1; i < _filterbanks.Count - 1; i++)
+            for(int i = 1; i < Filterbanks.Count - 1; i++)
             {
                 List<double> f = CreateFilterbank(i);
                 fbs.Add(f);
@@ -107,7 +116,7 @@ namespace SpeechRecognition
                     energy += LogErr;
                 }
                 energy = Math.Log(energy);
-                _energies.Add(energy);
+                Energies.Add(energy);
             }
         }
 
@@ -115,16 +124,16 @@ namespace SpeechRecognition
         {
             List<double> dct = new List<double>();
             
-            for(int k = 0; k < _energies.Count; k++)
+            for(int k = 0; k < Energies.Count; k++)
             {
                 double sum = 0;
-                for (int n = 0; n < _energies.Count; n++)
+                for (int n = 0; n < Energies.Count; n++)
                 {
-                    sum += _energies[n] * Math.Cos(Math.PI / _energies.Count * (n + 1 / 2) * k);
+                    sum += Energies[n] * Math.Cos(Math.PI / Energies.Count * (n + 1 / 2) * k);
                 }
                 dct.Add(sum);
             }
-            _energies.Clear();
+            Energies.Clear();
             return dct;
         }
     }

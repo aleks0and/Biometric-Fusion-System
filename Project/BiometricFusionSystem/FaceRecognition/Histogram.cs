@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FaceRecognition
 {
-    class Histogram
+    public class Histogram
     {
         public static void GetHistogram(Bitmap bmp, int[] r, int[] g, int[] b)
         {

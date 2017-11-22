@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SpeechRecognition;
 using System.Collections.Generic;
+using Common;
 
 namespace UnitTests
 {

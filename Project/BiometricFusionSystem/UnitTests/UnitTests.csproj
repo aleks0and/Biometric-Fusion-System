@@ -40,6 +40,7 @@
       <HintPath>..\packages\MathNet.Numerics.3.20.0\lib\net40\MathNet.Numerics.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -49,16 +50,35 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
     <Compile Include="DynamicTimeWarpingTest.cs" />
+    <Compile Include="FrameMakerTest.cs" />
+    <Compile Include="HistogramTest.cs" />
+    <Compile Include="MelConverterTest.cs" />
+    <Compile Include="MelFilterbankTest.cs" />
+    <Compile Include="PeriodogramTest.cs" />
     <Compile Include="WindowFunctionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BiometricFusionSystem\BiometricFusionSystem.csproj">
+      <Project>{03930dc8-ad64-4ea8-adc6-504b4562b7cb}</Project>
+      <Name>BiometricFusionSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{851cf4dc-40cd-4667-b630-38147e9deb44}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FaceRecognition\FaceRecognition.csproj">
+      <Project>{ae077c38-d282-4489-b86a-4aa6cc8c74d3}</Project>
+      <Name>FaceRecognition</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpeechRecognition\SpeechRecognition.csproj">
       <Project>{9d31599e-6e78-4e4d-b5f4-2f1642b1727d}</Project>
       <Name>SpeechRecognition</Name>
