@@ -143,7 +143,7 @@ namespace WavFileReader
                 estimates.Add(estimate);
             }
 
-            MelFilterbank melFilterbank = new MelFilterbank(300, 22050, 10, (int)Header.sampleRate, estimates[0].Count);
+            MelFilterbank melFilterbank = new MelFilterbank(300, 22050, 10, (int)Header.sampleRate, estimates[0].ż);
 
             melFilterbank.GenerateFilterbanks();
             melFilterbank.ConvertFilterbanks();

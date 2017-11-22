@@ -129,7 +129,8 @@ namespace SpeechRecognition
                 double sum = 0;
                 for (int n = 0; n < Energies.Count; n++)
                 {
-                    sum += Energies[n] * Math.Cos(Math.PI / Energies.Count * (n + 1 / 2) * k);
+                    double cosine = Math.Cos(Math.PI / Energies.Count * (n + 0.5) * k);        
+                    sum += Energies[n] * cosine;
                 }
                 dct.Add(sum);
             }

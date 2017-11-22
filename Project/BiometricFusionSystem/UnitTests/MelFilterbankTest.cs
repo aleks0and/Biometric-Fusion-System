@@ -142,19 +142,31 @@ namespace UnitTests
             List<double> actualResult = _filterBank.DiscreteCosineTransform();
             
             expectedResult.Add(-110.34);
-            expectedResult.Add(-65.20);
+            expectedResult.Add(-32.64);
             expectedResult.Add(14.43);
             expectedResult.Add(-9.16);
             for (int i = 0; i < 4; i++)
             {
-                Assert.AreEqual(expectedResult[i], actualResult[i],0.01);
+                Assert.AreEqual(expectedResult[i], actualResult[i],0.2);
             }
 
         }
         [TestMethod]
         public void EnergiesAfterDCTAreCleared()
         {
-
+            _filterBank.GenerateFilterbankIntervals();
+            _filterBank.ConvertFilterbanks();
+            _filterBank.CalculateFilters();
+            List<List<double>> filterBanks = _filterBank.CreateFilterbanks();
+            List<double> periodogramMock = new List<double>();
+            List<double> expectedResult = new List<double>();
+            for (int i = 0; i < 7; i++)
+            {
+                periodogramMock.Add(i);
+            }
+            _filterBank.CalculateFilterbanksEnergies(periodogramMock, filterBanks);
+            List<double> actualResult = _filterBank.DiscreteCosineTransform();
+            Assert.AreEqual(0, _filterBank.Energies.Count);
         }
     }
 }
