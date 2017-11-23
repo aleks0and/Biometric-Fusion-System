@@ -10,18 +10,12 @@ namespace FaceRecognition
     public class HistogramFeatureExtraction
     {
         private const int Max = 256;
-        int[] _histogramR;
-        int[] _histogramG;
-        int[] _histogramB;
         int _height;
         int _width;
         Bitmap _bmp;
 
         public HistogramFeatureExtraction(int width, int height, Bitmap bmp)
         {
-            _histogramR = new int[Max];
-            _histogramG = new int[Max];
-            _histogramB = new int[Max];
             _height = height;
             _width = width;
             _bmp = bmp;

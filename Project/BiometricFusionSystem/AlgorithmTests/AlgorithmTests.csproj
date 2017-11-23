@@ -33,6 +33,7 @@
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FaceAlgorithmTest.cs" />
     <Compile Include="SpeechAlgorithmTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -55,6 +57,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{851CF4DC-40CD-4667-B630-38147E9DEB44}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FaceRecognition\FaceRecognition.csproj">
+      <Project>{ae077c38-d282-4489-b86a-4aa6cc8c74d3}</Project>
+      <Name>FaceRecognition</Name>
     </ProjectReference>
     <ProjectReference Include="..\SpeechRecognition\SpeechRecognition.csproj">
       <Project>{9D31599E-6E78-4E4D-B5F4-2F1642B1727D}</Project>

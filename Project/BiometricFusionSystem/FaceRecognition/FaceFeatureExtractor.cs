@@ -8,33 +8,48 @@ using System.Threading.Tasks;
 namespace FaceRecognition
 {
     //zamien operacje na bitmapach zeby byly na pointerach
-    class FaceFeatureExtractor
+    public class FaceFeatureExtractor
     {
-        Bitmap _bmp;
+        
         int _finalMoment;
 
-        public FaceFeatureExtractor(Bitmap bmp, int finalMoment)
+        public FaceFeatureExtractor(int finalMoment)
         {
-            _bmp = bmp;
+            
             _finalMoment = finalMoment;
         }
 
-        public List<List<double>> GetFeatureVector()
+        public List<double> GetFeatureVector(Bitmap bmp)
         {
-            HistogramFeatureExtraction hfe = new HistogramFeatureExtraction(_bmp.Width, _bmp.Height, _bmp);
+            HistogramEqualization he = new HistogramEqualization();
+            bmp = he.Normalize(bmp);
+            HistogramFeatureExtraction hfe = new HistogramFeatureExtraction(bmp.Width, bmp.Height, bmp);
             List<List<double>> histogramFeatures = hfe.CalculateMoments(_finalMoment);
-
+            GrayscaleConverter gConverter = new GrayscaleConverter();
+            bmp = gConverter.Normalize(bmp);
             double[] lambda = { 10, 5 };
             GaborFilter gf = new GaborFilter(2, 1, lambda, Math.PI / 2, 4, 3);
-            List<Bitmap> gfBitmap = gf.ApplyFilter(_bmp);
-            _bmp = CombineBitmaps(gfBitmap);
-
-            GaborFilterMagnitudes gfm = new GaborFilterMagnitudes(_bmp);
+            List<Bitmap> gfBitmap = gf.ApplyFilter(bmp);
+            bmp = CombineBitmaps(gfBitmap);
+            GaborFilterMagnitudes gfm = new GaborFilterMagnitudes(bmp);
             List<double> magnitudesFeatures = gfm.CalculateFeatureVector();
-
             histogramFeatures.Add(magnitudesFeatures);
+            return histogramFeatures.SelectMany(n => n).ToList();
+        }
 
-            return histogramFeatures;
+        public List<double> GetGaborFeatureVector(Bitmap bmp)
+        {
+            HistogramEqualization he = new HistogramEqualization();
+            bmp = he.Normalize(bmp);
+            GrayscaleConverter gConverter = new GrayscaleConverter();
+            bmp = gConverter.Normalize(bmp);
+            double[] lambda = { 10, 5 };
+            GaborFilter gf = new GaborFilter(2, 1, lambda, Math.PI / 2, 4, 3);
+            List<Bitmap> gfBitmap = gf.ApplyFilter(bmp);
+            bmp = CombineBitmaps(gfBitmap);
+            GaborFilterMagnitudes gfm = new GaborFilterMagnitudes(bmp);
+            List<double> magnitudesFeatures = gfm.CalculateFeatureVector();
+            return magnitudesFeatures;
         }
 
         public Bitmap CombineBitmaps(List<Bitmap> lb)
