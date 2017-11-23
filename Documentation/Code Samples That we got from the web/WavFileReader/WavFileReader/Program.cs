@@ -18,6 +18,7 @@ namespace WavFileReader
         static void Main(string[] args)
         {
             DbTest();
+            GaborTest();
         }
         private static void DbTest()
         {
@@ -50,23 +51,23 @@ namespace WavFileReader
             List<double> periodogramResult2 = PeriodogramTest(path2);
 
             DynamicTimeWarping dtw = new DynamicTimeWarping(0.1);
-            bool answer = dtw.Verify(periodogramResult2, periodogramResult);
+            double answer = dtw.Compare(periodogramResult2, periodogramResult);
             Console.WriteLine("ANSWER Aleks=Aleks: " + answer);
 
             //porownanie Aleks do Martyna
             string path3 = "../../Samples/martyna_kurczak.wav";
             List<double> periodogramResult3 = PeriodogramTest(path3);
             
-            bool answer3 = dtw.Verify(periodogramResult3, periodogramResult);
+            double answer3 = dtw.Compare(periodogramResult3, periodogramResult);
             Console.WriteLine("ANSWER Aleks=Martyna: " + answer3);
 
             //porownanie Aleks do Kornel
             string path4 = "../../Samples/kornel_kurczak.wav";
             List<double> periodogramResult4 = PeriodogramTest(path4);
             
-            bool answer4 = dtw.Verify(periodogramResult4, periodogramResult);
+            double answer4 = dtw.Compare(periodogramResult4, periodogramResult);
             Console.WriteLine("ANSWER Aleks=Kornel: " + answer4);
-
+            Console.WriteLine("Speech test finished");
             Console.Read();
         }
         private static List<double> PeriodogramTest(string path)
@@ -113,39 +114,30 @@ namespace WavFileReader
                     }
                 }
             }
-            Console.WriteLine(Header);
 
             FrameMaker frameMaker = new FrameMaker(frameLength: 0.05f, frameInterval: 0.025f);
             var frames = frameMaker.ToFrames(lDataList, (int)Header.sampleRate);
-            //Frame sampleCopy = new Frame(frames[120].Samples);
-            Window windowFunction = new GaussWindow();
+            Window windowFunction = new HammingWindow();
 
             for (int i = 0; i < frames.Count; i++)
             {
                 windowFunction.ApplyWindow(frames[i]);
             }
-            //Frame sampleCheck = new Frame(frames[120].Samples);
-            foreach (var sample in frames)
-            {
-                foreach (var f in sample.Samples)
-                {
-                    if (f > 0)
-                    {
-                        //Console.WriteLine("f =" + f);
-                    }
-                }
-            }
-            var periodogram = new Periodogram();
             var estimates = new List<List<double>>();
             foreach(var frame in frames)
             {
-                var estimate = periodogram.GetEstimate(frame);
+                var estimate = Periodogram.GetEstimate(frame);
                 estimates.Add(estimate);
             }
 
-            MelFilterbank melFilterbank = new MelFilterbank(300, 22050, 10, (int)Header.sampleRate, estimates[0].ż);
+            MelFilterbank melFilterbank = new MelFilterbank(
+                lowerFreq: 300, 
+                upperFreq: 22050, 
+                filterbanksCount: 10, 
+                samplerate: (int)Header.sampleRate, 
+                fourierLength: estimates[0].Count);
 
-            melFilterbank.GenerateFilterbanks();
+            melFilterbank.GenerateFilterbankIntervals();
             melFilterbank.ConvertFilterbanks();
             melFilterbank.CalculateFilters();
             var fbs = melFilterbank.CreateFilterbanks();
@@ -156,9 +148,7 @@ namespace WavFileReader
                 dct.Add(melFilterbank.DiscreteCosineTransform());
             }
             var result = dct.SelectMany(n => n).ToList();
-            Console.WriteLine("THE END------------------------------------");
-            return result;
-            
+            return result; 
         }
     
         private static void GaborTest()

@@ -28,7 +28,6 @@ namespace SpeechRecognition
             {
                 frames.Add(new Frame(audioStream.GetRange(index, samplesPerFrame)));
                 index += step;
-                
             }
 
             return frames;

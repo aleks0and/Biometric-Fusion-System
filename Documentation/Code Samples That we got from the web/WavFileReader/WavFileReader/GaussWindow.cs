@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpeechRecognition
 {
-    class GaussWindow : Window
+    public class GaussWindow : Window
     {
         private const float Sigma = 0.4f;
         // private const float B = 1.45f; Possibly used for fourier transform
@@ -17,7 +17,8 @@ namespace SpeechRecognition
             for (int i = 0; i < sampleLength; i++)
             {
                 gauss = Math.Exp((-0.5) * Math.Pow((((i + 1) - (sampleLength - 1) / 2) / (Sigma * (sampleLength - 1) / 2)), 2));
-                frame.Samples[i] *= (short)gauss;
+                gauss = gauss * frame.Samples[i];
+                frame.Samples[i] = (short)gauss;
             }
         }
     }

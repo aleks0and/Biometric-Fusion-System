@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpeechRecognition
 {
-    class MelConverter
+    public class MelConverter
     {
         public static double ToMel(double freq)
         {

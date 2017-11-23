@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9D31599E-6E78-4E4D-B5F4-2F1642B1727D}</ProjectGuid>
+    <ProjectGuid>{D74F381A-65C5-4A04-AA45-12C507DCBAB5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SpeechRecognition</RootNamespace>
-    <AssemblyName>SpeechRecognition</AssemblyName>
+    <RootNamespace>AlgorithmTests</RootNamespace>
+    <AssemblyName>AlgorithmTests</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,12 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MathNet.Numerics, Version=3.20.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MathNet.Numerics.3.20.0\lib\net40\MathNet.Numerics.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,32 +41,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FrameMaker.cs" />
-    <Compile Include="Frame.cs" />
-    <Compile Include="GaussWindow.cs" />
-    <Compile Include="HammingWindow.cs" />
-    <Compile Include="MelConverter.cs" />
-    <Compile Include="MelFilterbank.cs" />
-    <Compile Include="Periodogram.cs" />
+    <Compile Include="SpeechAlgorithmTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpeechFeatureExtractor.cs" />
-    <Compile Include="Window.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Camera\Camera.csproj">
+      <Project>{E826C80C-DF59-4305-B0BF-27A58C1B5404}</Project>
+      <Name>Camera</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{851cf4dc-40cd-4667-b630-38147e9deb44}</Project>
+      <Project>{851CF4DC-40CD-4667-B630-38147E9DEB44}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpeechRecognition\SpeechRecognition.csproj">
+      <Project>{9D31599E-6E78-4E4D-B5F4-2F1642B1727D}</Project>
+      <Name>SpeechRecognition</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

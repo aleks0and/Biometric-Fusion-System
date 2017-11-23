@@ -20,7 +20,7 @@ namespace Common
             return Math.Abs(a - b);
         }
 
-        public bool Verify(List<double> input, List<double> template)
+        public double Compare(List<double> input, List<double> template)
         {
             var distances = new double[input.Count + 1, template.Count + 1];
             for(int i = 0; i < input.Count + 1; i++)
@@ -43,9 +43,15 @@ namespace Common
                 }
             }
 
-            var total = template.Sum();
+            return distances[input.Count, template.Count];
+        }
 
-            return (distances[input.Count, template.Count] / total) < _threshold;
+        public bool Verify(List<double> input, List<double> template)
+        {
+            double distance = Compare(input, template);
+
+            double total = template.Sum();
+            return (distance / total) < _threshold;
         }
     }
 }
