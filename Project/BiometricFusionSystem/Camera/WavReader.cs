@@ -10,6 +10,11 @@ namespace Camera
 {
     public class WavReader
     {
+        /// <summary>
+        /// Function reads the wav. file from a given path
+        /// </summary>
+        /// <param name="path"> Path from which the program should get a wav. file</param>
+        /// <returns> A WavFile element which holds all the information read from the file</returns>
         public static WavFile Read(string path)
         {
             WavHeader Header = new WavHeader();

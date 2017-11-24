@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+    /// <summary>
+    /// Class which manages getting the information from the database
+    /// </summary>
     class FaceRepository 
     {
         private DbConnection _connection;
@@ -17,6 +20,11 @@ namespace Common
         {
             _connection = connection;
         }
+        /// <summary>
+        /// Function loads the template from the face database regarding
+        /// </summary>
+        /// <param name="id">Identification number by which the function finds the person</param>
+        /// <returns> class holding the personal information - image, first name, last name and feature vector for the image</returns>
         public Person GetFaceById(int id)
         {
             Person person = null;
@@ -46,8 +54,11 @@ namespace Common
             }
             return person;
         }
-
-        public void SaveFace(byte[] img, string featureVector, string firstName, string lastName)
+        /// <summary>
+        /// Function responsible for saving the person data in the face database.
+        /// </summary>
+        /// <param name="person"> class holding the information about the person: picture, first name, last name, feature vector of the person</param>
+        public void SaveFace(Person person)
         {
             try
             {
@@ -57,16 +68,16 @@ namespace Common
                 cmdInsert.Parameters.Add("@FeatureVector", System.Data.SqlDbType.VarChar);
                 cmdInsert.Parameters.Add("@FirstName", System.Data.SqlDbType.VarChar, MaxNameLength);
                 cmdInsert.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar, MaxNameLength);
-                cmdInsert.Parameters["@Picture"].Value = img;
-                cmdInsert.Parameters["@FeatureVector"].Value = featureVector;
-                cmdInsert.Parameters["@FirstName"].Value = firstName;
-                cmdInsert.Parameters["@LastName"].Value = lastName;
+                cmdInsert.Parameters["@Picture"].Value = person.FaceImage;
+                cmdInsert.Parameters["@FeatureVector"].Value = person.FaceFeatureVector;
+                cmdInsert.Parameters["@FirstName"].Value = person.FirstName;
+                cmdInsert.Parameters["@LastName"].Value = person.LastName;
                 _connection.SqlConnection.Open();
                 cmdInsert.ExecuteNonQuery();
             }
             catch(SqlException ex)
             {
-
+                Debug.WriteLine(ex.Message);
             }
             finally
             {

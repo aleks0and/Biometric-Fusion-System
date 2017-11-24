@@ -8,20 +8,23 @@ namespace Camera
 {
     public class WavHeader
     {
-        public byte[] riffID; //not needed
-        public uint size;
-        public byte[] wavID;  //not needed
-        public byte[] fmtID;  //not needed
-        public uint fmtSize;
-        public ushort format; //if 1 then uncompressed, anything else -> compressed
-        public ushort channels; //mono/stereo
-        public uint sampleRate; //https://pl.wikipedia.org/wiki/Pr%C3%B3bkowanie
-        public uint bytePerSec; //SampleRate * NumChannels * BitsPerSample/8
-        public ushort blockSize; // NumChannels* BitsPerSample/8 = number of bytes per one sample for all channels
-        public ushort bit;
-        public byte[] dataID; //not needed
+        public byte[] riffID; //"RIFF" marks the file as riff file.
+        public uint size;     //Size of overall file, in bytes (32-bit integer)
+        public byte[] wavID;  //"WAVE" file type header
+        public byte[] fmtID;  //"fmt" Format chunk marker
+        public uint fmtSize;  //Length of format data
+        public ushort format; //Type of format - if 1 then uncompressed(PCM), anything else -> compressed
+        public ushort channels; //number of channels - 1 for mono
+        public uint sampleRate; //Sample Rate - Number of Samples per second, or Hertz 32 byte integer. Common values are 44100 (CD), 48000 (DAT).  https://pl.wikipedia.org/wiki/Pr%C3%B3bkowanie
+        public uint bytePerSec; //(SampleRate * NumChannels * BitsPerSample)/8
+        public ushort blockSize; // NumChannels* BitsPerSample/8 = number of bytes per one sample for all channels  
+        public ushort bit;      //Bits per sample
+        public byte[] dataID; //"data" marks the beginning of the data section
         public uint dataSize; // == NumSamples * NumChannels * BitsPerSample/8 
-
+        /// <summary>
+        /// Function writes onto console all the header information.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             Console.WriteLine("RiffId " + riffID[0] + " " +

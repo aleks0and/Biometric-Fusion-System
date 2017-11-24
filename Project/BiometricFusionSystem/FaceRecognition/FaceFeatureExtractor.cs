@@ -12,13 +12,20 @@ namespace FaceRecognition
     {
         
         int _finalMoment;
-
+        /// <summary>
+        /// constructor of the FaceFeatureExtractor class
+        /// </summary>
+        /// <param name="finalMoment"> the order moment at which the calculation of histogram moment generating function should stop</param>
         public FaceFeatureExtractor(int finalMoment)
         {
-            
             _finalMoment = finalMoment;
         }
-
+        /// <summary>
+        /// function which calculates the feature vectors (Gabor function related and Color histogram related) for a given image.
+        /// </summary>
+        /// <param name="bmp">image for which the function calculates the feature vectors</param>
+        /// <returns> list of feature vectors stored as list of double with the following structure
+        ///           first the color histogram moments and as last elements gabor filter feature vectors</returns>
         public List<double> GetFeatureVector(Bitmap bmp)
         {
             HistogramEqualization he = new HistogramEqualization();
@@ -36,7 +43,11 @@ namespace FaceRecognition
             histogramFeatures.Add(magnitudesFeatures);
             return histogramFeatures.SelectMany(n => n).ToList();
         }
-
+        /// <summary>
+        /// function which calculates the feature vectors only for the gabor function for a given image.
+        /// </summary>
+        /// <param name="bmp">image for which the function calculates the feature vectors</param>
+        /// <returns> list of gabor filter feature vectors stored as list of double </returns>
         public List<double> GetGaborFeatureVector(Bitmap bmp)
         {
             HistogramEqualization he = new HistogramEqualization();
@@ -51,7 +62,11 @@ namespace FaceRecognition
             List<double> magnitudesFeatures = gfm.CalculateFeatureVector();
             return magnitudesFeatures;
         }
-
+        /// <summary>
+        /// Function which combines the result of list of pictures into one picture by putting them "on top" of each other
+        /// </summary>
+        /// <param name="lb">list of bitmaps</param>
+        /// <returns> combined image of the input bitmaps</returns>
         public Bitmap CombineBitmaps(List<Bitmap> lb)
         {
             var superpos = new Bitmap(lb[0].Width, lb[0].Height);

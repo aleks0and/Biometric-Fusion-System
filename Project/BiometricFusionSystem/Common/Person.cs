@@ -6,6 +6,16 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+    /// <summary>
+    /// Class holding the information neccessary for person verification/identification
+    /// Id - Id number in the database
+    /// First name
+    /// Last name
+    /// FaceImage - image of the face of the person stored as an byte array
+    /// FaceFeatureVector - features extracted from the picture stored as list of double
+    /// VoiceRecording - recording of speech of the person stored as an byte array
+    /// VoiceFeatureVector - features extracted from the recording sotred as list of double
+    /// </summary>
     public class Person
     {
         public int Id { get; set; }
@@ -15,24 +25,33 @@ namespace Common
         public List<double> FaceFeatureVector { get; set; }
         public byte[] VoiceRecording { get; set; }
         public List<double> VoiceFeatureVector { get; set; }
-
-        public string FaceFeatureVectorToString()
+        /// <summary>
+        /// Function converting the list of face feature vectors to string separated by a loaded character 
+        /// </summary>
+        /// <param name="separator"> character which separates the values </param>
+        /// <returns> string contating feature vectors </returns>
+        public string FaceFeatureVectorToString(char separator)
         {
             string ffv = "";
 
             for(int i = 0; i < FaceFeatureVector.Count; i++)
             {
-                ffv += FaceFeatureVector[i] + ",";
+                ffv += FaceFeatureVector[i] + separator;
             }
 
             return ffv;
         }
-
-        public List<double> FaceFeatureVectorToList(string strffv)
+        /// <summary>
+        /// Function converting the string of face feature vectors to list of doubles
+        /// </summary>
+        /// <param name="featureVectorString"> string with face feature vectors </param>
+        /// <param name="separator"> character which separates the values </param>
+        /// <returns> list of double contating feature vectors </returns>
+        public List<double> FeatureVectorToList(string featureVectorString, char separator)
         {
             List<double> ffv = new List<double>();
 
-            string[] q = strffv.Split(',');
+            string[] q = featureVectorString.Split(separator);
 
             for(int i = 0; i < q.Length; i++)
             {

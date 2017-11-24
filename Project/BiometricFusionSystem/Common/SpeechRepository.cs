@@ -17,6 +17,11 @@ namespace Common
         {
             _connection = connection;
         }
+        /// <summary>
+        /// Function loads the template from the speech database regarding
+        /// </summary>
+        /// <param name="id">Identification number by which the function finds the person</param>
+        /// <returns> class holding the personal information - Voice recording, first name, last name and feature vector for the image</returns>
         public Person GetSpeechById(int id)
         {
             Person person = null;
@@ -46,7 +51,11 @@ namespace Common
             }
             return person;
         }
-        public void SaveSpeech(byte[] speech, string featureVector, string firstName, string lastName)
+        /// <summary>
+        /// Function responsible for saving the personal data in the speech database.
+        /// </summary>
+        /// <param name="person"> class holding the information about the person: voice recording, first name, last name, feature vector of the person</param>
+        public void SaveSpeech(Person person)
         {
             try
             {
@@ -57,16 +66,16 @@ namespace Common
                 cmdInsert.Parameters.Add("@FeatureVector", System.Data.SqlDbType.VarChar);
                 cmdInsert.Parameters.Add("@FirstName", System.Data.SqlDbType.VarChar, MaxNameLength);
                 cmdInsert.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar, MaxNameLength);
-                cmdInsert.Parameters["@Speech"].Value = speech;
-                cmdInsert.Parameters["@FeatureVector"].Value = featureVector;
-                cmdInsert.Parameters["@FirstName"].Value = firstName;
-                cmdInsert.Parameters["@LastName"].Value = lastName;
+                cmdInsert.Parameters["@Speech"].Value = person.VoiceRecording;
+                cmdInsert.Parameters["@FeatureVector"].Value = person.VoiceFeatureVector;
+                cmdInsert.Parameters["@FirstName"].Value = person.FirstName;
+                cmdInsert.Parameters["@LastName"].Value = person.LastName;
                 _connection.SqlConnection.Open();
                 cmdInsert.ExecuteNonQuery();
             }
             catch (SqlException ex)
             {
-
+                Debug.WriteLine(ex.Message);
             }
             finally
             {
