@@ -10,12 +10,19 @@ namespace FaceRecognition
     public class GaborFilterMagnitudes
     {
         Bitmap _bmpAfterGabor;
-
+        /// <summary>
+        /// Constructor for the class
+        /// </summary>
+        /// <param name="bmpAfterGabor"> bitmap preprocessed by Gabor filter</param>
         public GaborFilterMagnitudes(Bitmap bmpAfterGabor)
         {
             _bmpAfterGabor = bmpAfterGabor;
         }
 
+        /// <summary>
+        /// Function calculating the feature vectore for the gabor filter results
+        /// </summary>
+        /// <returns> List of Feature vectors for the bitmap held in the class stored as a list of double</returns>
         public List<double> CalculateFeatureVector()
         {
             List<double> fv = new List<double>();
@@ -30,7 +37,10 @@ namespace FaceRecognition
 
             return fv;
         }
-
+        /// <summary>
+        /// Function calculating the mean value of all the pixels in the bitmap
+        /// </summary>
+        /// <returns>Mean value</returns>
         public double CalculateMean()
         {
             double mean = 0;
@@ -45,7 +55,11 @@ namespace FaceRecognition
             mean /= (_bmpAfterGabor.Width * _bmpAfterGabor.Height);
             return mean;
         }
-
+        /// <summary>
+        /// Function calculating the standard deviation for all the pixels in the bitmap
+        /// </summary>
+        /// <param name="mean"> mean for all the pixels in the bitmap </param>
+        /// <returns>standard deviation</returns>
         public double CalculateStd(double mean)
         {
             double std = 0;
@@ -60,7 +74,12 @@ namespace FaceRecognition
             std = Math.Sqrt(std);
             return std;
         }
-
+        /// <summary>
+        /// Function calculating the average skewness for all the pixels in the bitmap
+        /// </summary>
+        /// <param name="mean">mean value for all the pixels in the bitmap</param>
+        /// <param name="std">standard deviation</param>
+        /// <returns>skewness</returns>
         public double CalculateSkew(double mean, double std)
         {
             double skew = 0;

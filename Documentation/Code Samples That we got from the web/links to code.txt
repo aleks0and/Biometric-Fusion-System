@@ -4,5 +4,7 @@ WavFileReader: https://gist.github.com/yomakkkk/2290864
 
 Voice feature extraction: http://practicalcryptography.com/miscellaneous/machine-learning/guide-mel-frequency-cepstral-coefficients-mfccs/
 
+pierwszy dokument odnoœnie Gabor Filter
+http://aircconline.com/sipij/V3N6/3612sipij01.pdf
 W klasie GaborFilter zamien stdDevX i stdDevY na wzory ze strony 10:
 http://shonen.naun.org/multimedia/NAUN/bio/bio-2.pdf

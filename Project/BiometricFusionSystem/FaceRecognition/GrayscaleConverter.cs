@@ -9,6 +9,11 @@ namespace FaceRecognition
 {
     public class GrayscaleConverter : INormalization
     {
+        /// <summary>
+        /// function converting the bitmap into grayscale values
+        /// </summary>
+        /// <param name="bmp">source bitmap </param>
+        /// <returns> grayscale version of original bitmap</returns>
         public Bitmap Normalize (Bitmap bmp)
         {
             for (int i = 0; i < bmp.Width; i++)
