@@ -4,7 +4,14 @@ WavFileReader: https://gist.github.com/yomakkkk/2290864
 
 Voice feature extraction: http://practicalcryptography.com/miscellaneous/machine-learning/guide-mel-frequency-cepstral-coefficients-mfccs/
 
-pierwszy dokument odnoœnie Gabor Filter
+pierwszy dokument odnosnie Gabor Filter
 http://aircconline.com/sipij/V3N6/3612sipij01.pdf
 W klasie GaborFilter zamien stdDevX i stdDevY na wzory ze strony 10:
 http://shonen.naun.org/multimedia/NAUN/bio/bio-2.pdf
+
+Dokumenty ktore opisuja ogolnie metode mfcc i dynamic time warping
+https://ai2-s2-pdfs.s3.amazonaws.com/abce/5f6d32ce30e707d53b62dd83fdf6c0111caf.pdf
+http://ijirae.com/volumes/vol1/issue10/27.NVEC10086.pdf
+https://arxiv.org/abs/1003.4083
+w sdp, speech synthesis and recognition Sadaoki Furui tez jest o DTW okolo 267 strony
+w Fundamentals of Speech Recognition Homayoon Beigi, co kiedys wyslalem jest o MFCC od 157 strony
