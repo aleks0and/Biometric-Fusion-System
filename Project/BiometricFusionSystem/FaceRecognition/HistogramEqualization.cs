@@ -140,8 +140,8 @@ namespace FaceRecognition
             for(int i = 0; i < Max; i++)
             {
                 equalizedColors[0, i] = (int)Math.Floor(cdfR[i] * (channelMax[0] - channelMin[0]) + channelMin[0]);
-                equalizedColors[1, i] = (int)Math.Floor(cdfR[i] * (channelMax[1] - channelMin[1]) + channelMin[1]);
-                equalizedColors[2, i] = (int)Math.Floor(cdfR[i] * (channelMax[2] - channelMin[2]) + channelMin[2]);
+                equalizedColors[1, i] = (int)Math.Floor(cdfG[i] * (channelMax[1] - channelMin[1]) + channelMin[1]);
+                equalizedColors[2, i] = (int)Math.Floor(cdfB[i] * (channelMax[2] - channelMin[2]) + channelMin[2]);
             }
 
             return equalizedColors;
