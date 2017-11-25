@@ -1,0 +1,23 @@
+﻿<Window x:Class="Gui.VerificationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Gui"
+        mc:Ignorable="d"
+        Title="VerificationWindow" Height="200" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Content="First Name" />
+        <TextBox Grid.Row="1" Margin="5, 5, 5, 5" />
+        <Label Grid.Row="2" Content="Last Name" />
+        <TextBox Grid.Row="3" Margin="5, 5, 5, 5"/>
+        <Button Grid.Row="4" Content="Ok" Click="Button_Click" />
+    </Grid>
+</Window>
