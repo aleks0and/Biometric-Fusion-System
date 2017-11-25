@@ -10,7 +10,7 @@ namespace SpeechRecognition
     public class Periodogram
     {
         /// <summary>
-        /// function calculating the periodogram estimates for the frame.
+        /// function calculating the periodogram estimates for the frame. which 
         /// </summary>
         /// <param name="frame"> frame for which the estimates will be calculated</param>
         /// <returns> estimates stored as list of double </returns>
