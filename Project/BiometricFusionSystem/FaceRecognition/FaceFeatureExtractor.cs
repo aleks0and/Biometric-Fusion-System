@@ -30,7 +30,7 @@ namespace FaceRecognition
         {
             HistogramEqualization he = new HistogramEqualization();
             bmp = he.Normalize(bmp);
-            HistogramFeatureExtraction hfe = new HistogramFeatureExtraction(bmp.Width, bmp.Height, bmp);
+            HistogramFeatureExtraction hfe = new HistogramFeatureExtraction(bmp);
             List<List<double>> histogramFeatures = hfe.CalculateMoments(_finalMoment);
             GrayscaleConverter gConverter = new GrayscaleConverter();
             bmp = gConverter.Normalize(bmp);

@@ -14,14 +14,25 @@ namespace FaceRecognition
         int _width;
         Bitmap _bmp;
 
-        public HistogramFeatureExtraction(int width, int height, Bitmap bmp)
+        /// <summary>
+        /// Constructor for the class setting the initial values
+        /// </summary>
+        /// <param name="width"> width of the bitmap</param>
+        /// <param name="height"> height of the bitmap</param>
+        /// <param name="bmp"> initial bitmap </param>
+        public HistogramFeatureExtraction(Bitmap bmp)
         {
-            _height = height;
-            _width = width;
+            _height = bmp.Height;
+            _width = bmp.Width;
             _bmp = bmp;
         }
 
         // second Moment is the Variance, third is the Skewness
+        /// <summary>
+        /// Function calculating the moments which are to be used as feature vector
+        /// </summary>
+        /// <param name="finalMoment"> the iteration at which the calculation of moments stops</param>
+        /// <returns> feature vector based on the color histogram </returns>
         public List<List<double>> CalculateMoments (int finalMoment)
         {
             List<List<double>> moments = new List<List<double>>();
@@ -33,6 +44,10 @@ namespace FaceRecognition
             return moments;
             
         }
+        /// <summary>
+        /// Function calculating the first moment for the color histogram which is equal to the mean value of the colors.
+        /// </summary>
+        /// <returns> Mean value for each color channel stored as a list of double </returns>
         private List<double> CalculateMean ()
         {
             double sumR = 0;
@@ -57,6 +72,14 @@ namespace FaceRecognition
             Means.Add(sumB);
             return Means;
         }
+
+        /// <summary>
+        /// Function calculating the moments starting at 2, it requires the calculation of the first moment beforehand
+        /// 2nd moment is the variance for the color channel, 3rd is the skewness
+        /// </summary>
+        /// <param name="moment"> moment number which is to be calculated</param>
+        /// <param name="mean"> mean values for the color channels necessary for the calculation</param>
+        /// <returns> values for the ith moment stored as list of double</returns>
         private List<double> CalculateIthMoment (int moment, List<double> mean)
         {
             List<double> ithMoment = new List<double>();

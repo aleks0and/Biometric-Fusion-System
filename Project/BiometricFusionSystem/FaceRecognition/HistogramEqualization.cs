@@ -10,6 +10,11 @@ namespace FaceRecognition
     public class HistogramEqualization : INormalization
     {
         private const int Max = 256;
+        /// <summary>
+        /// Function which applies the histogram equalization to the bitmap
+        /// </summary>
+        /// <param name="bmp">input bitmap</param>
+        /// <returns>bitmap with applied histogram equalization</returns>
         public Bitmap Normalize(Bitmap bmp)
         {
             var pmfR = new int[Max];
@@ -20,7 +25,7 @@ namespace FaceRecognition
             var cdfR = new double[Max];
             var cdfG = new double[Max];
             var cdfB = new double[Max];
-            FindCdf(bmp, pmfR, pmfG, pmfB, cdfR, cdfG, cdfB);
+            FindCdf(bmp.Width, bmp.Height, pmfR, pmfG, pmfB, cdfR, cdfG, cdfB);
 
             int[] channelMax = GetChannelMax(bmp);
             int[] channelMin = GetChannelMin(bmp);
@@ -30,11 +35,21 @@ namespace FaceRecognition
         }
 
 
-
-        private void FindCdf(Bitmap bmp, int[] pmfR, int[] pmfG, int[] pmfB,
+        /// <summary>
+        /// Function which calculated cumulative distribution function for all channels of the picture
+        /// </summary>
+        /// <param name="width">width of the picture</param>
+        /// <param name="height">height of the picture</param>
+        /// <param name="pmfR"> histogram of red channel</param>
+        /// <param name="pmfG"> histogram of green channel</param>
+        /// <param name="pmfB"> histogram of blue channel</param>
+        /// <param name="cdfR"> cumulative distribution for red channel</param>
+        /// <param name="cdfG"> cumulative distribution for green channel</param>
+        /// <param name="cdfB"> cumulative distribution for blue channel</param>
+        private void FindCdf(int width, int height, int[] pmfR, int[] pmfG, int[] pmfB,
             double[] cdfR, double[] cdfG, double[] cdfB)
         {
-            int maxSize = bmp.Width * bmp.Height;
+            int maxSize = width * height;
             for(int i = 0; i < Max; i++)
             {
                 int j = i;
@@ -50,7 +65,11 @@ namespace FaceRecognition
                 cdfB[i] /= maxSize;
             }
         }
-
+        /// <summary>
+        /// Get the maximum value for all the channels
+        /// </summary>
+        /// <param name="bmp">initial bitmap</param>
+        /// <returns>an array with the max values for all three channels index: 0 for red, 1 for green, 2 for blue</returns>
         private int[] GetChannelMax(Bitmap bmp)
         {
             int[] channels = new int[3];
@@ -76,6 +95,11 @@ namespace FaceRecognition
             }
             return channels;
         }
+        /// <summary>
+        /// Get the maximum value for all the channels
+        /// </summary>
+        /// <param name="bmp">initial bitmap</param>
+        /// <returns>an array with the min values for all three channels index: 0 for red, 1 for green, 2 for blue</returns>
         private int[] GetChannelMin(Bitmap bmp)
         {
             int[] channels = new int[3] { 255, 255, 255 };
@@ -100,7 +124,15 @@ namespace FaceRecognition
             }
             return channels;
         }
-
+        /// <summary>
+        /// Function applies the mathematical formula to calculate the equalized colors for the cumulative distribution function.
+        /// </summary>
+        /// <param name="cdfR"> cumulative distribution for red channel</param>
+        /// <param name="cdfG"> cumulative distribution for green channel</param>
+        /// <param name="cdfB"> cumulative distribution for blue channel</param>
+        /// <param name="channelMax"> maximum value for all the color channels</param>
+        /// <param name="channelMin"> minimum value for all the color channels</param>
+        /// <returns> array containing the equalized colors for color channels</returns>
         private int[,] GetEqualizedColors(double[] cdfR, double[] cdfG, double[] cdfB,
             int[] channelMax, int[] channelMin)
         {
@@ -114,7 +146,12 @@ namespace FaceRecognition
 
             return equalizedColors;
         }
-
+        /// <summary>
+        /// function equalizing the colors in the bitmap 
+        /// </summary>
+        /// <param name="bmp"> initial bitmap</param>
+        /// <param name="equalizedColors"> array holding the equalized values for color channels</param>
+        /// <returns> bitmap with equalized colors</returns>
         private Bitmap Equalize(Bitmap bmp, int[,] equalizedColors)
         {
             Bitmap newBmp = new Bitmap(bmp.Width, bmp.Height);

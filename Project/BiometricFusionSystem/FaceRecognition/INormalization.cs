@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace FaceRecognition
 {
+    /// <summary>
+    /// interface for the function aplying the normalization
+    /// </summary>
     public interface INormalization
     {
         Bitmap Normalize(Bitmap bmp);
