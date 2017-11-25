@@ -30,7 +30,6 @@ namespace SpeechRecognition
             var melFilterbank = new MelFilterbank(LowerFrequency, sampleRate / 2,
                 _filterbanksCount, sampleRate, estimates[0].Count);
             var filterbanks = PrepareFilterbanks(melFilterbank);
-
             return GetMfcc(melFilterbank, filterbanks, estimates);
         }
         /// <summary>
@@ -60,10 +59,13 @@ namespace SpeechRecognition
             return estimates;
         }
         /// <summary>
-        /// function applying the neccesary operations for the following use filterbanks
+        /// function applying the neccesary operations for the following use filterbanks:
+        /// n + 2 linearly spaced filter intervals are generated
+        /// function converts the filter intervals back to Herz
+        /// filterbank of n vectors of triangular filters is computed
         /// </summary>
         /// <param name="filterbank"> Mel filterbank </param>
-        /// <returns></returns>
+        /// <returns> filterbanks stored as list of double</returns>
         private List<List<double>> PrepareFilterbanks(MelFilterbank filterbank)
         {
             filterbank.GenerateFilterbankIntervals();
@@ -72,12 +74,12 @@ namespace SpeechRecognition
             return filterbank.CreateFilterbanks();
         }
         /// <summary>
-        /// 
+        /// function which returns the feature vector which values are Mel Frequency Cepstral Coefficients
         /// </summary>
-        /// <param name="melFilterbank"></param>
-        /// <param name="filterbanks"></param>
-        /// <param name="estimates"></param>
-        /// <returns></returns>
+        /// <param name="melFilterbank"> filter bank</param>
+        /// <param name="filterbanks"> filterbanks after the preprocessing</param>
+        /// <param name="estimates"> periodogram estimates</param>
+        /// <returns> feature vector used for speech verification </returns>
         private List<double> GetMfcc(MelFilterbank melFilterbank, List<List<double>> filterbanks,
             List<List<double>> estimates)
         {
