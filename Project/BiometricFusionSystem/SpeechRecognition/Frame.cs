@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace SpeechRecognition
 {
+    /// <summary>
+    /// Class which stores the frames of a speech recording
+    /// </summary>
     public class Frame
     {
        public List<short> Samples { get; set; }

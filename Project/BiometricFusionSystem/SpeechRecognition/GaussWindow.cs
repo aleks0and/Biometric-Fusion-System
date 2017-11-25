@@ -8,8 +8,15 @@ namespace SpeechRecognition
 {
     public class GaussWindow : Window
     {
+        /// <summary>
+        ///  Sigma is the standard deviation of this function
+        /// </summary>
         private const float Sigma = 0.4f;
-        // private const float B = 1.45f; Possibly used for fourier transform
+        //private const float B = 1.45f; Possibly used for fourier transform
+        /// <summary>
+        /// Function which applies the Gaussian window which amplifies the middle of the frame and weakens the beginning and the end of the frame.
+        /// </summary>
+        /// <param name="frame"> Frame to which the window will be applied</param>
         public void ApplyWindow(Frame frame)
         {
             double gauss;

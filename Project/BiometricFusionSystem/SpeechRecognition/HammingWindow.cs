@@ -8,9 +8,15 @@ namespace SpeechRecognition
 {
     public class HammingWindow : Window
     {
+        /// <summary>
+        /// the optimal values for this window 
+        /// </summary>
         private const float Alpha = 0.53836f;
-        private const float Beta = 0.46163f;
-
+        private const float Beta = 0.46164f;
+        /// <summary>
+        /// Function which applies the Hamming window to the frame.
+        /// </summary>
+        /// <param name="frame">frame to which the window will be applied</param>
         public void ApplyWindow(Frame frame)
         {
             double hamming;
