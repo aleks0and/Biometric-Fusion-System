@@ -1,0 +1,13 @@
+capturing picture
+./ffmpeg -f dshow -i video="Logitech HD Webcam C270" -qscale:v 0 -vframes 1 -s 640x480 -y "C:\Users\aleks\Desktop\ffmpeg\bin\fotka2.bmp"
+
+capture audio
+./ffmpeg -f dshow -i audio="Mikrofon (HD Webcam C270)" -ac 1 -ar 16000 -t 10 "C:\Users\aleks\Desktop\ffmpeg\bin\nagranie.wav"
+
+show devices
+ffmpeg -list_devices true -f dshow -i dummy
+
+
+
+name of the device:Logitech HD Webcam C270
+microphone name: Mikrofon (HD Webcam C270)
