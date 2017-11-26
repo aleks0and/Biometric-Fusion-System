@@ -39,6 +39,11 @@ namespace AlgorithmTests
             Assert.IsTrue(angelinaVsAngelina < scarlettVsAngelina);
             Assert.IsTrue(scarlettVsAngelina < bradVsAngelina);
         }
+        [TestMethod]
+        public void MDCTest()
+        {
+            //load images paths to listBmp, class names to classNames, and call LoadBitmaps(listBmp, classNames)
+        }
 
         private List<double> GetFeatures(string filePath)
         {
@@ -55,6 +60,33 @@ namespace AlgorithmTests
             var features = _extractor.GetGaborFeatureVector(bmp);
             bmp.Dispose();
             return features;
+        }
+        private void LoadBitmaps(List<string> listBmp, List<string> classNames)
+        {
+            List<List<double>> fvs = new List<List<double>>();
+            List<double> fv = new List<double>();
+            for(int i = 0; i < listBmp.Count; i++)
+            {
+                fv = GetFeatures(listBmp[i]);
+                fvs.Add(fv);
+            }
+
+            string temp = classNames[0];
+            List<List<List<double>>> list = new List<List<List<double>>>();
+            List<List<double>> fvForOneClass = new List<List<double>>();
+
+            for (int h = 0; h < classNames.Count; h++)
+            {
+                if (temp != classNames[h])
+                {
+                    list.Add(fvForOneClass);
+                    fvForOneClass = new List<List<double>>();
+                }
+                fvForOneClass.Add(fvs[h]);
+            }
+
+            MinimumDistanceClassifier mdc = new MinimumDistanceClassifier();
+            mdc.Train(list, classNames.Distinct().ToList());
         }
     }
 }

@@ -52,6 +52,7 @@
     <Compile Include="HistogramEqualization.cs" />
     <Compile Include="HistogramFeatureExtraction.cs" />
     <Compile Include="INormalization.cs" />
+    <Compile Include="MinimumDistanceClassifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
