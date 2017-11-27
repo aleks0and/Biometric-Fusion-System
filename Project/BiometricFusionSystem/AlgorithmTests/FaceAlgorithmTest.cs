@@ -42,6 +42,23 @@ namespace AlgorithmTests
         [TestMethod]
         public void MDCTest()
         {
+            List<string> imagePaths = new List<string>();
+            List<string> classNames = new List<string>();
+            for (int i = 0; i < 4; i++)
+            { 
+                classNames.Add("Aleks");
+                imagePaths.Add(_sampleDirPath + "Aleks" + (i + 1));
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                classNames.Add("Martyna");
+                imagePaths.Add(_sampleDirPath + "Martyna" + (i + 1));
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                classNames.Add("Kornel");
+                imagePaths.Add(_sampleDirPath + "Kornel" + (i + 1));
+            }
             //load images paths to listBmp, class names to classNames, and call LoadBitmaps(listBmp, classNames)
         }
 
