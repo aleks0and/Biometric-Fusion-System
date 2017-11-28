@@ -9,14 +9,14 @@ namespace FaceRecognition
 {
     public class GaborFilterMagnitudes
     {
-        Bitmap _bmpAfterGabor;
+        private FastBitmap _bmpAfterGabor;
         /// <summary>
         /// Constructor for the class
         /// </summary>
         /// <param name="bmpAfterGabor"> bitmap preprocessed by Gabor filter</param>
         public GaborFilterMagnitudes(Bitmap bmpAfterGabor)
         {
-            _bmpAfterGabor = bmpAfterGabor;
+            _bmpAfterGabor = new FastBitmap(bmpAfterGabor);
         }
 
         /// <summary>
@@ -44,15 +44,18 @@ namespace FaceRecognition
         public double CalculateMean()
         {
             double mean = 0;
+            _bmpAfterGabor.Start();
 
             for(int i = 0; i < _bmpAfterGabor.Width; i++)
             {
                 for(int j = 0; j < _bmpAfterGabor.Height; j++)
                 {
-                    mean += _bmpAfterGabor.GetPixel(i, j).R;
+                    var c = _bmpAfterGabor.GetPixel(i, j);
+                    mean += c.R;
                 }
             }
             mean /= (_bmpAfterGabor.Width * _bmpAfterGabor.Height);
+            _bmpAfterGabor.End();
             return mean;
         }
         /// <summary>
@@ -63,7 +66,7 @@ namespace FaceRecognition
         public double CalculateStd(double mean)
         {
             double std = 0;
-
+            _bmpAfterGabor.Start();
             for (int i = 0; i < _bmpAfterGabor.Width; i++)
             {
                 for (int j = 0; j < _bmpAfterGabor.Height; j++)
@@ -72,6 +75,7 @@ namespace FaceRecognition
                 }
             }
             std = Math.Sqrt(std);
+            _bmpAfterGabor.End();
             return std;
         }
         /// <summary>
@@ -83,7 +87,7 @@ namespace FaceRecognition
         public double CalculateSkew(double mean, double std)
         {
             double skew = 0;
-
+            _bmpAfterGabor.Start();
             for (int i = 0; i < _bmpAfterGabor.Width; i++)
             {
                 for (int j = 0; j < _bmpAfterGabor.Height; j++)
@@ -92,6 +96,7 @@ namespace FaceRecognition
                 }
             }
             skew /= (_bmpAfterGabor.Width * _bmpAfterGabor.Height);
+            _bmpAfterGabor.End();
             return skew;
         }
 

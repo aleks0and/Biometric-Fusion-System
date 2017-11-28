@@ -16,16 +16,19 @@ namespace FaceRecognition
         /// <returns> grayscale version of original bitmap</returns>
         public Bitmap Normalize (Bitmap bmp)
         {
+            FastBitmap b = new FastBitmap(bmp);
+            b.Start();
             for (int i = 0; i < bmp.Width; i++)
             {
                 for (int j = 0; j < bmp.Height; j++)
                 {
-                    var p = bmp.GetPixel(i, j);
+                    var p = b.GetPixel(i, j);
                     int sum = p.R + p.G + p.B;
                     sum /= 3;
-                    bmp.SetPixel(i, j, Color.FromArgb(sum, sum, sum));
+                    b.SetPixel(i, j, Color.FromArgb(sum, sum, sum));
                 }
             }
+            b.End();
             return bmp;
         }
     }

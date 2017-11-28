@@ -18,16 +18,19 @@ namespace FaceRecognition
         /// <param name="b">array representing the occurences blue channel values</param>
         public static void GetHistogram(Bitmap bmp, int[] r, int[] g, int[] b)
         {
+            FastBitmap fastBmp = new FastBitmap(bmp);
+            fastBmp.Start();
             for (int i = 0; i < bmp.Width; i++)
             {
                 for (int j = 0; j < bmp.Height; j++)
                 {
-                    var p = bmp.GetPixel(i, j);
+                    var p = fastBmp.GetPixel(i, j);
                     r[p.R]++;
                     g[p.G]++;
                     b[p.B]++;
                 }
             }
+            fastBmp.End();
         }
 
     }

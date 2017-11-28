@@ -103,7 +103,7 @@ namespace AlgorithmTests
             }
 
             MinimumDistanceClassifier mdc = new MinimumDistanceClassifier();
-            mdc.Train(list, classNames.Distinct().ToList());
+            mdc.Train(list, classNames.ToList());
         }
     }
 }
