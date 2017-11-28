@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ffmpeg.cs" />
     <Compile Include="WavReader.cs" />
     <Compile Include="WavFile.cs" />
     <Compile Include="WavHeader.cs" />
