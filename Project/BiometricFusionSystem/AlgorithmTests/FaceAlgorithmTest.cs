@@ -47,18 +47,19 @@ namespace AlgorithmTests
             for (int i = 0; i < 4; i++)
             { 
                 classNames.Add("Aleks");
-                imagePaths.Add(_sampleDirPath + "Aleks" + (i + 1));
+                imagePaths.Add("Aleks" + (i + 1) + ".bmp");
             }
             for (int i = 0; i < 4; i++)
             {
                 classNames.Add("Martyna");
-                imagePaths.Add(_sampleDirPath + "Martyna" + (i + 1));
+                imagePaths.Add("Martyna" + (i + 1) + ".bmp");
             }
             for (int i = 0; i < 4; i++)
             {
                 classNames.Add("Kornel");
-                imagePaths.Add(_sampleDirPath + "Kornel" + (i + 1));
+                imagePaths.Add("Kornel" + (i + 1) + ".bmp");
             }
+            LoadBitmaps(imagePaths, classNames);
             //load images paths to listBmp, class names to classNames, and call LoadBitmaps(listBmp, classNames)
         }
 
@@ -87,23 +88,34 @@ namespace AlgorithmTests
                 fv = GetFeatures(listBmp[i]);
                 fvs.Add(fv);
             }
-
-            string temp = classNames[0];
             List<List<List<double>>> list = new List<List<List<double>>>();
-            List<List<double>> fvForOneClass = new List<List<double>>();
-
-            for (int h = 0; h < classNames.Count; h++)
+            List<Tuple<int,string>> numberOfBitmapsPerPerson = new List<Tuple<int, string>>();
+            string tempName = classNames[0];
+            int tempCount = 0;
+            for (int i = 0; i < classNames.Count; i++)
             {
-                if (temp != classNames[h])
+                if (tempName!=classNames[i])
                 {
-                    list.Add(fvForOneClass);
-                    fvForOneClass = new List<List<double>>();
+                    numberOfBitmapsPerPerson.Add( new Tuple<int, string>(tempCount, tempName));
+                    tempName = classNames[i];
+                    tempCount = 0;
                 }
-                fvForOneClass.Add(fvs[h]);
+                tempCount++;
             }
-
+            numberOfBitmapsPerPerson.Add(new Tuple<int, string>(tempCount, tempName));
+            int index = 0;
+            foreach (var t in numberOfBitmapsPerPerson)
+            {
+                var fvForOneClass = new List<List<double>>();
+                for (int i = 0; i < t.Item1; i++)
+                {
+                    fvForOneClass.Add(fvs[index]);
+                    index++;
+                }
+                list.Add(fvForOneClass);
+            }
             MinimumDistanceClassifier mdc = new MinimumDistanceClassifier();
-            mdc.Train(list, classNames.ToList());
+            mdc.Train(list, classNames.Distinct().ToList());
         }
     }
 }

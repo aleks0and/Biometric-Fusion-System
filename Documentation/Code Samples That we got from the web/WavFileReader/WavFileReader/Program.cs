@@ -17,7 +17,7 @@ namespace WavFileReader
     {
         static void Main(string[] args)
         {
-            DbTest();
+           // DbTest();
             GaborTest();
         }
         private static void DbTest()
@@ -153,7 +153,7 @@ namespace WavFileReader
     
         private static void GaborTest()
         {
-            Bitmap b = new Bitmap(@"../../im-grayscale.bmp");
+            Bitmap b = new Bitmap(@"../../Aleks1.bmp");
 
             double[] lambda = { 10, 5 };
             GaborFilter gf = new GaborFilter(2, 1, lambda, Math.PI / 2, 4, 3);

@@ -38,7 +38,7 @@ namespace FaceRecognition
             _bmp.Start();
             List<List<double>> moments = new List<List<double>>();
             moments.Add(CalculateMean());
-            for (int i = 2; i < finalMoment; i++)
+            for (int i = 2; i <= finalMoment; i++)
             {
                 moments.Add(CalculateIthMoment(i, moments[0]));
             }
@@ -98,12 +98,12 @@ namespace FaceRecognition
                 }
             }
             int pixelCount = _height * _width;
-            sumR /= pixelCount;
-            sumG /= pixelCount;
-            sumB /= pixelCount;
-            sumR = Math.Pow(sumR, 1 / moment);
-            sumG = Math.Pow(sumG, 1 / moment);
-            sumB = Math.Pow(sumB, 1 / moment);
+            sumR /= (double)pixelCount;
+            sumG /= (double)pixelCount;
+            sumB /= (double)pixelCount;
+            sumR = Math.Pow(sumR, 1.0 / moment);
+            sumG = Math.Pow(sumG, 1.0 / moment);
+            sumB = Math.Pow(sumB, 1.0 / moment);
             ithMoment.Add(sumR);
             ithMoment.Add(sumG);
             ithMoment.Add(sumB);

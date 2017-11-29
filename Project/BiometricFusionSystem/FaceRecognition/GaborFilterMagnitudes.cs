@@ -54,7 +54,7 @@ namespace FaceRecognition
                     mean += c.R;
                 }
             }
-            mean /= (_bmpAfterGabor.Width * _bmpAfterGabor.Height);
+            mean /= (double)(_bmpAfterGabor.Width * _bmpAfterGabor.Height);
             _bmpAfterGabor.End();
             return mean;
         }
@@ -74,6 +74,7 @@ namespace FaceRecognition
                     std += Math.Pow(Math.Abs(Math.Abs(_bmpAfterGabor.GetPixel(i, j).R) - mean), 2);
                 }
             }
+            std /= (double)(_bmpAfterGabor.Width *_bmpAfterGabor.Height)- 1.0;
             std = Math.Sqrt(std);
             _bmpAfterGabor.End();
             return std;
