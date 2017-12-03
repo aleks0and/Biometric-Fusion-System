@@ -17,6 +17,7 @@ namespace FaceRecognition
         /// <returns>bitmap with applied histogram equalization</returns>
         public Bitmap Normalize(Bitmap bmp)
         {
+
             var pmfR = new int[Max];
             var pmfG = new int[Max];
             var pmfB = new int[Max];
@@ -154,7 +155,8 @@ namespace FaceRecognition
         /// <returns> bitmap with equalized colors</returns>
         private Bitmap Equalize(Bitmap bmp, int[,] equalizedColors)
         {
-            Bitmap newBmp = new Bitmap(bmp.Width, bmp.Height);
+            FastBitmap newBmp = new FastBitmap(new Bitmap(bmp.Width, bmp.Height));
+            newBmp.Start();
             for(int i = 0; i < bmp.Width; i++)
             {
                 for(int j = 0; j < bmp.Height; j++)
@@ -167,7 +169,8 @@ namespace FaceRecognition
                             equalizedColors[2, p.B]));
                 }
             }
-            return newBmp;
+            newBmp.End();
+            return newBmp.Bmp;
         }
     }
 }

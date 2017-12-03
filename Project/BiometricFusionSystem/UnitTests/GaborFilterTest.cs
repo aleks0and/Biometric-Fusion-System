@@ -91,8 +91,8 @@ namespace UnitTests
             GaborFilterMagnitudes magnitudes = new GaborFilterMagnitudes(bmp[0]);
             double mean = 127.5;
             double actual = magnitudes.CalculateStd(mean);
-            double expected = 255;
-            Assert.AreEqual(expected, actual);
+            double expected = 147.2;
+            Assert.AreEqual(expected, actual, 0.1);
         }
         [TestMethod]
         public void GaborMagnitudeSkewness()
@@ -101,7 +101,7 @@ namespace UnitTests
             var bmp = gf.ApplyFilter(_bmp);
             GaborFilterMagnitudes magnitudes = new GaborFilterMagnitudes(bmp[0]);
             double mean = 127.5;
-            double std = 255;
+            double std = 147.2;
             double actual = magnitudes.CalculateSkew(mean, std);
             double expected = 0;
             Assert.AreEqual(expected, actual);

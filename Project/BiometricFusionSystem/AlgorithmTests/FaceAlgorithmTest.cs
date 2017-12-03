@@ -39,6 +39,29 @@ namespace AlgorithmTests
             Assert.IsTrue(angelinaVsAngelina < scarlettVsAngelina);
             Assert.IsTrue(scarlettVsAngelina < bradVsAngelina);
         }
+        [TestMethod]
+        public void MDCTest()
+        {
+            List<string> imagePaths = new List<string>();
+            List<string> classNames = new List<string>();
+            for (int i = 0; i < 4; i++)
+            { 
+                classNames.Add("Aleks");
+                imagePaths.Add("Aleks" + (i + 1) + ".bmp");
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                classNames.Add("Martyna");
+                imagePaths.Add("Martyna" + (i + 1) + ".bmp");
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                classNames.Add("Kornel");
+                imagePaths.Add("Kornel" + (i + 1) + ".bmp");
+            }
+            LoadBitmaps(imagePaths, classNames);
+            //load images paths to listBmp, class names to classNames, and call LoadBitmaps(listBmp, classNames)
+        }
 
         private List<double> GetFeatures(string filePath)
         {
@@ -55,6 +78,44 @@ namespace AlgorithmTests
             var features = _extractor.GetGaborFeatureVector(bmp);
             bmp.Dispose();
             return features;
+        }
+        private void LoadBitmaps(List<string> listBmp, List<string> classNames)
+        {
+            List<List<double>> fvs = new List<List<double>>();
+            List<double> fv = new List<double>();
+            for(int i = 0; i < listBmp.Count; i++)
+            {
+                fv = GetFeatures(listBmp[i]);
+                fvs.Add(fv);
+            }
+            List<List<List<double>>> list = new List<List<List<double>>>();
+            List<Tuple<int,string>> numberOfBitmapsPerPerson = new List<Tuple<int, string>>();
+            string tempName = classNames[0];
+            int tempCount = 0;
+            for (int i = 0; i < classNames.Count; i++)
+            {
+                if (tempName!=classNames[i])
+                {
+                    numberOfBitmapsPerPerson.Add( new Tuple<int, string>(tempCount, tempName));
+                    tempName = classNames[i];
+                    tempCount = 0;
+                }
+                tempCount++;
+            }
+            numberOfBitmapsPerPerson.Add(new Tuple<int, string>(tempCount, tempName));
+            int index = 0;
+            foreach (var t in numberOfBitmapsPerPerson)
+            {
+                var fvForOneClass = new List<List<double>>();
+                for (int i = 0; i < t.Item1; i++)
+                {
+                    fvForOneClass.Add(fvs[index]);
+                    index++;
+                }
+                list.Add(fvForOneClass);
+            }
+            MinimumDistanceClassifier mdc = new MinimumDistanceClassifier();
+            mdc.Train(list, classNames.Distinct().ToList());
         }
     }
 }

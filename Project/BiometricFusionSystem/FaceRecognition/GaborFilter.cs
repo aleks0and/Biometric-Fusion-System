@@ -51,18 +51,24 @@ namespace FaceRecognition
         public Bitmap CalculateGaborFilter(Bitmap b, int k, double lambda)
         {
             //CalculateStdDev(b);
+            FastBitmap src = new FastBitmap(b);
             int max = _kernelSize - 1;
-            Bitmap bmp = new Bitmap(b.Width - max, b.Height - max);
+            FastBitmap dest = new FastBitmap(new Bitmap(b.Width - max, b.Height - max));
             var kernel = GetKernel(k, lambda);
+
+            src.Start();
+            dest.Start();
 
             for(int i = max / 2; i < b.Width - max / 2; i++)
             {
                 for(int j = max / 2; j < b.Height - max / 2; j++)
                 {
-                    ApplyKernel(b, bmp, i, j, kernel);
+                    ApplyKernel(src, dest, i, j, kernel);
                 }
             }
-            return bmp;
+            src.End();
+            dest.End();
+            return dest.Bmp;
         }
         /// <summary>
         /// function limiting the value to the max of 255 and min to 0
@@ -141,7 +147,7 @@ namespace FaceRecognition
         /// <param name="x"> horizontal coordinates of pixel</param>
         /// <param name="y"> vertical coordinates of pixel</param>
         /// <param name="kernel"> kernel with current gabor filter values</param>
-        private void ApplyKernel(Bitmap src, Bitmap dest, int x, int y, double[,] kernel)
+        private void ApplyKernel(FastBitmap src, FastBitmap dest, int x, int y, double[,] kernel)
         {
             int max = (_kernelSize - 1) / 2;
             double sumR = 0, sumG = 0, sumB = 0;

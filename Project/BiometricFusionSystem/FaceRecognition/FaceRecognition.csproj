@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FaceFeatureExtractor.cs" />
+    <Compile Include="FastBitmap.cs" />
     <Compile Include="GaborFilter.cs" />
     <Compile Include="GaborFilterMagnitudes.cs" />
     <Compile Include="GrayscaleConverter.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="HistogramEqualization.cs" />
     <Compile Include="HistogramFeatureExtraction.cs" />
     <Compile Include="INormalization.cs" />
+    <Compile Include="MinimumDistanceClassifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

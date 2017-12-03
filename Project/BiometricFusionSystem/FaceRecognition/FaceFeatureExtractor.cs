@@ -69,7 +69,15 @@ namespace FaceRecognition
         /// <returns> combined image of the input bitmaps</returns>
         public Bitmap CombineBitmaps(List<Bitmap> lb)
         {
-            var superpos = new Bitmap(lb[0].Width, lb[0].Height);
+            var superpos = new FastBitmap(new Bitmap(lb[0].Width, lb[0].Height));
+            var fastBitmaps = lb.Select(b => new FastBitmap(b)).ToList();
+
+            superpos.Start();
+            foreach(var fb in fastBitmaps)
+            {
+                fb.Start();
+            }
+
             for (int i = 0; i < superpos.Width; i++)
             {
                 for (int j = 0; j < superpos.Height; j++)
@@ -77,7 +85,7 @@ namespace FaceRecognition
                     int min = 255;
                     for (int k = 0; k < lb.Count; k++)
                     {
-                        var px = lb[k].GetPixel(i, j);
+                        var px = fastBitmaps[k].GetPixel(i, j);
                         if (px.R < min)
                         {
                             min = px.R;
@@ -86,7 +94,13 @@ namespace FaceRecognition
                     superpos.SetPixel(i, j, Color.FromArgb(min, min, min));
                 }
             }
-            return superpos;
+
+            foreach(var fb in fastBitmaps)
+            {
+                fb.End();
+            }
+            superpos.End();
+            return superpos.Bmp;
         }
     }
 }

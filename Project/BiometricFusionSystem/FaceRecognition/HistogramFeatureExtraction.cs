@@ -12,7 +12,7 @@ namespace FaceRecognition
         private const int Max = 256;
         int _height;
         int _width;
-        Bitmap _bmp;
+        private FastBitmap _bmp;
 
         /// <summary>
         /// Constructor for the class setting the initial values
@@ -24,7 +24,7 @@ namespace FaceRecognition
         {
             _height = bmp.Height;
             _width = bmp.Width;
-            _bmp = bmp;
+            _bmp = new FastBitmap(bmp);
         }
 
         // second Moment is the Variance, third is the Skewness
@@ -35,12 +35,14 @@ namespace FaceRecognition
         /// <returns> feature vector based on the color histogram </returns>
         public List<List<double>> CalculateMoments (int finalMoment)
         {
+            _bmp.Start();
             List<List<double>> moments = new List<List<double>>();
             moments.Add(CalculateMean());
-            for (int i = 2; i < finalMoment; i++)
+            for (int i = 2; i <= finalMoment; i++)
             {
                 moments.Add(CalculateIthMoment(i, moments[0]));
             }
+            _bmp.End();
             return moments;
             
         }
@@ -96,12 +98,12 @@ namespace FaceRecognition
                 }
             }
             int pixelCount = _height * _width;
-            sumR /= pixelCount;
-            sumG /= pixelCount;
-            sumB /= pixelCount;
-            sumR = Math.Pow(sumR, 1 / moment);
-            sumG = Math.Pow(sumG, 1 / moment);
-            sumB = Math.Pow(sumB, 1 / moment);
+            sumR /= (double)pixelCount;
+            sumG /= (double)pixelCount;
+            sumB /= (double)pixelCount;
+            sumR = Math.Pow(sumR, 1.0 / moment);
+            sumG = Math.Pow(sumG, 1.0 / moment);
+            sumB = Math.Pow(sumB, 1.0 / moment);
             ithMoment.Add(sumR);
             ithMoment.Add(sumG);
             ithMoment.Add(sumB);
