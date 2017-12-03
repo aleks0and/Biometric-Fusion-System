@@ -92,9 +92,9 @@ namespace FaceRecognition
             {
                 for (int j = 0; j < _height; j++)
                 {
-                    sumR += Math.Pow(_bmp.GetPixel(i, j).R - mean[0], moment);
-                    sumG += Math.Pow(_bmp.GetPixel(i, j).G - mean[1], moment);
-                    sumB += Math.Pow(_bmp.GetPixel(i, j).B - mean[2], moment);
+                    sumR += Math.Pow(Math.Abs(_bmp.GetPixel(i, j).R - mean[0]), moment);
+                    sumG += Math.Pow(Math.Abs(_bmp.GetPixel(i, j).G - mean[1]), moment);
+                    sumB += Math.Pow(Math.Abs(_bmp.GetPixel(i, j).B - mean[2]), moment);
                 }
             }
             int pixelCount = _height * _width;

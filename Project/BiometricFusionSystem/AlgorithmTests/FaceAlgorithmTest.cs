@@ -44,22 +44,22 @@ namespace AlgorithmTests
         {
             List<string> imagePaths = new List<string>();
             List<string> classNames = new List<string>();
-            for (int i = 0; i < 4; i++)
-            { 
-                classNames.Add("Aleks");
-                imagePaths.Add("Aleks" + (i + 1) + ".bmp");
-            }
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 3; i++)
             {
                 classNames.Add("Martyna");
-                imagePaths.Add("Martyna" + (i + 1) + ".bmp");
+                imagePaths.Add("MartynaSlawinska" + (i + 1) + ".bmp");
             }
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 3; i++)
             {
                 classNames.Add("Kornel");
-                imagePaths.Add("Kornel" + (i + 1) + ".bmp");
+                imagePaths.Add("KornelZaba" + (i + 1) + ".bmp");
             }
-            LoadBitmaps(imagePaths, classNames);
+            var mdc = new MinimumDistanceClassifier();
+            LoadBitmaps(imagePaths, classNames, mdc);
+            var martyna = GetFeatures("MartynaSlawinska4.bmp");
+            var kornel = GetFeatures("KornelZaba4.bmp");
+            Assert.AreEqual("Kornel", mdc.Classify(kornel));
+            Assert.AreEqual("Martyna", mdc.Classify(martyna));
             //load images paths to listBmp, class names to classNames, and call LoadBitmaps(listBmp, classNames)
         }
 
@@ -79,7 +79,7 @@ namespace AlgorithmTests
             bmp.Dispose();
             return features;
         }
-        private void LoadBitmaps(List<string> listBmp, List<string> classNames)
+        private void LoadBitmaps(List<string> listBmp, List<string> classNames, MinimumDistanceClassifier mdc)
         {
             List<List<double>> fvs = new List<List<double>>();
             List<double> fv = new List<double>();
@@ -114,7 +114,6 @@ namespace AlgorithmTests
                 }
                 list.Add(fvForOneClass);
             }
-            MinimumDistanceClassifier mdc = new MinimumDistanceClassifier();
             mdc.Train(list, classNames.Distinct().ToList());
         }
     }
