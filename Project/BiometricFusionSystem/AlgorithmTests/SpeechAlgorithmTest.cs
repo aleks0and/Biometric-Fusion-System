@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SpeechRecognition;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -203,6 +204,154 @@ namespace AlgorithmTests
 
             Assert.IsTrue(aleksVsAleks < kornelVsAleks);
             Assert.IsTrue(kornelVsAleks < martynaVsAleks);
+        }
+        [TestMethod]
+        public void AlgorithmAK1_KZSuccessRate0_75()
+        {
+            var a1 = GetFeatures("AleksanderKusmierczykA1.wav");
+            var a2 = GetFeatures("AleksanderKusmierczykA2.wav");
+            var a3 = GetFeatures("AleksanderKusmierczykA3.wav");
+            var a4 = GetFeatures("AleksanderKusmierczykA4.wav");
+
+            var k1 = GetFeatures("KornelZabaa1.wav");
+            var k2 = GetFeatures("KornelZabaa2.wav");
+            var k3 = GetFeatures("KornelZabaa3.wav");
+            var k4 = GetFeatures("KornelZabaa4.wav");
+
+            var AKResults = new List<double>();
+            var KZResults = new List<double>();
+
+            AKResults.Add(_timeWarping.Compare(a1, a2));
+            AKResults.Add(_timeWarping.Compare(a1, a3));
+            AKResults.Add(_timeWarping.Compare(a1, a4));
+            KZResults.Add(_timeWarping.Compare(a1, k1));
+            KZResults.Add(_timeWarping.Compare(a1, k2));
+            KZResults.Add(_timeWarping.Compare(a1, k3));
+            KZResults.Add(_timeWarping.Compare(a1, k4));
+
+            double sum = 0;
+            foreach(var akResult in AKResults)
+            {
+                foreach(var kzResult in KZResults)
+                {
+                    if(akResult < kzResult)
+                    {
+                        sum++;
+                    }
+                }
+            }
+            sum /= (double)(AKResults.Count * KZResults.Count);
+            Assert.IsTrue(sum > 0.75);
+        }
+        [TestMethod]
+        public void AlgorithmAK2_KZSuccessRate0_75()
+        {
+            var a2 = GetFeatures("AleksanderKusmierczykA2.wav");
+            var a3 = GetFeatures("AleksanderKusmierczykA3.wav");
+            var a4 = GetFeatures("AleksanderKusmierczykA4.wav");
+
+            var k1 = GetFeatures("KornelZabaa1.wav");
+            var k2 = GetFeatures("KornelZabaa2.wav");
+            var k3 = GetFeatures("KornelZabaa3.wav");
+            var k4 = GetFeatures("KornelZabaa4.wav");
+
+            var AKResults = new List<double>();
+            var KZResults = new List<double>();
+
+            AKResults.Add(_timeWarping.Compare(a2, a3));
+            AKResults.Add(_timeWarping.Compare(a2, a4));
+            KZResults.Add(_timeWarping.Compare(a2, k1));
+            KZResults.Add(_timeWarping.Compare(a2, k2));
+            KZResults.Add(_timeWarping.Compare(a2, k3));
+            KZResults.Add(_timeWarping.Compare(a2, k4));
+
+            double sum = 0;
+            foreach (var akResult in AKResults)
+            {
+                foreach (var kzResult in KZResults)
+                {
+                    if (akResult < kzResult)
+                    {
+                        sum++;
+                    }
+                }
+            }
+            sum /= (double)(AKResults.Count * KZResults.Count);
+            Assert.IsTrue(sum > 0.75);
+        }
+        [TestMethod]
+        public void AlgorithmKZ1_AKSuccessRate0_75()
+        {
+            var a1 = GetFeatures("AleksanderKusmierczykA1.wav");
+            var a2 = GetFeatures("AleksanderKusmierczykA2.wav");
+            var a3 = GetFeatures("AleksanderKusmierczykA3.wav");
+            var a4 = GetFeatures("AleksanderKusmierczykA4.wav");
+
+            var k1 = GetFeatures("KornelZabaa1.wav");
+            var k2 = GetFeatures("KornelZabaa2.wav");
+            var k3 = GetFeatures("KornelZabaa3.wav");
+            var k4 = GetFeatures("KornelZabaa4.wav");
+
+            var AKResults = new List<double>();
+            var KZResults = new List<double>();
+
+            AKResults.Add(_timeWarping.Compare(k1, a2));
+            AKResults.Add(_timeWarping.Compare(k1, a3));
+            AKResults.Add(_timeWarping.Compare(k1, a4));
+            AKResults.Add(_timeWarping.Compare(k1, a1));
+            KZResults.Add(_timeWarping.Compare(k1, k2));
+            KZResults.Add(_timeWarping.Compare(k1, k3));
+            KZResults.Add(_timeWarping.Compare(k1, k4));
+
+            double sum = 0;
+            foreach (var akResult in AKResults)
+            {
+                foreach (var kzResult in KZResults)
+                {
+                    if (akResult > kzResult)
+                    {
+                        sum++;
+                    }
+                }
+            }
+            sum /= (double)(AKResults.Count * KZResults.Count);
+            Assert.IsTrue(sum > 0.75);
+        }
+        [TestMethod]
+        public void AlgorithmKZ2_AKSuccessRate0_75()
+        {
+            var a1 = GetFeatures("AleksanderKusmierczykA1.wav");
+            var a2 = GetFeatures("AleksanderKusmierczykA2.wav");
+            var a3 = GetFeatures("AleksanderKusmierczykA3.wav");
+            var a4 = GetFeatures("AleksanderKusmierczykA4.wav");
+
+            var k2 = GetFeatures("KornelZabaa2.wav");
+            var k3 = GetFeatures("KornelZabaa3.wav");
+            var k4 = GetFeatures("KornelZabaa4.wav");
+
+            var AKResults = new List<double>();
+            var KZResults = new List<double>();
+
+            AKResults.Add(_timeWarping.Compare(k2, a2));
+            AKResults.Add(_timeWarping.Compare(k2, a3));
+            AKResults.Add(_timeWarping.Compare(k2, a4));
+            AKResults.Add(_timeWarping.Compare(k2, a1));
+            KZResults.Add(_timeWarping.Compare(k2, k3));
+            KZResults.Add(_timeWarping.Compare(k2, k4));
+
+            double sum = 0;
+            foreach (var akResult in AKResults)
+            {
+                foreach (var kzResult in KZResults)
+                {
+                    if (akResult > kzResult)
+                    {
+                        sum++;
+                    }
+                }
+            }
+            sum /= (double)(AKResults.Count * KZResults.Count);
+            Assert.IsTrue(sum > 0.75);
         }
         private List<double> GetFeatures(string filePath)
         {
