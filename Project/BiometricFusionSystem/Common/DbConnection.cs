@@ -26,7 +26,7 @@ namespace Common
         public DbConnection ()
         {
             _sqlConnection = new SqlConnection();
-            _sqlConnection.ConnectionString = @"Server=localhost\MSSQLSERVER2; Data Source=MARTYNA\MSSQLSERVER2; Initial Catalog = BiometricDB; User ID = sa; Password = sastudent";
+            _sqlConnection.ConnectionString = @"Data Source=DESKTOP-BDCV57Q\SQLEXPRESS;Initial Catalog=BiometricDB;Integrated Security=True";
             _sqlConnection.FireInfoMessageEventOnUserErrors = false;
         }
 

@@ -31,13 +31,14 @@ namespace Common
                 _connection.SqlConnection.Open();
                 using (var reader = select.ExecuteReader())
                 {
+                    reader.Read();
                     p = new Person()
                     {
                         Id = (int)reader[0],
                         FirstName = (string)reader[1],
                         LastName = (string)reader[2],
-                        FaceFeatureVector = ((double[])reader[3]).ToList(),
-                        VoiceFeatureVector = ((double[])reader[4]).ToList()
+                        FaceFeatureVector = Person.FeatureVectorToList((string)reader[3], ' '),
+                        VoiceFeatureVector = Person.FeatureVectorToList((string)reader[4], ' ')
                     };
                 }
             }
@@ -79,37 +80,18 @@ namespace Common
 
         private int GetPersonId(string firstName, string lastName)
         {
-            //var select = new SqlCommand("select Id from Person where FirstName=@FirstName and LastName=@LastName");
-            //select.Connection = _connection.SqlConnection;
-            //select.Parameters.Add("@FirstName", System.Data.SqlDbType.VarChar, MaxNameLength);
-            //select.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar, MaxNameLength);
-            //select.Parameters["@FirstName"].Value = firstName;
-            //select.Parameters["@LastName"].Value = lastName;
-            //using (SqlDataReader reader = select.ExecuteReader())
-            //{
-            //    int ret = (int)reader[0];
-            //    return ret;
-            //}
-            SqlDataReader reader = null;
             int ret = -1;
-            try
+
+            var select = new SqlCommand("select Id from Person where FirstName=@FirstName and LastName=@LastName");
+            select.Connection = _connection.SqlConnection;
+            select.Parameters.Add("@FirstName", System.Data.SqlDbType.VarChar, firstName.Length);
+            select.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar, lastName.Length);
+            select.Parameters["@FirstName"].Value = firstName;
+            select.Parameters["@LastName"].Value = lastName;
+            using (var reader = select.ExecuteReader())
             {
-                var select = new SqlCommand("select Id from Person where FirstName=@FirstName and LastName=@LastName");
-                select.Connection = _connection.SqlConnection;
-                select.Parameters.Add("@FirstName", System.Data.SqlDbType.VarChar, MaxNameLength);
-                select.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar, MaxNameLength);
-                select.Parameters["@FirstName"].Value = firstName;
-                select.Parameters["@LastName"].Value = lastName;
-                reader = select.ExecuteReader();
-            }
-            catch (SqlException ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-            finally
-            {
-                ret = (int)reader["Id"];
-                reader.Close();
+                reader.Read();
+                ret = (int)reader[0];
             }
             return ret;
         }
@@ -121,7 +103,8 @@ namespace Common
             insert.Parameters.Add("@Id", System.Data.SqlDbType.Int);
             insert.Parameters.Add("@FeatureVector", System.Data.SqlDbType.VarChar);
             insert.Parameters["@Id"].Value = person.Id;
-            insert.Parameters["@FeatureVector"].Value = person.FaceFeatureVector;
+            insert.Parameters["@FeatureVector"].Value = person.FaceFeatureVectorToString(' ');
+
             insert.ExecuteNonQuery();
         }
         private void AddSpeech(Person person)
@@ -131,7 +114,8 @@ namespace Common
             insert.Parameters.Add("@Id", System.Data.SqlDbType.Int);
             insert.Parameters.Add("@FeatureVector", System.Data.SqlDbType.VarChar);
             insert.Parameters["@Id"].Value = person.Id;
-            insert.Parameters["@FeatureVector"].Value = person.VoiceFeatureVector;
+            insert.Parameters["@FeatureVector"].Value = person.VoiceFeatureVectorToString(' ');
+
             insert.ExecuteNonQuery();
         }
     }

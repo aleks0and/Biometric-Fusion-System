@@ -44,7 +44,7 @@ namespace Common
 
             for (int i = 0; i < vector.Count; i++)
             {
-                ffv += vector[i] + separator;
+                ffv += vector[i].ToString("F2") + separator;
             }
 
             return ffv;
@@ -55,7 +55,7 @@ namespace Common
         /// <param name="featureVectorString"> string with face feature vectors </param>
         /// <param name="separator"> character which separates the values </param>
         /// <returns> list of double contating feature vectors </returns>
-        public List<double> FeatureVectorToList(string featureVectorString, char separator)
+        public static List<double> FeatureVectorToList(string featureVectorString, char separator)
         {
             List<double> ffv = new List<double>();
 
