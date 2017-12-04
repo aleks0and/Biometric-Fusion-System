@@ -32,11 +32,19 @@ namespace Common
         /// <returns> string contating feature vectors </returns>
         public string FaceFeatureVectorToString(char separator)
         {
+            return FeatureVectorToString(FaceFeatureVector, separator);
+        }
+        public string VoiceFeatureVectorToString(char separator)
+        {
+            return FeatureVectorToString(VoiceFeatureVector, separator);
+        }
+        private string FeatureVectorToString(List<double> vector, char separator)
+        {
             string ffv = "";
 
-            for(int i = 0; i < FaceFeatureVector.Count; i++)
+            for (int i = 0; i < vector.Count; i++)
             {
-                ffv += FaceFeatureVector[i] + separator;
+                ffv += vector[i] + separator;
             }
 
             return ffv;
