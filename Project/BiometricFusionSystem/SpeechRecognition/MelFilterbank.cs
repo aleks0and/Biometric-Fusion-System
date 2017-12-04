@@ -21,13 +21,13 @@ namespace SpeechRecognition
         public List<double> Energies { get; private set; }
 
         /// <summary>
-        /// 
+        /// Constructor of the class setting the basic parameters
         /// </summary>
-        /// <param name="lowerFreq"></param>
-        /// <param name="upperFreq"></param>
-        /// <param name="filterbanksCount"></param>
-        /// <param name="samplerate"></param>
-        /// <param name="fourierLength"></param>
+        /// <param name="lowerFreq"> lowest frequency in Herz </param>
+        /// <param name="upperFreq"> highest frequency in Herz </param>
+        /// <param name="filterbanksCount"> number of filterbanks </param>
+        /// <param name="samplerate"> samplerate for the speech recording </param>
+        /// <param name="fourierLength"> half the number of frames created from the speech recording</param>
         public MelFilterbank(double lowerFreq, double upperFreq, int filterbanksCount, int samplerate, int fourierLength)
         {
             _lowerFreq = MelConverter.ToMel(lowerFreq);
@@ -42,7 +42,7 @@ namespace SpeechRecognition
             Energies = new List<double>();
         }
         /// <summary>
-        /// 
+        /// function creating the filterbank intervals starting at the lowest frequency and finishing at the highest with the step.
         /// </summary>
         public void GenerateFilterbankIntervals()
         {
@@ -55,7 +55,7 @@ namespace SpeechRecognition
             }
         }
         /// <summary>
-        /// 
+        /// function converting the filterbanks to Herz
         /// </summary>
         public void ConvertFilterbanks()
         {
@@ -65,7 +65,7 @@ namespace SpeechRecognition
             }
         }
         /// <summary>
-        /// 
+        /// function generating filter intervals
         /// </summary>
         public void CalculateFilters()
         {
@@ -75,10 +75,10 @@ namespace SpeechRecognition
             }
         }
         /// <summary>
-        /// 
+        /// function creates filterbanks of n vectors of triangular filters
         /// </summary>
-        /// <param name="m"></param>
-        /// <returns></returns>
+        /// <param name="m">ith value for which the filterbanks will be calculated</param>
+        /// <returns>filterbanks stored as list of double</returns>
         public List<double> CreateFilterbank(int m)
         {
             List<double> fb = new List<double>();
@@ -108,7 +108,7 @@ namespace SpeechRecognition
             return fb;
         }
         /// <summary>
-        /// 
+        /// function creating the filterbanks for each interval.
         /// </summary>
         /// <returns></returns>
         public List<List<double>> CreateFilterbanks()
@@ -122,10 +122,10 @@ namespace SpeechRecognition
             return fbs;
         }
         /// <summary>
-        /// 
+        /// function which filteres the spectral densities through the filterbanks
         /// </summary>
-        /// <param name="est"></param>
-        /// <param name="fbs"></param>
+        /// <param name="est"> spectral density estimates </param>
+        /// <param name="fbs"> list of filterbanks </param>
         public void CalculateFilterbanksEnergies(List<double> est, List<List<double>> fbs)
         {
             for(int i = 0; i < fbs.Count; i++)
