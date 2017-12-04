@@ -18,24 +18,38 @@ namespace Common
         }
         public Person GetPerson(string firstName, string lastName)
         {
-            var select = new SqlCommand("select p.Id, p.FirstName, p.LastName, f.FeatureVector FaceFeatureVector, v.FeatureVector VoiceFeatureVector from Person p " 
-                + "join FaceBiometric f on p.Id = f.Id join VoiceBiometric v on p.Id = v.Id where p.FirstName=@FirstName and p.LastName=@LastName");
-            select.Parameters.Add("@FirstName", System.Data.SqlDbType.VarChar, MaxNameLength);
-            select.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar, MaxNameLength);
-            select.Parameters["@FirstName"].Value = firstName;
-            select.Parameters["@LastName"].Value = lastName;
-            _connection.SqlConnection.Open();
-            using (var reader = select.ExecuteReader())
-            {
-                return new Person()
+            Person p = null;
+            try
+            { 
+                var select = new SqlCommand("select p.Id, p.FirstName, p.LastName, f.FeatureVector FaceFeatureVector, v.FeatureVector VoiceFeatureVector from Person p " 
+                    + "join FaceBiometric f on p.Id = f.Id join VoiceBiometric v on p.Id = v.Id where p.FirstName=@FirstName and p.LastName=@LastName");
+                select.Connection = _connection.SqlConnection;
+                select.Parameters.Add("@FirstName", System.Data.SqlDbType.VarChar, MaxNameLength);
+                select.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar, MaxNameLength);
+                select.Parameters["@FirstName"].Value = firstName;
+                select.Parameters["@LastName"].Value = lastName;
+                _connection.SqlConnection.Open();
+                using (var reader = select.ExecuteReader())
                 {
-                    Id = (int)reader[0],
-                    FirstName = (string)reader[1],
-                    LastName = (string)reader[2],
-                    FaceFeatureVector = ((double[])reader[3]).ToList(),
-                    VoiceFeatureVector = ((double[])reader[4]).ToList()
-                };
+                    p = new Person()
+                    {
+                        Id = (int)reader[0],
+                        FirstName = (string)reader[1],
+                        LastName = (string)reader[2],
+                        FaceFeatureVector = ((double[])reader[3]).ToList(),
+                        VoiceFeatureVector = ((double[])reader[4]).ToList()
+                    };
+                }
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                _connection.SqlConnection.Close();
+            }
+            return p;
         }
         public void AddPerson(Person person)
         {
@@ -65,15 +79,39 @@ namespace Common
 
         private int GetPersonId(string firstName, string lastName)
         {
-            var select = new SqlCommand("select Id from Person where FirstName=@FirstName and LastName=@LastName");
-            select.Parameters.Add("@FirstName", System.Data.SqlDbType.VarChar, MaxNameLength);
-            select.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar, MaxNameLength);
-            select.Parameters["@FirstName"].Value = firstName;
-            select.Parameters["@LastName"].Value = lastName;
-            using (var reader = select.ExecuteReader())
+            //var select = new SqlCommand("select Id from Person where FirstName=@FirstName and LastName=@LastName");
+            //select.Connection = _connection.SqlConnection;
+            //select.Parameters.Add("@FirstName", System.Data.SqlDbType.VarChar, MaxNameLength);
+            //select.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar, MaxNameLength);
+            //select.Parameters["@FirstName"].Value = firstName;
+            //select.Parameters["@LastName"].Value = lastName;
+            //using (SqlDataReader reader = select.ExecuteReader())
+            //{
+            //    int ret = (int)reader[0];
+            //    return ret;
+            //}
+            SqlDataReader reader = null;
+            int ret = -1;
+            try
             {
-                return (int)reader[0];
+                var select = new SqlCommand("select Id from Person where FirstName=@FirstName and LastName=@LastName");
+                select.Connection = _connection.SqlConnection;
+                select.Parameters.Add("@FirstName", System.Data.SqlDbType.VarChar, MaxNameLength);
+                select.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar, MaxNameLength);
+                select.Parameters["@FirstName"].Value = firstName;
+                select.Parameters["@LastName"].Value = lastName;
+                reader = select.ExecuteReader();
             }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                ret = (int)reader["Id"];
+                reader.Close();
+            }
+            return ret;
         }
 
         private void AddFace(Person person)
