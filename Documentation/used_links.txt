@@ -15,3 +15,6 @@ http://ijirae.com/volumes/vol1/issue10/27.NVEC10086.pdf
 https://arxiv.org/abs/1003.4083
 w sdp, speech synthesis and recognition Sadaoki Furui tez jest o DTW okolo 267 strony
 w Fundamentals of Speech Recognition Homayoon Beigi, co kiedys wyslalem jest o MFCC od 157 strony
+
+Minimum Distance Classifiers:
+https://homepages.inf.ed.ac.uk/rbf/HIPR2/classify.htm
