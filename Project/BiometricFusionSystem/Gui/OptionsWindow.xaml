@@ -28,7 +28,7 @@
             <RadioButton Content="Speech only" GroupName="VerifyMethod" />
             <RadioButton  Content="Face and speech" GroupName="VerifyMethod" />
         </StackPanel>
-        <Button Grid.Row="2" Grid.Column="0" Content="Ok" Click="Button_Click" />
-        <Button Grid.Row="2" Grid.Column="1" Content="Cancel" Click="Button_Click" />
+        <Button Grid.Row="2" Grid.Column="0" Content="Ok" />
+        <Button Grid.Row="2" Grid.Column="1" Content="Cancel" />
     </Grid>
 </Window>

@@ -54,11 +54,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\WindowService.cs" />
     <Compile Include="Utility\BindableBase.cs" />
     <Compile Include="Utility\RelayCommand.cs" />
     <Compile Include="VerificationWindow.xaml.cs">
       <DependentUpon>VerificationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -109,5 +111,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

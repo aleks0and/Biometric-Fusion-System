@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gui.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,21 +21,13 @@ namespace Gui
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainViewModel _mainViewModel;
+
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void OptionsClick(object sender, RoutedEventArgs e)
-        {
-            var optionsWindow = new OptionsWindow();
-            optionsWindow.ShowDialog();
-        }
-
-        private void VerifyClick(object sender, RoutedEventArgs e)
-        {
-            var verifyWindow = new VerificationWindow();
-            verifyWindow.ShowDialog();
+            _mainViewModel = new MainViewModel();
+            this.DataContext = _mainViewModel;
         }
     }
 }

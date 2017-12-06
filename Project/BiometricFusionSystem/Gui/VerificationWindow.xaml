@@ -18,6 +18,6 @@
         <TextBox Grid.Row="1" Margin="5, 5, 5, 5" />
         <Label Grid.Row="2" Content="Last Name" />
         <TextBox Grid.Row="3" Margin="5, 5, 5, 5"/>
-        <Button Grid.Row="4" Content="Ok" Click="Button_Click" />
+        <Button Grid.Row="4" Content="Ok" />
     </Grid>
 </Window>

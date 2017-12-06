@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Gui.Utility;
+using Gui.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,14 +21,11 @@ namespace Gui
     /// </summary>
     public partial class OptionsWindow : Window
     {
-        public OptionsWindow()
+        private MainViewModel _mainViewModel;
+        public OptionsWindow(BindableBase viewModel)
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+            _mainViewModel = viewModel as MainViewModel;
         }
     }
 }
