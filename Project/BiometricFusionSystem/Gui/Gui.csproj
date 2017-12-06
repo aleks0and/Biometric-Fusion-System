@@ -111,6 +111,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Camera\Camera.csproj">
+      <Project>{e826c80c-df59-4305-b0bf-27a58c1b5404}</Project>
+      <Name>Camera</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
