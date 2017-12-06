@@ -22,11 +22,12 @@ namespace Gui.ViewModel
         
         public MainViewModel()
         {
+            _ffmpeg = new Ffmpeg();
             OpenOptionsCommand = new RelayCommand(OpenOptions, canExecute => true);
             OpenVerificationCommand = new RelayCommand(OpenVerification, canExecute => true);
-            AcquirePhotoCommand = new RelayCommand(AcquirePhoto, canExecute => true);
-            AcquireRecordingCommand = new RelayCommand(AcquireRecording, canExecute => true);
-            _ffmpeg = new Ffmpeg();
+            AcquirePhotoCommand = new RelayCommand(AcquirePhoto, _ffmpeg.IsBusy);
+            AcquireRecordingCommand = new RelayCommand(AcquireRecording, _ffmpeg.IsBusy);
+            
         }
 
         private void AcquirePhoto(object parameter)

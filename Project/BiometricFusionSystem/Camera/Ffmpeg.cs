@@ -35,7 +35,11 @@ namespace Camera
             _process.Start();
             
         }
-
+        /// <summary>
+        /// before using this function one has to remove the output.wav file if such previously existed
+        /// </summary>
+        /// <param name="outputPath"></param>
+        /// <param name="handler"></param>
         public void RecordAudio(string outputPath, EventHandler handler)
         {
             _handler = handler;
@@ -52,7 +56,11 @@ namespace Camera
             _process.EnableRaisingEvents = true;
             _process.Exited += _handler;
             _process.Start();
-            
+        }
+
+        public bool IsBusy (object parameter)
+        {
+            return _process == null;
         }
 
         public void EndEvent()
