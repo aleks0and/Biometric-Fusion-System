@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.IO;
+using System.Reflection;
 
 namespace Gui.Model
 {
@@ -20,7 +22,8 @@ namespace Gui.Model
 
         public void LoadImage(string path)
         {
-            Image = new BitmapImage(new Uri(path, UriKind.Relative));
+            path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\" + path;
+            Image = new BitmapImage(new Uri(path));
         }
     }
 }
