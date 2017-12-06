@@ -11,8 +11,8 @@ namespace Camera
 {
     public class Ffmpeg
     {
-        private string _cameraName = "Logitech HD Webcam C270";
-        private string _microphoneName = "Mikrofon (HD Webcam C270)";
+        private string _cameraName = "TOSHIBA Web Camera - HD";//"Logitech HD Webcam C270";
+        private string _microphoneName = "Internal Mic (IDT High Definition Audio CODEC)";//"Mikrofon (HD Webcam C270)";
         private Process _process;
         private EventHandler _handler;
         //handle exited event on process to know when it ends
