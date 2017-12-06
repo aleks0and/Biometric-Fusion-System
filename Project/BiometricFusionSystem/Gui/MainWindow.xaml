@@ -26,7 +26,7 @@
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
                 <Grid Background="DarkGray"  Grid.Row="0">
-                    <Label Content="Photo here" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Image Source="{Binding Person.Image}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" StretchDirection="Both"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>

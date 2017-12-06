@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\PersonData.cs" />
     <Compile Include="Model\WindowService.cs" />
     <Compile Include="Utility\BindableBase.cs" />
     <Compile Include="Utility\RelayCommand.cs" />

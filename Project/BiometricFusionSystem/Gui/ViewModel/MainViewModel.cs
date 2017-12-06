@@ -19,6 +19,12 @@ namespace Gui.ViewModel
         public ICommand OpenVerificationCommand { get; set; }
         public ICommand AcquirePhotoCommand { get; set; }
         public ICommand AcquireRecordingCommand { get; set; }
+        private PersonData _person;
+        public PersonData Person
+        {
+            get { return _person; }
+            set { _person = value; Notify(); }
+        }
         
         public MainViewModel()
         {
@@ -27,7 +33,7 @@ namespace Gui.ViewModel
             OpenVerificationCommand = new RelayCommand(OpenVerification, canExecute => true);
             AcquirePhotoCommand = new RelayCommand(AcquirePhoto, _ffmpeg.IsBusy);
             AcquireRecordingCommand = new RelayCommand(AcquireRecording, _ffmpeg.IsBusy);
-            
+            Person = new PersonData();
         }
 
         private void AcquirePhoto(object parameter)
@@ -44,7 +50,7 @@ namespace Gui.ViewModel
         { 
             _ffmpeg.EndEvent();
             MessageBox.Show("Photo acquired");
-
+            Person.LoadImage(@"output.bmp");
         }
         private void AcquireRecordingHandler(object parameter, EventArgs e)
         {
