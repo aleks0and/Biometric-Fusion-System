@@ -8,7 +8,7 @@ namespace FaceRecognition
 {
     public class MinimumDistanceClassifier
     {
-        Dictionary<string/*class name*/, List<double>/*mean feature vector for a class*/> _classes;
+        public Dictionary<string/*class name*/, List<double>/*mean feature vector for a class*/> _classes;
 
         public MinimumDistanceClassifier()
         {

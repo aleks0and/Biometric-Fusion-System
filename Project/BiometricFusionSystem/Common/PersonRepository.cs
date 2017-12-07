@@ -52,7 +52,7 @@ namespace Common
             }
             return p;
         }
-        public void AddPerson(Person person)
+        public void AddPerson(Person person, string recordedWord)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace Common
                 cmdInsert.ExecuteNonQuery();
                 person.Id = GetPersonId(person.FirstName, person.LastName);
                 AddFace(person);
-                AddSpeech(person);
+                AddSpeech(person, recordedWord);
             }
             catch (SqlException ex)
             {
@@ -107,15 +107,16 @@ namespace Common
 
             insert.ExecuteNonQuery();
         }
-        private void AddSpeech(Person person)
+        private void AddSpeech(Person person, string recordedWord)
         {
-            var insert = new SqlCommand("INSERT INTO VoiceBiometric (Id,FeatureVector) values(@Id,@FeatureVector)");
+            var insert = new SqlCommand("INSERT INTO VoiceBiometric (Id,FeatureVector,RecordedWord) values(@Id,@FeatureVector,@RecordedWord)");
             insert.Connection = _connection.SqlConnection;
             insert.Parameters.Add("@Id", System.Data.SqlDbType.Int);
             insert.Parameters.Add("@FeatureVector", System.Data.SqlDbType.VarChar);
+            insert.Parameters.Add("@RecordedWord", System.Data.SqlDbType.VarChar);
             insert.Parameters["@Id"].Value = person.Id;
             insert.Parameters["@FeatureVector"].Value = person.VoiceFeatureVectorToString(' ');
-
+            insert.Parameters["@RecordedWord"].Value = recordedWord;
             insert.ExecuteNonQuery();
         }
     }

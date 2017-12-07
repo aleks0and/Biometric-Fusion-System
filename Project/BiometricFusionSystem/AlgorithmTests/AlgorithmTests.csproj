@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FaceAlgorithmTest.cs" />
+    <Compile Include="LoadDatabaseTest.cs" />
     <Compile Include="SpeechAlgorithmTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -14,7 +14,7 @@ namespace AlgorithmTests
     public class FaceAlgorithmTest
     {
         // we need to change it so we keep the pictures in the DB instead of the project directory
-        private string _sampleDirPath = @"../../../../../../Samples/";
+        private string _sampleDirPath = @"../../../../../Samples/";
         //private string _sampleDirPath = @"../../Samples/";
         private DynamicTimeWarping _timeWarping;
         private FaceFeatureExtractor _extractor;
@@ -98,7 +98,7 @@ namespace AlgorithmTests
             return features;
         }
 
-        private List<double> GetFeatures(string filePath, string directoryPath)
+        public List<double> GetFeatures(string filePath, string directoryPath)
         {
             string path = directoryPath + filePath;
             var bmp = new Bitmap(path);

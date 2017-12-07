@@ -23,7 +23,7 @@ namespace IntegrationTests
             
             PersonRepository pr = new PersonRepository(dc);
 
-            pr.AddPerson(p1);            
+            pr.AddPerson(p1, "test");            
 
             
         }

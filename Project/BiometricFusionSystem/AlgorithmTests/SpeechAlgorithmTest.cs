@@ -353,7 +353,7 @@ namespace AlgorithmTests
             sum /= (double)(AKResults.Count * KZResults.Count);
             Assert.IsTrue(sum > 0.75);
         }
-        private List<double> GetFeatures(string filePath)
+        public List<double> GetFeatures(string filePath)
         {
             string path = _sampleDirPath + filePath;
             var file = WavReader.Read(path);
