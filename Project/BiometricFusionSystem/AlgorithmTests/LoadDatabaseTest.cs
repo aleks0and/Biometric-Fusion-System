@@ -10,6 +10,7 @@ using FaceRecognition;
 using System.Drawing;
 using SpeechRecognition;
 using Camera;
+using System.IO;
 
 namespace AlgorithmTests
 {
@@ -21,6 +22,7 @@ namespace AlgorithmTests
         private FrameMaker _frameMaker;
         private SpeechFeatureExtractor _extractorSpeech;
         private DynamicTimeWarping _timeWarping;
+        private string _sampleDirectory = @"C:\Users\Kornel\Desktop\Samples";
 
         public LoadDatabaseTest()
         {
@@ -34,26 +36,27 @@ namespace AlgorithmTests
         [TestMethod]
         public void LoadPersons()
         {
-            Person person = new Person();
-            
-            person.FirstName = "A";
-            person.LastName = "B";
-            List<List<double>> fvs = new List<List<double>>();
-            for(int i = 0; i < 4; i++)
-            {
-                List<double> fv = GetFeaturesFace("AB" + (i + 1) + ".bmp", @"C:\Users\Martyna\Desktop\Samples\AB\");
-                fvs.Add(fv);
-            }
-            MinimumDistanceClassifier minimumDistanceClassifier = new MinimumDistanceClassifier();
-            minimumDistanceClassifier.AddToDictionary(fvs, "AB");
-            person.FaceFeatureVector = minimumDistanceClassifier._classes["AB"];
-
-            person.VoiceFeatureVector = GetFeaturesVoice(@"C:\Users\Martyna\Desktop\close\AB\AB1.wav");
-
+            var dirs = Directory.GetDirectories(_sampleDirectory + @"/photos");
+            dirs = dirs.Select(d => Path.GetFileName(d)).ToArray();
+            var classifier = new MinimumDistanceClassifier();
             DbConnection db = new DbConnection();
-
-            PersonRepository personRepository = new PersonRepository(db);
-            personRepository.AddPerson(person, "close");
+            var personRepository = new PersonRepository(db);
+            foreach (var dir in dirs)
+            {
+                List<List<double>> faceVectors = new List<List<double>>();
+                for(int i = 0; i < 4; i++)
+                {
+                    var faceFeatureVector = GetFeaturesFace(dir + (i + 1) + ".bmp", _sampleDirectory + @"\photos\" + dir + @"\");
+                    faceVectors.Add(faceFeatureVector);
+                }
+                classifier.AddToDictionary(faceVectors, dir);
+                var person = new Person();
+                person.FaceFeatureVector = classifier.Classes[dir];
+                person.VoiceFeatureVector = GetFeaturesVoice(_sampleDirectory + @"\algorithm\" + dir + @"\" + dir + "1.wav");
+                person.FirstName = dir[0].ToString();
+                person.LastName = dir.Substring(1);
+                personRepository.AddPerson(person, "algorithm");
+            }
 
         }
 
