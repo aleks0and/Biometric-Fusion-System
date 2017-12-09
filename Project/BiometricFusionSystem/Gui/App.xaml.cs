@@ -1,4 +1,6 @@
-﻿using Gui.Model;
+﻿using Common;
+using Gui.Model;
+using Gui.Properties;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,7 +18,15 @@ namespace Gui
     {
         private void ApplicationStartup(object sender, StartupEventArgs e)
         {
-            WindowService.OpenDatabaseRestore();
+            if(!string.IsNullOrEmpty(Settings.Default.ConnectionString))
+            {
+                var dbConnection = new DbConnection(ConfigurationManager.ConnectionStrings[0].ConnectionString, true);
+                WindowService.OpenMainWindow(dbConnection);
+            }
+            else
+            {
+                WindowService.OpenDatabaseRestore();
+            }
         }
     }
 }

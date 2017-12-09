@@ -14,6 +14,7 @@ namespace Common
     {
         private SqlConnection _sqlConnection;
         public SqlConnection SqlConnection { get { return _sqlConnection; } }
+        public string ConnectionString { get; set; }
         /// <summary>
         /// Function which sets the necessary credentials which are needed for the connection
         /// Server - localhost\\ followed by the name of the server application
@@ -26,15 +27,25 @@ namespace Common
         public DbConnection ()
         {
             _sqlConnection = new SqlConnection();
-            _sqlConnection.ConnectionString = @"Data Source=DESKTOP-BDCV57Q\SQLEXPRESS;Initial Catalog=BiometricDB;Integrated Security=True";
+            ConnectionString = @"Data Source=DESKTOP-BDCV57Q\SQLEXPRESS;Initial Catalog=BiometricDB;Integrated Security=True";
+            _sqlConnection.ConnectionString = ConnectionString;
             _sqlConnection.FireInfoMessageEventOnUserErrors = false;
         }
 
         public DbConnection(string dataSource)
         {
             _sqlConnection = new SqlConnection();
-            _sqlConnection.ConnectionString = @"Data Source=" + dataSource + ";Initial Catalog=BiometricDB;Integrated Security=True";
+            ConnectionString = @"Data Source=" + dataSource + @";Initial Catalog=BiometricDB;Integrated Security=True";
+            _sqlConnection.ConnectionString = ConnectionString;
             _sqlConnection.FireInfoMessageEventOnUserErrors = false;
+        }
+
+        public DbConnection(string connectionString, bool fireInfoMessage)
+        {
+            _sqlConnection = new SqlConnection();
+            ConnectionString = connectionString;
+            _sqlConnection.ConnectionString = ConnectionString;
+            _sqlConnection.FireInfoMessageEventOnUserErrors = fireInfoMessage;
         }
     }
 }
