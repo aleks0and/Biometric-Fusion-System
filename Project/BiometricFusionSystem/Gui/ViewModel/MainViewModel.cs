@@ -1,4 +1,5 @@
 ﻿using Camera;
+using Common;
 using Gui.Model;
 using Gui.Utility;
 using System;
@@ -13,8 +14,8 @@ namespace Gui.ViewModel
 {
     public class MainViewModel : BindableBase
     {
+        private DbConnection _dbConnection;
         private Ffmpeg _ffmpeg;
-        private WindowService _service = new WindowService();
         public ICommand OpenOptionsCommand { get; set; }
         public ICommand OpenVerificationCommand { get; set; }
         public ICommand AcquirePhotoCommand { get; set; }
@@ -26,8 +27,9 @@ namespace Gui.ViewModel
             set { _person = value; Notify(); }
         }
         
-        public MainViewModel()
+        public MainViewModel(DbConnection dbConnection)
         {
+            _dbConnection = dbConnection;
             _ffmpeg = new Ffmpeg();
             OpenOptionsCommand = new RelayCommand(OpenOptions, canExecute => true);
             OpenVerificationCommand = new RelayCommand(OpenVerification, canExecute => true);
@@ -60,11 +62,11 @@ namespace Gui.ViewModel
 
         private void OpenOptions(object parameter)
         {
-            _service.OpenOptions(this);
+            WindowService.OpenOptions(this);
         }
         private void OpenVerification(object parameter)
         {
-            _service.OpenVerifiaction(this);
+            WindowService.OpenVerification(this);
         }
     }
 }

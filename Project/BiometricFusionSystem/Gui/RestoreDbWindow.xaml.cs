@@ -1,5 +1,4 @@
-﻿using Common;
-using Gui.ViewModel;
+﻿using Gui.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,23 +11,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Gui
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for RestoreDbWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RestoreDbWindow : Window
     {
-        private MainViewModel _mainViewModel;
-
-        public MainWindow(DbConnection dbConnection)
+        public RestoreDbWindow()
         {
             InitializeComponent();
-            _mainViewModel = new MainViewModel(dbConnection);
-            this.DataContext = _mainViewModel;
+            this.DataContext = new RestoreDbVm();
         }
     }
 }

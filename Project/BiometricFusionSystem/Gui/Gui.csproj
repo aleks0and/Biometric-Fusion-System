@@ -56,12 +56,16 @@
     </ApplicationDefinition>
     <Compile Include="Model\PersonData.cs" />
     <Compile Include="Model\WindowService.cs" />
+    <Compile Include="RestoreDbWindow.xaml.cs">
+      <DependentUpon>RestoreDbWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utility\BindableBase.cs" />
     <Compile Include="Utility\RelayCommand.cs" />
     <Compile Include="VerificationWindow.xaml.cs">
       <DependentUpon>VerificationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\RestoreDbVm.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -75,6 +79,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="OptionsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RestoreDbWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -116,6 +124,10 @@
     <ProjectReference Include="..\Camera\Camera.csproj">
       <Project>{e826c80c-df59-4305-b0bf-27a58c1b5404}</Project>
       <Name>Camera</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{851CF4DC-40CD-4667-B630-38147E9DEB44}</Project>
+      <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

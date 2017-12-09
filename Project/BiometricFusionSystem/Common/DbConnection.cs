@@ -30,5 +30,11 @@ namespace Common
             _sqlConnection.FireInfoMessageEventOnUserErrors = false;
         }
 
+        public DbConnection(string dataSource)
+        {
+            _sqlConnection = new SqlConnection();
+            _sqlConnection.ConnectionString = @"Data Source=" + dataSource + ";Initial Catalog=BiometricDB;Integrated Security=True";
+            _sqlConnection.FireInfoMessageEventOnUserErrors = false;
+        }
     }
 }

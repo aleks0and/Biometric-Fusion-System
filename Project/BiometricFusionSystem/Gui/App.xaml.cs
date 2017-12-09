@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gui.Model;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,9 @@ namespace Gui
     /// </summary>
     public partial class App : Application
     {
+        private void ApplicationStartup(object sender, StartupEventArgs e)
+        {
+            WindowService.OpenDatabaseRestore();
+        }
     }
 }

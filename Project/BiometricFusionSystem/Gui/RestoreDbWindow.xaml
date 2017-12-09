@@ -1,0 +1,19 @@
+﻿<Window x:Class="Gui.RestoreDbWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Gui"
+        mc:Ignorable="d"
+        Title="Restore Database" Height="175" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Content="Enter your SQL Server name:" VerticalAlignment="Bottom" Margin="0,5,0,5" />
+        <TextBox Text="{Binding ServerName}" Grid.Row="1" Margin="5,0,5,5" />
+        <Button Command="{Binding RestoreDatabaseCommand}" Grid.Row="2" Content="Restore database" />
+    </Grid>
+</Window>
