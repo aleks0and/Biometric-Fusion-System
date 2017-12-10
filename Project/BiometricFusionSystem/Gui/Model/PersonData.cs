@@ -23,7 +23,12 @@ namespace Gui.Model
         public void LoadImage(string path)
         {
             path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\" + path;
-            Image = new BitmapImage(new Uri(path));
+            //Image = new BitmapImage(new Uri(path));
+            Image = new BitmapImage();
+            Image.BeginInit();
+            Image.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
+            Image.UriSource = new Uri(path);
+            Image.EndInit();
         }
     }
 }

@@ -52,6 +52,43 @@ namespace Common
             }
             return p;
         }
+        public List<Person> SelectPersons()
+        {
+            List<Person> persons = new List<Person>();
+            Person p = null;
+            try
+            {
+                var select = new SqlCommand("select p.Id, p.FirstName, p.LastName, f.FeatureVector FaceFeatureVector, v.FeatureVector VoiceFeatureVector from Person p "
+                    + "join FaceBiometric f on p.Id = f.Id join VoiceBiometric v on p.Id = v.Id");
+                select.Connection = _connection.SqlConnection;
+                _connection.SqlConnection.Open();
+                using (var reader = select.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        p = new Person()
+                        {
+                            Id = (int)reader[0],
+                            FirstName = (string)reader[1],
+                            LastName = (string)reader[2],
+                            FaceFeatureVector = Person.FeatureVectorToList((string)reader[3], ' '),
+                            VoiceFeatureVector = Person.FeatureVectorToList((string)reader[4], ' ')
+                        };
+                        persons.Add(p);
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                _connection.SqlConnection.Close();
+            }
+            return persons;
+        }
         public void AddPerson(Person person, string recordedWord)
         {
             try
