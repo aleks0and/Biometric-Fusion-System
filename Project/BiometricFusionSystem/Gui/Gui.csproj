@@ -63,6 +63,7 @@
       <DependentUpon>RestoreDbWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utility\BindableBase.cs" />
+    <Compile Include="Utility\BitmapSourceToBitmapConverter.cs" />
     <Compile Include="Utility\RelayCommand.cs" />
     <Compile Include="VerificationWindow.xaml.cs">
       <DependentUpon>VerificationWindow.xaml</DependentUpon>
@@ -135,6 +136,10 @@
     <ProjectReference Include="..\FaceRecognition\FaceRecognition.csproj">
       <Project>{AE077C38-D282-4489-B86A-4AA6CC8C74D3}</Project>
       <Name>FaceRecognition</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpeechRecognition\SpeechRecognition.csproj">
+      <Project>{9D31599E-6E78-4E4D-B5F4-2F1642B1727D}</Project>
+      <Name>SpeechRecognition</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

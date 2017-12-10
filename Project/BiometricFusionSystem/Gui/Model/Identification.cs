@@ -8,38 +8,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpeechRecognition;
+using Gui.Utility;
 
 namespace Gui.Model
 {
-    class Identification
+    public class Identification
     {
-        List<Person> persons;
-        PersonRepository personRepository;
-        MinimumDistanceClassifier mdc;
+        private List<Person> _persons;
+        private PersonRepository _personRepository;
+        private MinimumDistanceClassifier _mdc;
+        private FrameMaker _frameMaker;
+        private SpeechFeatureExtractor _speechFeatureExtractor;
+        private DynamicTimeWarping _dynamicTimeWarping;
 
         public Identification(DbConnection dbConnection)
         {
-            persons = new List<Person>();
-            personRepository = new PersonRepository(dbConnection);
-            mdc = new MinimumDistanceClassifier();
+            _persons = new List<Person>();
+            _personRepository = new PersonRepository(dbConnection);
+            _mdc = new MinimumDistanceClassifier();
+            _frameMaker = new FrameMaker(frameLength: 0.05f, frameInterval: 0.025f);
+            _speechFeatureExtractor = new SpeechFeatureExtractor(window: new HammingWindow(), filterbanksCount: 10);
+            _dynamicTimeWarping = new DynamicTimeWarping(threshold: 0.25);
         }
 
         public void LoadPersonsList()
         {
-            if(persons.Count == 0)
+            if(_persons.Count == 0)
             {
-                persons = personRepository.SelectPersons();
+                _persons = _personRepository.SelectPersons();
             }
 
-            for(int i = 0; i < persons.Count; i++)
+            for(int i = 0; i < _persons.Count; i++)
             {
-                mdc.Classes.Add(persons[i].FirstName + persons[i].LastName, persons[i].FaceFeatureVector);
+                _mdc.Classes.Add(_persons[i].FirstName + _persons[i].LastName, _persons[i].FaceFeatureVector);
+                _dynamicTimeWarping.Classes.Add(_persons[i].FirstName + _persons[i].LastName, _persons[i].VoiceFeatureVector);
             }
         }
 
-        public void IdentifySpeech()
+        public string IdentifySpeech(List<short> samples, int sampleRate)
         {
+            var frames = _frameMaker.ToFrames(samples, sampleRate);
+            var featureVector = _speechFeatureExtractor.GetFeatures(frames, sampleRate);
 
+            return _dynamicTimeWarping.Classify(featureVector);
         }
 
         public string IdentifyFace(Bitmap faceImage)
@@ -47,13 +59,16 @@ namespace Gui.Model
             FaceFeatureExtractor faceFeatureExtractor = new FaceFeatureExtractor(3);
             var fv = faceFeatureExtractor.GetFeatureVector(faceImage);
             
-            string className = mdc.Classify(fv);
-            return className;
+            return _mdc.Classify(fv);
         }
 
-        public void Identify()
+        public bool Identify(PersonData person)
         {
+            var bitmap = BitmapSourceToBitmapConverter.Convert(person.Image);
+            var faceResult = IdentifyFace(bitmap);
+            var speechResult = IdentifySpeech(person.Samples, (int)person.SampleRate);
 
+            return faceResult == speechResult;
         }
     }
 }

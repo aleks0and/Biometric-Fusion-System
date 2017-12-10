@@ -14,12 +14,13 @@ namespace Gui.ViewModel
 {
     public class MainViewModel : BindableBase
     {
-        private DbConnection _dbConnection;
+        private Identification _identification;
         private Ffmpeg _ffmpeg;
         public ICommand OpenOptionsCommand { get; set; }
         public ICommand OpenVerificationCommand { get; set; }
         public ICommand AcquirePhotoCommand { get; set; }
         public ICommand AcquireRecordingCommand { get; set; }
+        public ICommand IdentifyCommand { get; set; }
         private PersonData _person;
         public PersonData Person
         {
@@ -29,12 +30,13 @@ namespace Gui.ViewModel
         
         public MainViewModel(DbConnection dbConnection)
         {
-            _dbConnection = dbConnection;
             _ffmpeg = new Ffmpeg();
+            _identification = new Identification(dbConnection);
             OpenOptionsCommand = new RelayCommand(OpenOptions, canExecute => true);
             OpenVerificationCommand = new RelayCommand(OpenVerification, canExecute => true);
             AcquirePhotoCommand = new RelayCommand(AcquirePhoto, _ffmpeg.IsBusy);
             AcquireRecordingCommand = new RelayCommand(AcquireRecording, _ffmpeg.IsBusy);
+            IdentifyCommand = new RelayCommand(Identify, p => Person.Image != null && Person.Samples != null);
             Person = new PersonData();
         }
 
@@ -52,12 +54,18 @@ namespace Gui.ViewModel
         { 
             _ffmpeg.EndEvent();
             MessageBox.Show("Photo acquired");
-            //Person.LoadImage(@"output.bmp");
+            Person.LoadImage(@"output.bmp");
         }
         private void AcquireRecordingHandler(object parameter, EventArgs e)
         {
             _ffmpeg.EndEvent();
             MessageBox.Show("Recording acquired");
+            Person.LoadWavFile(@"output.wav");
+        }
+
+        private void Identify(object parameter)
+        {
+            _identification.Identify(Person);
         }
 
         private void OpenOptions(object parameter)

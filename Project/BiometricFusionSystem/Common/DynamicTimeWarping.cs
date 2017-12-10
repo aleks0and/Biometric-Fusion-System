@@ -12,6 +12,11 @@ namespace Common
     public class DynamicTimeWarping : IVerifier
     {
         private double _threshold;
+        private Dictionary<string, List<double>> _classes;
+        public Dictionary<string, List<double>> Classes
+        {
+            get { return _classes; }
+        }
         /// <summary>
         /// setting the value of the threshold
         /// </summary>
@@ -19,6 +24,7 @@ namespace Common
         public DynamicTimeWarping(double threshold)
         {
             _threshold = threshold;
+            _classes = new Dictionary<string, List<double>>();
         }
         /// <summary>
         /// function which finds the absolute difference bewtween two numbers
@@ -69,6 +75,25 @@ namespace Common
             double distance = Compare(input, template);
             double total = template.Sum();
             return (distance / total) < _threshold;
+        }
+
+        public string Classify(List<double> input)
+        {
+            string className = "";
+            double dist = 0;
+            double minDist = double.MaxValue;
+
+            for (int i = 0; i < _classes.Count; i++)
+            {
+                dist = Compare(input, _classes.Values.ElementAt(i));
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    className = _classes.Keys.ElementAt(i);
+                }
+            }
+
+            return className;
         }
     }
 }
