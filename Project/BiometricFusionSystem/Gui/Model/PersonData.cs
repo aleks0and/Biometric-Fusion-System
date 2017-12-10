@@ -9,6 +9,8 @@ using System.Windows.Media.Imaging;
 using System.IO;
 using System.Reflection;
 using Camera;
+using System.Windows;
+using System.Threading;
 
 namespace Gui.Model
 {
@@ -46,15 +48,19 @@ namespace Gui.Model
 
         public void LoadImage(string path)
         {
-            path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\" + path;
-            Image = new BitmapImage(new Uri(path));
-            ImagePath = "Path: " + path;
-            ImageSize = "Image width: " + (int)Image.Width + ", height: " + (int)Image.Height;
+            Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background,
+                new Action(() =>
+                {
+                    path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\" + path;
+                    Image = new BitmapImage(new Uri(path));
+                    ImagePath = "Path: " + path;
+                    ImageSize = "Image width: " + (int)Image.Width + ", height: " + (int)Image.Height;
+                }));
         }
 
         public void LoadWavFile(string path)
         {
-            var wavFile = WavReader.Read(path);
+            var wavFile = WavReader.Read(@"C:\Engineering Thesis\Project\BiometricFusionSystem\Gui\bin\Debug\bin\output.wav");
             _sampleRate = wavFile.Header.sampleRate;
             _samples = wavFile.LeftChannel;
         }

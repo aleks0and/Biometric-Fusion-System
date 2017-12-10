@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -36,7 +37,7 @@ namespace Gui.ViewModel
             OpenVerificationCommand = new RelayCommand(OpenVerification, canExecute => true);
             AcquirePhotoCommand = new RelayCommand(AcquirePhoto, _ffmpeg.IsBusy);
             AcquireRecordingCommand = new RelayCommand(AcquireRecording, _ffmpeg.IsBusy);
-            IdentifyCommand = new RelayCommand(Identify, p => Person.Image != null && Person.Samples != null);
+            IdentifyCommand = new RelayCommand(Identify, canExecute => true); //p => Person.Image != null && Person.Samples != null
             Person = new PersonData();
         }
 

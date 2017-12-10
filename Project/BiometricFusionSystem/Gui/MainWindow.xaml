@@ -27,14 +27,17 @@
                 </Grid.RowDefinitions>
                 <Grid Background="DarkGray"  Grid.Row="0">
                     <Image Source="{Binding Person.Image}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" StretchDirection="Both"/>
+                    <!---->
                 </Grid>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*" />
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="{Binding Person.ImagePath}"/>
+                    <Label Grid.Row="0" Content="{Binding Person.ImagePath}"/> 
+                    <!---->
                     <Label Grid.Row="1" Content="{Binding Person.ImageSize}"/>
+                    <!---->
                 </Grid>
             </Grid>
             <Grid Grid.Row="1" Grid.Column="1" Margin="5,0,5,0">

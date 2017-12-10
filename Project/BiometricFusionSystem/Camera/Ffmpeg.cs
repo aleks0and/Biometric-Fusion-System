@@ -11,8 +11,8 @@ namespace Camera
 {
     public class Ffmpeg
     {
-        private string _cameraName = "TOSHIBA Web Camera - HD";//"Logitech HD Webcam C270";
-        private string _microphoneName = "Internal Mic (IDT High Definition Audio CODEC)";//"Mikrofon (HD Webcam C270)";
+        private string _cameraName = "Logitech HD Webcam C270";//"TOSHIBA Web Camera - HD";
+        private string _microphoneName = "Mikrofon (HD Webcam C270)";//"Internal Mic (IDT High Definition Audio CODEC)";
         private Process _process;
         private EventHandler _handler;
         //handle exited event on process to know when it ends
@@ -42,12 +42,13 @@ namespace Camera
         /// <param name="handler"></param>
         public void RecordAudio(string outputPath, EventHandler handler)
         {
+            var path = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            File.Delete( path + "\\" + outputPath);
             _handler = handler;
             _process = new Process();
             _process.StartInfo.RedirectStandardOutput = true;
             _process.StartInfo.RedirectStandardError = true;
-            _process.StartInfo.FileName = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) +
-                                    @"\bin\ffmpeg.exe";
+            _process.StartInfo.FileName = path + @"\bin\ffmpeg.exe";
 
             _process.StartInfo.Arguments = "-f dshow -i audio=\"" + _microphoneName + "\" -ac 1 -ar 44100 -t 3 \"" + outputPath + "\"";
 

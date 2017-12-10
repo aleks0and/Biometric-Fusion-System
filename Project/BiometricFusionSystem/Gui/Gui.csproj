@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataAcquisitionSettingsWindow.xaml.cs">
+      <DependentUpon>DataAcquisitionSettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Identification.cs" />
     <Compile Include="Model\PersonData.cs" />
     <Compile Include="Model\WindowService.cs" />
@@ -70,6 +73,10 @@
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\RestoreDbVm.cs" />
+    <Page Include="DataAcquisitionSettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
