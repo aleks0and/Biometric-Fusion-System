@@ -37,12 +37,11 @@ namespace Gui.Model
             if(_persons.Count == 0)
             {
                 _persons = _personRepository.SelectPersons();
-            }
-
-            for(int i = 0; i < _persons.Count; i++)
-            {
-                _mdc.Classes.Add(_persons[i].FirstName + _persons[i].LastName, _persons[i].FaceFeatureVector);
-                _dynamicTimeWarping.Classes.Add(_persons[i].FirstName + _persons[i].LastName, _persons[i].VoiceFeatureVector);
+                for (int i = 0; i < _persons.Count; i++)
+                {
+                    _mdc.Classes.Add(_persons[i].FirstName + _persons[i].LastName, _persons[i].FaceFeatureVector);
+                    _dynamicTimeWarping.Classes.Add(_persons[i].FirstName + _persons[i].LastName, _persons[i].VoiceFeatureVector);
+                }
             }
         }
 
@@ -62,7 +61,7 @@ namespace Gui.Model
             return _mdc.Classify(fv);
         }
 
-        public bool Identify(PersonData person)
+        public Tuple<string, string> Identify(PersonData person)
         {
             LoadPersonsList();
 
@@ -70,7 +69,7 @@ namespace Gui.Model
             var faceResult = IdentifyFace(bitmap);
             var speechResult = IdentifySpeech(person.Samples, (int)person.SampleRate);
 
-            return faceResult == speechResult;
+            return new Tuple<string, string>(faceResult, speechResult);
         }
     }
 }

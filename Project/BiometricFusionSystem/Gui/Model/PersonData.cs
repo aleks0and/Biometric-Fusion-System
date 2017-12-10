@@ -21,6 +21,8 @@ namespace Gui.Model
         private List<short> _samples;
         private string _imagePath;
         private string _imageSize;
+        private string _recordingLength;
+        private string _recordingPath;
 
         public BitmapImage Image
         {
@@ -45,6 +47,16 @@ namespace Gui.Model
             get { return _imageSize; }
             set { _imageSize = value; Notify(); }
         }
+        public string RecordingLength
+        {
+            get { return _recordingLength; }
+            set { _recordingLength = value; Notify(); }
+        }
+        public string RecordingPath
+        {
+            get { return _recordingPath; }
+            set { _recordingPath = value; Notify(); }
+        }
 
         public void LoadImage(string path)
         {
@@ -64,6 +76,12 @@ namespace Gui.Model
             var wavFile = WavReader.Read(path);
             _sampleRate = wavFile.Header.sampleRate;
             _samples = wavFile.LeftChannel;
+            RecordingPath = "Path: " + path;
+            double seconds = Samples.Count / (double)SampleRate;
+            double milliseconds = (seconds - Math.Floor(seconds)) * 1000;
+            var time = new DateTime(1, 1, 1, 0, 0, (int)seconds, (int)milliseconds);
+
+            RecordingLength = "Length: " + time.ToString("mm:ss:fff");
         }
     }
 }

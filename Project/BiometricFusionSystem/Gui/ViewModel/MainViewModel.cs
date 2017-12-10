@@ -38,7 +38,7 @@ namespace Gui.ViewModel
             OpenVerificationCommand = new RelayCommand(OpenVerification, canExecute => true);
             AcquirePhotoCommand = new RelayCommand(AcquirePhoto, _ffmpeg.IsBusy);
             AcquireRecordingCommand = new RelayCommand(AcquireRecording, _ffmpeg.IsBusy);
-            IdentifyCommand = new RelayCommand(Identify, canExecute => true); //p => Person.Image != null && Person.Samples != null
+            IdentifyCommand = new RelayCommand(Identify, p => Person.Image != null && Person.Samples != null);
             Person = new PersonData();
         }
 
@@ -46,6 +46,7 @@ namespace Gui.ViewModel
         {
             //_ffmpeg.TakePicture("output.bmp", new EventHandler(AcquirePhotoHandler));
             OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "BMP files (*.bmp)|*.bmp";
             string strfilename;
             ofd.ShowDialog();
             strfilename = ofd.FileName;
@@ -56,6 +57,7 @@ namespace Gui.ViewModel
         {
             //_ffmpeg.RecordAudio("output.wav", new EventHandler(AcquireRecordingHandler));
             OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "WAV files (*.wav)|*.wav";
             string strfilename;
             ofd.ShowDialog();
             strfilename = ofd.InitialDirectory + ofd.FileName;
@@ -77,7 +79,9 @@ namespace Gui.ViewModel
 
         private void Identify(object parameter)
         {
-            _identification.Identify(Person);
+            var result = _identification.Identify(Person);
+            MessageBox.Show(string.Format("Face result: {0}\nSpeech result: {1}", result.Item1, result.Item2),
+                "Results", MessageBoxButton.OK);
         }
 
         private void OpenOptions(object parameter)

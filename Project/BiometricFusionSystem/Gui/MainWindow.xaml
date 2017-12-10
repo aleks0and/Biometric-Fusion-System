@@ -62,10 +62,9 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
-                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Content="Path: C:/BFS/Samples/trackSample1.wav"/>
-                    <Label Grid.Row="1" Grid.Column="0" Content="Length: 00:00:05" />
+                    <Label Grid.Row="0" Grid.Column="0" Content="{Binding Person.RecordingPath}"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="{Binding Person.RecordingLength}" />
                 </Grid>
             </Grid>
             <Grid Grid.Row="2" Grid.ColumnSpan="2">
