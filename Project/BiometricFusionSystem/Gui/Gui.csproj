@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Identification.cs" />
     <Compile Include="Model\PersonData.cs" />
     <Compile Include="Model\WindowService.cs" />
     <Compile Include="RestoreDbWindow.xaml.cs">
