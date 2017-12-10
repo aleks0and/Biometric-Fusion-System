@@ -51,7 +51,7 @@ namespace Gui.Model
             Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background,
                 new Action(() =>
                 {
-                    path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\" + path;
+                    //path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\" + path;
                     Image = new BitmapImage(new Uri(path));
                     ImagePath = "Path: " + path;
                     ImageSize = "Image width: " + (int)Image.Width + ", height: " + (int)Image.Height;
@@ -60,7 +60,8 @@ namespace Gui.Model
 
         public void LoadWavFile(string path)
         {
-            var wavFile = WavReader.Read(@"C:\Engineering Thesis\Project\BiometricFusionSystem\Gui\bin\Debug\bin\output.wav");
+            //var wavFile = WavReader.Read(@"bin\" + path);
+            var wavFile = WavReader.Read(path);
             _sampleRate = wavFile.Header.sampleRate;
             _samples = wavFile.LeftChannel;
         }

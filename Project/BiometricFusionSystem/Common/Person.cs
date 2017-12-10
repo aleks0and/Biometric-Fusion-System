@@ -61,7 +61,7 @@ namespace Common
 
             string[] q = featureVectorString.Split(separator);
 
-            for(int i = 0; i < q.Length; i++)
+            for(int i = 0; i < q.Length - 1; i++)
             {
                 double w = double.Parse(q[i]);
                 ffv.Add(w);

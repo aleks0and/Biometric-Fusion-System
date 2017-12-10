@@ -2,6 +2,7 @@
 using Common;
 using Gui.Model;
 using Gui.Utility;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,12 +44,22 @@ namespace Gui.ViewModel
 
         private void AcquirePhoto(object parameter)
         {
-            _ffmpeg.TakePicture("output.bmp", new EventHandler(AcquirePhotoHandler));
+            //_ffmpeg.TakePicture("output.bmp", new EventHandler(AcquirePhotoHandler));
+            OpenFileDialog ofd = new OpenFileDialog();
+            string strfilename;
+            ofd.ShowDialog();
+            strfilename = ofd.FileName;
+            Person.LoadImage(strfilename);
         }
 
         private void AcquireRecording(object parameter)
         {
-            _ffmpeg.RecordAudio("output.wav", new EventHandler(AcquireRecordingHandler));
+            //_ffmpeg.RecordAudio("output.wav", new EventHandler(AcquireRecordingHandler));
+            OpenFileDialog ofd = new OpenFileDialog();
+            string strfilename;
+            ofd.ShowDialog();
+            strfilename = ofd.InitialDirectory + ofd.FileName;
+            Person.LoadWavFile(strfilename);
         }
 
         private void AcquirePhotoHandler(object parameter, EventArgs e)

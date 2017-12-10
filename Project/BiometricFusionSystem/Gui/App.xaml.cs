@@ -20,7 +20,7 @@ namespace Gui
         {
             if(!string.IsNullOrEmpty(Settings.Default.ConnectionString))
             {
-                var dbConnection = new DbConnection(ConfigurationManager.ConnectionStrings[0].ConnectionString, true);
+                var dbConnection = new DbConnection(Settings.Default.ConnectionString, true);
                 WindowService.OpenMainWindow(dbConnection);
             }
             else

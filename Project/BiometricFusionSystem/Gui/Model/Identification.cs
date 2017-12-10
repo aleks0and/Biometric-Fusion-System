@@ -64,6 +64,8 @@ namespace Gui.Model
 
         public bool Identify(PersonData person)
         {
+            LoadPersonsList();
+
             var bitmap = BitmapSourceToBitmapConverter.Convert(person.Image);
             var faceResult = IdentifyFace(bitmap);
             var speechResult = IdentifySpeech(person.Samples, (int)person.SampleRate);
