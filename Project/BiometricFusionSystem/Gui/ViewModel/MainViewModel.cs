@@ -52,7 +52,7 @@ namespace Gui.ViewModel
         { 
             _ffmpeg.EndEvent();
             MessageBox.Show("Photo acquired");
-            Person.LoadImage(@"output.bmp");
+            //Person.LoadImage(@"output.bmp");
         }
         private void AcquireRecordingHandler(object parameter, EventArgs e)
         {

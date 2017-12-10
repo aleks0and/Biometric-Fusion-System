@@ -37,6 +37,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -130,6 +131,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{851CF4DC-40CD-4667-B630-38147E9DEB44}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FaceRecognition\FaceRecognition.csproj">
+      <Project>{AE077C38-D282-4489-B86A-4AA6CC8C74D3}</Project>
+      <Name>FaceRecognition</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

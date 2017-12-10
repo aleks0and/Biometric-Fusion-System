@@ -3,6 +3,8 @@ using FaceRecognition;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +30,7 @@ namespace Gui.Model
             {
                 persons = personRepository.SelectPersons();
             }
+
             for(int i = 0; i < persons.Count; i++)
             {
                 mdc.Classes.Add(persons[i].FirstName + persons[i].LastName, persons[i].FaceFeatureVector);
