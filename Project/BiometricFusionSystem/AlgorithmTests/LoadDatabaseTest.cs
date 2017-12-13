@@ -22,7 +22,7 @@ namespace AlgorithmTests
         private FrameMaker _frameMaker;
         private SpeechFeatureExtractor _extractorSpeech;
         private DynamicTimeWarping _timeWarping;
-        private string _sampleDirectory = @"C:\Users\Kornel\Desktop\Samples";
+        private string _sampleDirectory = @"C:\Users\aleks\Desktop\data";
 
         public LoadDatabaseTest()
         {
@@ -36,28 +36,51 @@ namespace AlgorithmTests
         [TestMethod]
         public void LoadPersons()
         {
-            var dirs = Directory.GetDirectories(_sampleDirectory + @"/photos");
+            var dirs = Directory.GetDirectories(_sampleDirectory + @"/faces");
             dirs = dirs.Select(d => Path.GetFileName(d)).ToArray();
             var classifier = new MinimumDistanceClassifier();
             DbConnection db = new DbConnection();
             var personRepository = new PersonRepository(db);
+            DynamicTimeWarping dtwAlgorithm = new DynamicTimeWarping(threshold: 0.25);
+            DynamicTimeWarping dtwClose = new DynamicTimeWarping(threshold: 0.25);
             foreach (var dir in dirs)
             {
+                var person = new Person();
                 List<List<double>> faceVectors = new List<List<double>>();
                 for(int i = 0; i < 4; i++)
                 {
-                    var faceFeatureVector = GetFeaturesFace(dir + (i + 1) + ".bmp", _sampleDirectory + @"\photos\" + dir + @"\");
+                    var faceFeatureVector = GetFeaturesFace(dir + (i + 1) + ".bmp", _sampleDirectory + @"\faces\" + dir + @"\");
                     faceVectors.Add(faceFeatureVector);
                 }
                 classifier.AddToDictionary(faceVectors, dir);
-                var person = new Person();
                 person.FaceFeatureVector = classifier.Classes[dir];
-                person.VoiceFeatureVector = GetFeaturesVoice(_sampleDirectory + @"\algorithm\" + dir + @"\" + dir + "1.wav");
+                List<List<double>> speechAVectors = new List<List<double>>();
+                for (int i = 0; i < 4; i++)
+                {
+                    if (File.Exists(_sampleDirectory + @"\algorithm\" + dir + @"\" + dir + (i + 1) + ".wav"))
+                    {
+                        var faceFeatureVector = GetFeaturesVoice(_sampleDirectory + @"\algorithm\" + dir + @"\" + dir + (i + 1) + ".wav");
+                        speechAVectors.Add(faceFeatureVector);
+                    }
+                }
+                dtwAlgorithm.AddToDictionary(speechAVectors, dir);
+                List<List<double>> speechCVectors = new List<List<double>>();
+                for (int i = 0; i < 4; i++)
+                {
+                    if (File.Exists(_sampleDirectory + @"\close\" + dir + @"\" + dir + (i + 1) + ".wav"))
+                    {
+                        var faceFeatureVector = GetFeaturesVoice(_sampleDirectory + @"\close\" + dir + @"\" + dir + (i + 1) + ".wav");
+                        speechCVectors.Add(faceFeatureVector);
+                    }
+                }
+                dtwClose.AddToDictionary(speechCVectors, dir);
+                person.VoiceFeatureVector = dtwAlgorithm.Classes[dir];
                 person.FirstName = dir[0].ToString();
                 person.LastName = dir.Substring(1);
                 personRepository.AddPerson(person, "algorithm");
+                person.VoiceFeatureVector = dtwClose.Classes[dir];
+                personRepository.AddPerson(person, "close");
             }
-
         }
 
         public List<double> GetFeaturesFace(string filePath, string directoryPath)
