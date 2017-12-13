@@ -65,6 +65,46 @@ namespace Common
             return distances[input.Count, template.Count];
         }
         /// <summary>
+        /// function adds the class name and mean feature vector for a class to the dictionary
+        /// </summary>
+        /// <param name="classFV">list of feature vectors that belong to the class className</param>
+        /// <param name="className">name of the class</param>
+        public void AddToDictionary(List<List<double>> classFV, string className)
+        {
+            double minimalAverage = double.MaxValue;
+            int index = 0;
+            for (int i=0; i<classFV.Count; i++)
+            {
+                double average = 0; 
+                for(int j=0; j<classFV.Count; j++)
+                {
+                    if (j!=i)
+                    {
+                        average += Compare(classFV[i], classFV[j]);
+                    }
+                }
+                average /= (classFV.Count - 1);
+                if (minimalAverage > average)
+                {
+                    minimalAverage = average;
+                    index = i;
+                }
+            }
+            _classes.Add(className,classFV[index]);
+        }
+        /// <summary>
+        /// training function
+        /// </summary>
+        /// <param name="fvForClass">list of feature vectors belonging to a particular class</param>
+        /// <param name="classNames">list of class names</param>
+        public void Train(List<List<List<double>>> fvForClass, List<string> classNames)
+        {
+            for (int i = 0; i < fvForClass.Count; i++)
+            {
+                AddToDictionary(fvForClass[i], classNames[i]);
+            }
+        }
+        /// <summary>
         /// Functions verifies whether two samples have satisfactory similarities in order to state that they are of same speaker. 
         /// </summary>
         /// <param name="input"> input values which are to be compared to the template </param>
@@ -76,7 +116,11 @@ namespace Common
             double total = template.Sum();
             return (distance / total) < _threshold;
         }
-
+        /// <summary>
+        /// function classifies the input feature vector
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>returns name of the class where the feature vector belongs</returns>
         public string Classify(List<double> input)
         {
             string className = "";
