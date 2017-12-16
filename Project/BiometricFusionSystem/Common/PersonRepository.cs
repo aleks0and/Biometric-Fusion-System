@@ -52,15 +52,17 @@ namespace Common
             }
             return p;
         }
-        public List<Person> SelectPersons()
+        public List<Person> SelectPersons(string recordedWord)
         {
             List<Person> persons = new List<Person>();
             Person p = null;
             try
             {
                 var select = new SqlCommand("select p.Id, p.FirstName, p.LastName, f.FeatureVector FaceFeatureVector, v.FeatureVector VoiceFeatureVector from Person p "
-                    + "join FaceBiometric f on p.Id = f.Id join VoiceBiometric v on p.Id = v.Id");
+                    + "join FaceBiometric f on p.Id = f.Id join VoiceBiometric v on p.Id = v.Id where v.RecordedWord=@RecordedWord");
                 select.Connection = _connection.SqlConnection;
+                select.Parameters.Add("@RecordedWord", System.Data.SqlDbType.VarChar, MaxNameLength);
+                select.Parameters["@RecordedWord"].Value = recordedWord;
                 _connection.SqlConnection.Open();
                 using (var reader = select.ExecuteReader())
                 {
@@ -93,16 +95,13 @@ namespace Common
         {
             try
             {
-                var cmdInsert = new SqlCommand("INSERT INTO Person (FirstName,LastName) values(@FirstName,@LastName)");
-                cmdInsert.Connection = _connection.SqlConnection;
-                cmdInsert.Parameters.Add("@FirstName", System.Data.SqlDbType.VarChar, MaxNameLength);
-                cmdInsert.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar, MaxNameLength);
-                cmdInsert.Parameters["@FirstName"].Value = person.FirstName;
-                cmdInsert.Parameters["@LastName"].Value = person.LastName;
                 _connection.SqlConnection.Open();
-                cmdInsert.ExecuteNonQuery();
                 person.Id = GetPersonId(person.FirstName, person.LastName);
-                AddFace(person);
+                if(person.Id == -1)
+                {
+                    AddPerson(person);
+                    AddFace(person);
+                }
                 AddSpeech(person, recordedWord);
             }
             catch (SqlException ex)
@@ -115,6 +114,18 @@ namespace Common
             }
         }
 
+        private void AddPerson(Person person)
+        {
+            var cmdInsert = new SqlCommand("INSERT INTO Person (FirstName,LastName) values(@FirstName,@LastName)");
+            cmdInsert.Connection = _connection.SqlConnection;
+            cmdInsert.Parameters.Add("@FirstName", System.Data.SqlDbType.VarChar, MaxNameLength);
+            cmdInsert.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar, MaxNameLength);
+            cmdInsert.Parameters["@FirstName"].Value = person.FirstName;
+            cmdInsert.Parameters["@LastName"].Value = person.LastName;
+            cmdInsert.ExecuteNonQuery();
+            person.Id = GetPersonId(person.FirstName, person.LastName);
+        }
+
         private int GetPersonId(string firstName, string lastName)
         {
             int ret = -1;
@@ -125,10 +136,13 @@ namespace Common
             select.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar, lastName.Length);
             select.Parameters["@FirstName"].Value = firstName;
             select.Parameters["@LastName"].Value = lastName;
+            
             using (var reader = select.ExecuteReader())
             {
-                reader.Read();
-                ret = (int)reader[0];
+                while (reader.Read())
+                {
+                    ret = (int)reader[0];
+                }
             }
             return ret;
         }

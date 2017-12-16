@@ -22,7 +22,7 @@ namespace AlgorithmTests
         private FrameMaker _frameMaker;
         private SpeechFeatureExtractor _extractorSpeech;
         private DynamicTimeWarping _timeWarping;
-        private string _sampleDirectory = @"C:\Users\aleks\Desktop\data";
+        private string _sampleDirectory = @"C:\Users\Kornel\Desktop\Samples";
 
         public LoadDatabaseTest()
         {
@@ -36,7 +36,7 @@ namespace AlgorithmTests
         [TestMethod]
         public void LoadPersons()
         {
-            var dirs = Directory.GetDirectories(_sampleDirectory + @"/faces");
+            var dirs = Directory.GetDirectories(_sampleDirectory + @"\faces");
             dirs = dirs.Select(d => Path.GetFileName(d)).ToArray();
             var classifier = new MinimumDistanceClassifier();
             DbConnection db = new DbConnection();

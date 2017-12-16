@@ -36,7 +36,7 @@ namespace Gui.Model
         {
             if(_persons.Count == 0)
             {
-                _persons = _personRepository.SelectPersons();
+                _persons = _personRepository.SelectPersons("algorithm");
                 for (int i = 0; i < _persons.Count; i++)
                 {
                     _mdc.Classes.Add(_persons[i].FirstName + _persons[i].LastName, _persons[i].FaceFeatureVector);
