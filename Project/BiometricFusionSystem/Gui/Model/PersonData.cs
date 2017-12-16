@@ -37,6 +37,7 @@ namespace Gui.Model
         public List<short> Samples
         {
             get { return _samples; }
+            set { _samples = value; Notify(); }
         }
         public string ImagePath
         {
@@ -80,7 +81,7 @@ namespace Gui.Model
             //var wavFile = WavReader.Read(@"bin\" + path);
             var wavFile = WavReader.Read(path);
             _sampleRate = wavFile.Header.sampleRate;
-            _samples = wavFile.LeftChannel;
+            Samples = wavFile.LeftChannel;
             RecordingPath = "Path: " + path;
             RecordingUri = new Uri(path);
             double seconds = Samples.Count / (double)SampleRate;

@@ -38,6 +38,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -68,12 +69,16 @@
     <Compile Include="Utility\BindableBase.cs" />
     <Compile Include="Utility\BitmapSourceToBitmapConverter.cs" />
     <Compile Include="Utility\RelayCommand.cs" />
+    <Compile Include="Utility\SamplesToLineListConverter.cs" />
     <Compile Include="Utility\UriToBoolConverter.cs" />
     <Compile Include="VerificationWindow.xaml.cs">
       <DependentUpon>VerificationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\RestoreDbVm.cs" />
+    <Compile Include="WaveForm.xaml.cs">
+      <DependentUpon>WaveForm.xaml</DependentUpon>
+    </Compile>
     <Page Include="DataAcquisitionSettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -99,6 +104,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VerificationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WaveForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

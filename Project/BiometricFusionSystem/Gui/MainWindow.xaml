@@ -9,6 +9,7 @@
         Title="Biometric Fusion System" Height="600" Width="800">
     <Window.Resources>
         <utility:UriToBoolConverter x:Key="UriToBoolConverter" />
+        <utility:SamplesToLineListConverter x:Key="SamplesToLineListConverter" />
     </Window.Resources>
     
     <Grid>
@@ -58,6 +59,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <MediaElement Name="mediaPlayer" MediaEnded="StopMedia" Source="{Binding Person.RecordingUri}" LoadedBehavior="Manual" UnloadedBehavior="Stop" Visibility="Collapsed"/>
+                <local:WaveForm Grid.Row="0" Height="200" Width="300" Grid.ColumnSpan="2" Samples="{Binding Path=Person.Samples, Converter={StaticResource SamplesToLineListConverter}}" />
                 <Button Grid.Row="2" Grid.Column="0" Content="Play" Click="PlayMedia" IsEnabled="{Binding Path=Person.RecordingUri, Converter={StaticResource UriToBoolConverter}}"/>
                 <Button Grid.Row="2" Grid.Column="1" Content="Stop" Click="StopMedia" IsEnabled="{Binding Path=Person.RecordingUri, Converter={StaticResource UriToBoolConverter}}"/>
                 <Grid Grid.Row="3" Grid.ColumnSpan="2">
