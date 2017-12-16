@@ -23,6 +23,7 @@ namespace Gui.Model
         private string _imageSize;
         private string _recordingLength;
         private string _recordingPath;
+        private Uri _recordingUri;
 
         public BitmapImage Image
         {
@@ -57,7 +58,11 @@ namespace Gui.Model
             get { return _recordingPath; }
             set { _recordingPath = value; Notify(); }
         }
-
+        public Uri RecordingUri
+        {
+            get { return _recordingUri; }
+            set { _recordingUri = value; Notify(); }
+        }
         public void LoadImage(string path)
         {
             Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background,
@@ -77,6 +82,7 @@ namespace Gui.Model
             _sampleRate = wavFile.Header.sampleRate;
             _samples = wavFile.LeftChannel;
             RecordingPath = "Path: " + path;
+            RecordingUri = new Uri(path);
             double seconds = Samples.Count / (double)SampleRate;
             double milliseconds = (seconds - Math.Floor(seconds)) * 1000;
             var time = new DateTime(1, 1, 1, 0, 0, (int)seconds, (int)milliseconds);

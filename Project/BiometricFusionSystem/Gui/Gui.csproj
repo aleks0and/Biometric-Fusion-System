@@ -68,6 +68,7 @@
     <Compile Include="Utility\BindableBase.cs" />
     <Compile Include="Utility\BitmapSourceToBitmapConverter.cs" />
     <Compile Include="Utility\RelayCommand.cs" />
+    <Compile Include="Utility\UriToBoolConverter.cs" />
     <Compile Include="VerificationWindow.xaml.cs">
       <DependentUpon>VerificationWindow.xaml</DependentUpon>
     </Compile>

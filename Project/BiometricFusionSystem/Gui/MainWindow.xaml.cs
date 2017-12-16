@@ -30,5 +30,17 @@ namespace Gui
             _mainViewModel = new MainViewModel(dbConnection);
             this.DataContext = _mainViewModel;
         }
+
+        private void PlayMedia(object sender, RoutedEventArgs e)
+        {
+            mediaPlayer.Play();
+            
+        }
+
+        private void StopMedia(object sender, RoutedEventArgs e)
+        {
+            mediaPlayer.Stop();
+        }
+
     }
 }

@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gui"
+        xmlns:utility="clr-namespace:Gui.Utility"
         mc:Ignorable="d"
         Title="Biometric Fusion System" Height="600" Width="800">
+    <Window.Resources>
+        <utility:UriToBoolConverter x:Key="UriToBoolConverter" />
+    </Window.Resources>
+    
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -52,9 +57,9 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Slider Grid.Row="1" Grid.ColumnSpan="2" Maximum="100" VerticalAlignment="Center" Margin="5,0,5,0"/>
-                <Button Grid.Row="2" Grid.Column="0" Content="Play"/>
-                <Button Grid.Row="2" Grid.Column="1" Content="Stop"/>
+                <MediaElement Name="mediaPlayer" MediaEnded="StopMedia" Source="{Binding Person.RecordingUri}" LoadedBehavior="Manual" UnloadedBehavior="Stop" Visibility="Collapsed"/>
+                <Button Grid.Row="2" Grid.Column="0" Content="Play" Click="PlayMedia" IsEnabled="{Binding Path=Person.RecordingUri, Converter={StaticResource UriToBoolConverter}}"/>
+                <Button Grid.Row="2" Grid.Column="1" Content="Stop" Click="StopMedia" IsEnabled="{Binding Path=Person.RecordingUri, Converter={StaticResource UriToBoolConverter}}"/>
                 <Grid Grid.Row="3" Grid.ColumnSpan="2">
                     <Grid.RowDefinitions>
                         <RowDefinition />
