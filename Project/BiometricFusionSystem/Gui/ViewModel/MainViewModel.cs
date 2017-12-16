@@ -47,10 +47,12 @@ namespace Gui.ViewModel
             //_ffmpeg.TakePicture("output.bmp", new EventHandler(AcquirePhotoHandler));
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "BMP files (*.bmp)|*.bmp";
-            string strfilename;
             ofd.ShowDialog();
-            strfilename = ofd.FileName;
-            Person.LoadImage(strfilename);
+            string filename = ofd.FileName;
+            if (!string.IsNullOrEmpty(filename))
+            {
+                Person.LoadImage(filename);
+            }
         }
 
         private void AcquireRecording(object parameter)
@@ -58,10 +60,12 @@ namespace Gui.ViewModel
             //_ffmpeg.RecordAudio("output.wav", new EventHandler(AcquireRecordingHandler));
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "WAV files (*.wav)|*.wav";
-            string strfilename;
             ofd.ShowDialog();
-            strfilename = ofd.InitialDirectory + ofd.FileName;
-            Person.LoadWavFile(strfilename);
+            string filename = ofd.InitialDirectory + ofd.FileName;
+            if (!string.IsNullOrEmpty(filename))
+            {
+                Person.LoadWavFile(filename);
+            }
         }
 
         private void AcquirePhotoHandler(object parameter, EventArgs e)
