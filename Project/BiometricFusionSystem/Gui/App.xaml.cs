@@ -18,15 +18,17 @@ namespace Gui
     {
         private void ApplicationStartup(object sender, StartupEventArgs e)
         {
-            if(!string.IsNullOrEmpty(Settings.Default.ConnectionString))
-            {
-                var dbConnection = new DbConnection(Settings.Default.ConnectionString, true);
-                WindowService.OpenMainWindow(dbConnection);
-            }
-            else
-            {
-                WindowService.OpenDatabaseRestore();
-            }
+            //if(!string.IsNullOrEmpty(Settings.Default.ConnectionString))
+            //{
+            //    var dbConnection = new DbConnection(Settings.Default.ConnectionString, true);
+            //    WindowService.OpenMainWindow(dbConnection);
+            //}
+            //else
+            //{
+            //    WindowService.OpenDatabaseRestore();
+            //}
+            var dbConnection = new DbConnection();
+            WindowService.OpenMainWindow(dbConnection);
         }
     }
 }
