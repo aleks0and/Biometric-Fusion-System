@@ -28,7 +28,7 @@ namespace Common
         {
             _sqlConnection = new SqlConnection();
             //external DBConnectionString = @"Data Source=DESKTOP-BDCV57Q\SQLEXPRESS;Initial Catalog=BiometricDB;Integrated Security=True";
-            ConnectionString = "Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = \"C:\\Users\\Kornel\\Desktop\\G\\Biometric-Fusion-System\\Project\\BiometricFusionSystem\\Common\\biometricDB.mdf\"; Integrated Security = True";
+            ConnectionString = "Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = \"C:\\Users\\aleks\\Desktop\\Engineering Thesis\\Project\\BiometricFusionSystem\\Common\\biometricDB.mdf\"; Integrated Security = True;";
             _sqlConnection.ConnectionString = ConnectionString;
             _sqlConnection.FireInfoMessageEventOnUserErrors = false;
         }
