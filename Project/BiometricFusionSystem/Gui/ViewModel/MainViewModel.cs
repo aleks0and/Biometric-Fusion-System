@@ -92,6 +92,8 @@ namespace Gui.ViewModel
                     Person.LoadWavFile(filename);
                 }
             }
+
+            Person.RemoveSilence(Options.SilenceRemoval);
         }
 
         private void AcquirePhotoHandler(object parameter, EventArgs e)
@@ -109,19 +111,12 @@ namespace Gui.ViewModel
 
         private void Identify(object parameter)
         {
-            var result = _identification.Identify(Person);
+
+            var result = _identification.Identify(Person, Options.IdentificationMethod);
             MessageBox.Show(string.Format("Face result: {0}\nSpeech result: {1}", result.Item1, result.Item2),
                 "Results", MessageBoxButton.OK);
         }
-
-        //private void RemoveSilence(object parameter)
-        //{
-        //    Person.RemoveSilence();
-        //}
-        //private void Normalize(object parameter)
-        //{
-        //    Person.NormalizeVolume();
-        //}
+        
         private void OpenOptions(object parameter)
         {
             WindowService.OpenOptions(this);

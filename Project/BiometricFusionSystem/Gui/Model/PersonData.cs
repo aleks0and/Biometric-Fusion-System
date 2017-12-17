@@ -92,16 +92,19 @@ namespace Gui.Model
             RecordingLength = "Length: " + time.ToString("mm:ss:fff");
         }
 
-        //public void RemoveSilence()
-        //{
-        //    SilenceRemoval removal = new SilenceRemoval(50, 5);
-        //    Samples = removal.RemoveSilence(Samples);
-        //}
+        public void RemoveSilence(Model.SilenceRemoval silenceRemoval)
+        {
+            if (silenceRemoval == Model.SilenceRemoval.Yes)
+            {
+                SpeechRecognition.SilenceRemoval removal = new SpeechRecognition.SilenceRemoval(50, 5);
+                Samples = removal.RemoveSilence(Samples);
+            }
+        }
 
-        //public void NormalizeVolume()
-        //{
-        //    VolumeNormalizer norm = new VolumeNormalizer(0, 1000);
-        //    Samples = norm.Normalize(Samples);
-        //}
+        public void NormalizeVolume()
+        {
+            VolumeNormalizer norm = new VolumeNormalizer(0, 1000);
+            Samples = norm.Normalize(Samples);
+        }
     }
 }

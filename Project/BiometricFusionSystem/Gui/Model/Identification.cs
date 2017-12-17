@@ -61,13 +61,21 @@ namespace Gui.Model
             return _mdc.Classify(fv);
         }
 
-        public Tuple<string, string> Identify(PersonData person)
+        public Tuple<string, string> Identify(PersonData person, IdentificationMethod identificationMethod)
         {
             LoadPersonsList();
-
-            var bitmap = BitmapSourceToBitmapConverter.Convert(person.Image);
-            var faceResult = IdentifyFace(bitmap);
-            var speechResult = IdentifySpeech(person.Samples, (int)person.SampleRate);
+            string faceResult = "no result"; 
+            string speechResult = "no result";
+            
+            if (identificationMethod == IdentificationMethod.FaceOnly || identificationMethod == IdentificationMethod.FaceAndSpeech)
+            {
+                var bitmap = BitmapSourceToBitmapConverter.Convert(person.Image);
+                faceResult = IdentifyFace(bitmap);
+            }
+            if(identificationMethod == IdentificationMethod.SpeechOnly || identificationMethod == IdentificationMethod.FaceAndSpeech)
+            {
+                speechResult = IdentifySpeech(person.Samples, (int)person.SampleRate);
+            }
 
             return new Tuple<string, string>(faceResult, speechResult);
         }

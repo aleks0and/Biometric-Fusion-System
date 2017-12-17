@@ -28,5 +28,10 @@ namespace Gui
             _mainViewModel = viewModel as MainViewModel;
             this.DataContext = _mainViewModel;
         }
+
+        public void CloseWindow(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
