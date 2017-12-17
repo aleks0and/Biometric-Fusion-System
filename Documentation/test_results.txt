@@ -1,0 +1,5 @@
+data November + December:
+face: 19/48 (39.5%) voice: 23/48 (47.9%)
+
+data December only:
+face: 21/42 (50.0%) voice: 24/42 (57.1%)
