@@ -52,7 +52,9 @@
     <Compile Include="MelFilterbank.cs" />
     <Compile Include="Periodogram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SilenceRemoval.cs" />
     <Compile Include="SpeechFeatureExtractor.cs" />
+    <Compile Include="VolumeNormalizer.cs" />
     <Compile Include="Window.cs" />
   </ItemGroup>
   <ItemGroup>

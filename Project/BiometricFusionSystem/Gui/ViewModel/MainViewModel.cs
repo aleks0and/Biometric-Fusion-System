@@ -23,6 +23,9 @@ namespace Gui.ViewModel
         public ICommand AcquirePhotoCommand { get; set; }
         public ICommand AcquireRecordingCommand { get; set; }
         public ICommand IdentifyCommand { get; set; }
+        //public ICommand RemoveSilenceCommand { get; set; }
+        //public ICommand NormalizeCommand { get; set; }
+
         private PersonData _person;
         public PersonData Person
         {
@@ -39,6 +42,8 @@ namespace Gui.ViewModel
             AcquirePhotoCommand = new RelayCommand(AcquirePhoto, _ffmpeg.IsBusy);
             AcquireRecordingCommand = new RelayCommand(AcquireRecording, _ffmpeg.IsBusy);
             IdentifyCommand = new RelayCommand(Identify, p => Person.Image != null && Person.Samples != null);
+            //RemoveSilenceCommand = new RelayCommand(RemoveSilence, canExecute => true);
+            //NormalizeCommand = new RelayCommand(Normalize, canExecute => true);
             Person = new PersonData();
         }
 
@@ -88,6 +93,14 @@ namespace Gui.ViewModel
                 "Results", MessageBoxButton.OK);
         }
 
+        //private void RemoveSilence(object parameter)
+        //{
+        //    Person.RemoveSilence();
+        //}
+        //private void Normalize(object parameter)
+        //{
+        //    Person.NormalizeVolume();
+        //}
         private void OpenOptions(object parameter)
         {
             WindowService.OpenOptions(this);

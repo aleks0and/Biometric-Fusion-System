@@ -11,6 +11,7 @@ using System.Reflection;
 using Camera;
 using System.Windows;
 using System.Threading;
+using SpeechRecognition;
 
 namespace Gui.Model
 {
@@ -90,5 +91,17 @@ namespace Gui.Model
 
             RecordingLength = "Length: " + time.ToString("mm:ss:fff");
         }
+
+        //public void RemoveSilence()
+        //{
+        //    SilenceRemoval removal = new SilenceRemoval(50, 5);
+        //    Samples = removal.RemoveSilence(Samples);
+        //}
+
+        //public void NormalizeVolume()
+        //{
+        //    VolumeNormalizer norm = new VolumeNormalizer(0, 1000);
+        //    Samples = norm.Normalize(Samples);
+        //}
     }
 }

@@ -21,7 +21,7 @@ namespace Gui.Utility
             var lines = new List<Line>();
             var renderPos = 0;
             var samples = value as List<short>;
-            for(int i = 0; i < samples.Count; i++)
+            for(int i = 0; i < samples.Count; i+=8)
             {
                 var line = new Line()
                 {
