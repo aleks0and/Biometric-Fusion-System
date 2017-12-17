@@ -26,6 +26,7 @@ namespace Gui
         {
             InitializeComponent();
             _mainViewModel = viewModel as MainViewModel;
+            this.DataContext = _mainViewModel;
         }
     }
 }

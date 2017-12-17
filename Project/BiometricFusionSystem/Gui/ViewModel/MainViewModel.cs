@@ -32,7 +32,14 @@ namespace Gui.ViewModel
             get { return _person; }
             set { _person = value; Notify(); }
         }
-        
+
+        private Options _options;
+        public Options Options
+        {
+            get { return _options; }
+            set { _options = value; Notify(); }
+        }
+
         public MainViewModel(DbConnection dbConnection)
         {
             _ffmpeg = new Ffmpeg();
@@ -45,31 +52,45 @@ namespace Gui.ViewModel
             //RemoveSilenceCommand = new RelayCommand(RemoveSilence, canExecute => true);
             //NormalizeCommand = new RelayCommand(Normalize, canExecute => true);
             Person = new PersonData();
+            Options = new Options(AcquisitionMethod.FromDisk, SilenceRemoval.No, 
+                VerificationMethod.FaceAndSpeech, IdentificationMethod.FaceAndSpeech);
         }
 
         private void AcquirePhoto(object parameter)
         {
-            //_ffmpeg.TakePicture("output.bmp", new EventHandler(AcquirePhotoHandler));
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "BMP files (*.bmp)|*.bmp";
-            ofd.ShowDialog();
-            string filename = ofd.FileName;
-            if (!string.IsNullOrEmpty(filename))
+            if (Options.AcquisitionMethod == AcquisitionMethod.FromCamera)
             {
-                Person.LoadImage(filename);
+                _ffmpeg.TakePicture("output.bmp", new EventHandler(AcquirePhotoHandler));
+            }
+            else
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "BMP files (*.bmp)|*.bmp";
+                ofd.ShowDialog();
+                string filename = ofd.FileName;
+                if (!string.IsNullOrEmpty(filename))
+                {
+                    Person.LoadImage(filename);
+                }
             }
         }
 
         private void AcquireRecording(object parameter)
         {
-            //_ffmpeg.RecordAudio("output.wav", new EventHandler(AcquireRecordingHandler));
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "WAV files (*.wav)|*.wav";
-            ofd.ShowDialog();
-            string filename = ofd.InitialDirectory + ofd.FileName;
-            if (!string.IsNullOrEmpty(filename))
+            if (Options.AcquisitionMethod == AcquisitionMethod.FromCamera)
             {
-                Person.LoadWavFile(filename);
+                _ffmpeg.RecordAudio("output.wav", new EventHandler(AcquireRecordingHandler));
+            }
+            else
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "WAV files (*.wav)|*.wav";
+                ofd.ShowDialog();
+                string filename = ofd.InitialDirectory + ofd.FileName;
+                if (!string.IsNullOrEmpty(filename))
+                {
+                    Person.LoadWavFile(filename);
+                }
             }
         }
 

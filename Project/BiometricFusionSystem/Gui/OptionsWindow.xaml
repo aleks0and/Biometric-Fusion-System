@@ -4,13 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gui"
+        xmlns:localModel="clr-namespace:Gui.Model"
+        xmlns:utility="clr-namespace:Gui.Utility"
         mc:Ignorable="d"
-        Title="Options" Height="175" Width="300">
+        Title="Options" Height="200" Width="300">
+    <Window.Resources>
+        <utility:EnumToBoolConverter x:Key="EnumToBoolConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="4*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -18,17 +25,47 @@
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Content="Identification method" />
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">
-            <RadioButton Content="Face only" GroupName="IdentifyMethod" />
-            <RadioButton Content="Speech only" GroupName="IdentifyMethod" />
-            <RadioButton  Content="Face and speech" GroupName="IdentifyMethod" />
+            <RadioButton IsChecked="{Binding Path=Options.IdentificationMethod, 
+                Converter={StaticResource EnumToBoolConverter}, 
+                ConverterParameter={x:Static localModel:IdentificationMethod.FaceOnly}}" Content="Face only" GroupName="IdentifyMethod" />
+            <RadioButton IsChecked="{Binding Path=Options.IdentificationMethod, 
+                Converter={StaticResource EnumToBoolConverter}, 
+                ConverterParameter={x:Static localModel:IdentificationMethod.SpeechOnly}}" Content="Speech only" GroupName="IdentifyMethod" />
+            <RadioButton IsChecked="{Binding Path=Options.IdentificationMethod, 
+                Converter={StaticResource EnumToBoolConverter}, 
+                ConverterParameter={x:Static localModel:IdentificationMethod.FaceAndSpeech}}" Content="Face and speech" GroupName="IdentifyMethod" />
         </StackPanel>
         <Label Grid.Row="0" Grid.Column="1" Content="Verification method" />
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
-            <RadioButton Content="Face only" GroupName="VerifyMethod" />
-            <RadioButton Content="Speech only" GroupName="VerifyMethod" />
-            <RadioButton  Content="Face and speech" GroupName="VerifyMethod" />
+            <RadioButton IsChecked="{Binding Path=Options.VerificationMethod, 
+                Converter={StaticResource EnumToBoolConverter}, 
+                ConverterParameter={x:Static localModel:VerificationMethod.FaceOnly}}" Content="Face only" GroupName="VerifyMethod" />
+            <RadioButton IsChecked="{Binding Path=Options.VerificationMethod, 
+                Converter={StaticResource EnumToBoolConverter}, 
+                ConverterParameter={x:Static localModel:VerificationMethod.SpeechOnly}}" Content="Speech only" GroupName="VerifyMethod" />
+            <RadioButton IsChecked="{Binding Path=Options.VerificationMethod, 
+                Converter={StaticResource EnumToBoolConverter}, 
+                ConverterParameter={x:Static localModel:VerificationMethod.FaceAndSpeech}}" Content="Face and speech" GroupName="VerifyMethod" />
         </StackPanel>
-        <Button Grid.Row="2" Grid.Column="0" Content="Ok" />
-        <Button Grid.Row="2" Grid.Column="1" Content="Cancel" />
+        <Label Grid.Row="2" Grid.Column="0" Content="Acquisition method" />
+        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Vertical">
+            <RadioButton IsChecked="{Binding Path=Options.AcquisitionMethod, 
+                Converter={StaticResource EnumToBoolConverter}, 
+                ConverterParameter={x:Static localModel:AcquisitionMethod.FromDisk}}" Content="From disk" GroupName="AcquireMethod" />
+            <RadioButton IsChecked="{Binding Path=Options.AcquisitionMethod, 
+                Converter={StaticResource EnumToBoolConverter}, 
+                ConverterParameter={x:Static localModel:AcquisitionMethod.FromCamera}}" Content="From camera" GroupName="AcquireMethod" />
+        </StackPanel>
+        <Label Grid.Row="2" Grid.Column="1" Content="Silence removal" />
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Vertical">
+            <RadioButton IsChecked="{Binding Path=Options.SilenceRemoval, 
+                Converter={StaticResource EnumToBoolConverter}, 
+                ConverterParameter={x:Static localModel:SilenceRemoval.Yes}}" Content="Yes" GroupName="SilenceRemoval" />
+            <RadioButton IsChecked="{Binding Path=Options.SilenceRemoval, 
+                Converter={StaticResource EnumToBoolConverter}, 
+                ConverterParameter={x:Static localModel:SilenceRemoval.No}}" Content="No" GroupName="SilenceRemoval" />
+        </StackPanel>
+        <Button Grid.Row="4" Grid.Column="0" Content="Ok" />
+        <Button Grid.Row="4" Grid.Column="1" Content="Cancel" />
     </Grid>
 </Window>

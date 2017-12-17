@@ -60,7 +60,9 @@
     <Compile Include="DataAcquisitionSettingsWindow.xaml.cs">
       <DependentUpon>DataAcquisitionSettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Enums.cs" />
     <Compile Include="Model\Identification.cs" />
+    <Compile Include="Model\Options.cs" />
     <Compile Include="Model\PersonData.cs" />
     <Compile Include="Model\WindowService.cs" />
     <Compile Include="RestoreDbWindow.xaml.cs">
@@ -68,6 +70,7 @@
     </Compile>
     <Compile Include="Utility\BindableBase.cs" />
     <Compile Include="Utility\BitmapSourceToBitmapConverter.cs" />
+    <Compile Include="Utility\EnumToBoolConverter.cs" />
     <Compile Include="Utility\RelayCommand.cs" />
     <Compile Include="Utility\SamplesToLineListConverter.cs" />
     <Compile Include="Utility\UriToBoolConverter.cs" />
