@@ -178,13 +178,13 @@ namespace AlgorithmTests
         [TestMethod]
         public void SpeechTestToFile()
         {
-            string word = "algorithm";
+            string word = "close";
             int filterBanks = 10;
             int coeffs = 10;
             int testFilesPerPerson = 2;
             int trainFilesPerPerson = 4;
             float frameLength = 0.05f, frameInterval = 0.025f;
-            Window window = new HammingWindow();
+            Window window = new GaussWindow();
             var dtw = new DynamicTimeWarping(0);
             var frameMaker = new FrameMaker(frameLength, frameInterval);
             var extractor = new SpeechFeatureExtractor(window, filterBanks, coeffs);

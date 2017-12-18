@@ -102,3 +102,315 @@ Input file: SP6, input class: SP, result class: SP, SUCCESS
 Input file: ZR5, input class: ZR, result class: ZR, SUCCESS
 Input file: ZR6, input class: ZR, result class: SP, FAILURE
 RESULT: 24/42 (57.14)
+Date: Monday, December 18, 2017 21:22
+Used word algorithm
+Extractor params: 
+	 FilterBanksCount : 10
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Input file: AB15, input class: AB1, result class: AZ, FAILURE
+Input file: AB16, input class: AB1, result class: PB, FAILURE
+Input file: AH5, input class: AH, result class: AH, SUCCESS
+Input file: AH6, input class: AH, result class: AH, SUCCESS
+Input file: AK15, input class: AK1, result class: AK1, SUCCESS
+Input file: AK16, input class: AK1, result class: AK1, SUCCESS
+Input file: AZ5, input class: AZ, result class: AZ, SUCCESS
+Input file: AZ6, input class: AZ, result class: AZ, SUCCESS
+Input file: BM5, input class: BM, result class: BM, SUCCESS
+Input file: BM6, input class: BM, result class: BM, SUCCESS
+Input file: CW5, input class: CW, result class: CW, SUCCESS
+Input file: CW6, input class: CW, result class: CW, SUCCESS
+Input file: JK5, input class: JK, result class: JK, SUCCESS
+Input file: JK6, input class: JK, result class: JK, SUCCESS
+Input file: JK15, input class: JK1, result class: MO, FAILURE
+Input file: JK16, input class: JK1, result class: JK1, SUCCESS
+Input file: KL5, input class: KL, result class: MO, FAILURE
+Input file: KL6, input class: KL, result class: KL, SUCCESS
+Input file: KR5, input class: KR, result class: MO, FAILURE
+Input file: KR6, input class: KR, result class: MO, FAILURE
+Input file: LO5, input class: LO, result class: LO, SUCCESS
+Input file: LO6, input class: LO, result class: LO, SUCCESS
+Input file: MC5, input class: MC, result class: MC, SUCCESS
+Input file: MC6, input class: MC, result class: MC, SUCCESS
+Input file: ML5, input class: ML, result class: ML, SUCCESS
+Input file: ML6, input class: ML, result class: ML, SUCCESS
+Input file: MO5, input class: MO, result class: MO, SUCCESS
+Input file: MO6, input class: MO, result class: MO, SUCCESS
+Input file: MZ5, input class: MZ, result class: MZ, SUCCESS
+Input file: MZ6, input class: MZ, result class: AH, FAILURE
+Input file: OZ5, input class: OZ, result class: OZ, SUCCESS
+Input file: OZ6, input class: OZ, result class: MZ, FAILURE
+Input file: PB5, input class: PB, result class: PB, SUCCESS
+Input file: PB6, input class: PB, result class: PB, SUCCESS
+Input file: PH5, input class: PH, result class: PH, SUCCESS
+Input file: PH6, input class: PH, result class: KL, FAILURE
+Input file: RB5, input class: RB, result class: RB, SUCCESS
+Input file: RB6, input class: RB, result class: RB, SUCCESS
+Input file: SP5, input class: SP, result class: AH, FAILURE
+Input file: SP6, input class: SP, result class: SP, SUCCESS
+Input file: ZR5, input class: ZR, result class: KL, FAILURE
+Input file: ZR6, input class: ZR, result class: PH, FAILURE
+RESULT: 30/42 (71.43)
+Date: Monday, December 18, 2017 21:24
+Used word algorithm
+Extractor params: 
+	 FilterBanksCount : 10
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.01
+	 FrameInterval : 0.005
+Input file: AB15, input class: AB1, result class: KL, FAILURE
+Input file: AB16, input class: AB1, result class: KL, FAILURE
+Input file: AH5, input class: AH, result class: AH, SUCCESS
+Input file: AH6, input class: AH, result class: AH, SUCCESS
+Input file: AK15, input class: AK1, result class: AK1, SUCCESS
+Input file: AK16, input class: AK1, result class: AK1, SUCCESS
+Input file: AZ5, input class: AZ, result class: AZ, SUCCESS
+Input file: AZ6, input class: AZ, result class: AZ, SUCCESS
+Input file: BM5, input class: BM, result class: BM, SUCCESS
+Input file: BM6, input class: BM, result class: BM, SUCCESS
+Input file: CW5, input class: CW, result class: CW, SUCCESS
+Input file: CW6, input class: CW, result class: MZ, FAILURE
+Input file: JK5, input class: JK, result class: KL, FAILURE
+Input file: JK6, input class: JK, result class: JK, SUCCESS
+Input file: JK15, input class: JK1, result class: JK1, SUCCESS
+Input file: JK16, input class: JK1, result class: JK1, SUCCESS
+Input file: KL5, input class: KL, result class: KL, SUCCESS
+Input file: KL6, input class: KL, result class: KL, SUCCESS
+Input file: KR5, input class: KR, result class: MZ, FAILURE
+Input file: KR6, input class: KR, result class: MC, FAILURE
+Input file: LO5, input class: LO, result class: LO, SUCCESS
+Input file: LO6, input class: LO, result class: LO, SUCCESS
+Input file: MC5, input class: MC, result class: ML, FAILURE
+Input file: MC6, input class: MC, result class: MC, SUCCESS
+Input file: ML5, input class: ML, result class: MC, FAILURE
+Input file: ML6, input class: ML, result class: ML, SUCCESS
+Input file: MO5, input class: MO, result class: MO, SUCCESS
+Input file: MO6, input class: MO, result class: MC, FAILURE
+Input file: MZ5, input class: MZ, result class: LO, FAILURE
+Input file: MZ6, input class: MZ, result class: LO, FAILURE
+Input file: OZ5, input class: OZ, result class: OZ, SUCCESS
+Input file: OZ6, input class: OZ, result class: AH, FAILURE
+Input file: PB5, input class: PB, result class: PB, SUCCESS
+Input file: PB6, input class: PB, result class: MC, FAILURE
+Input file: PH5, input class: PH, result class: SP, FAILURE
+Input file: PH6, input class: PH, result class: KL, FAILURE
+Input file: RB5, input class: RB, result class: RB, SUCCESS
+Input file: RB6, input class: RB, result class: RB, SUCCESS
+Input file: SP5, input class: SP, result class: AH, FAILURE
+Input file: SP6, input class: SP, result class: SP, SUCCESS
+Input file: ZR5, input class: ZR, result class: SP, FAILURE
+Input file: ZR6, input class: ZR, result class: SP, FAILURE
+RESULT: 24/42 (57.14)
+Date: Monday, December 18, 2017 21:25
+Used word algorithm
+Extractor params: 
+	 FilterBanksCount : 40
+	 CoeffsLeft : 13
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Input file: AB15, input class: AB1, result class: AK1, FAILURE
+Input file: AB16, input class: AB1, result class: KL, FAILURE
+Input file: AH5, input class: AH, result class: AH, SUCCESS
+Input file: AH6, input class: AH, result class: AH, SUCCESS
+Input file: AK15, input class: AK1, result class: AK1, SUCCESS
+Input file: AK16, input class: AK1, result class: AK1, SUCCESS
+Input file: AZ5, input class: AZ, result class: AZ, SUCCESS
+Input file: AZ6, input class: AZ, result class: AZ, SUCCESS
+Input file: BM5, input class: BM, result class: BM, SUCCESS
+Input file: BM6, input class: BM, result class: BM, SUCCESS
+Input file: CW5, input class: CW, result class: CW, SUCCESS
+Input file: CW6, input class: CW, result class: CW, SUCCESS
+Input file: JK5, input class: JK, result class: JK, SUCCESS
+Input file: JK6, input class: JK, result class: JK, SUCCESS
+Input file: JK15, input class: JK1, result class: JK1, SUCCESS
+Input file: JK16, input class: JK1, result class: JK1, SUCCESS
+Input file: KL5, input class: KL, result class: KL, SUCCESS
+Input file: KL6, input class: KL, result class: KL, SUCCESS
+Input file: KR5, input class: KR, result class: MZ, FAILURE
+Input file: KR6, input class: KR, result class: MC, FAILURE
+Input file: LO5, input class: LO, result class: LO, SUCCESS
+Input file: LO6, input class: LO, result class: LO, SUCCESS
+Input file: MC5, input class: MC, result class: ML, FAILURE
+Input file: MC6, input class: MC, result class: ML, FAILURE
+Input file: ML5, input class: ML, result class: ML, SUCCESS
+Input file: ML6, input class: ML, result class: ML, SUCCESS
+Input file: MO5, input class: MO, result class: MO, SUCCESS
+Input file: MO6, input class: MO, result class: MO, SUCCESS
+Input file: MZ5, input class: MZ, result class: MZ, SUCCESS
+Input file: MZ6, input class: MZ, result class: AH, FAILURE
+Input file: OZ5, input class: OZ, result class: OZ, SUCCESS
+Input file: OZ6, input class: OZ, result class: MZ, FAILURE
+Input file: PB5, input class: PB, result class: PB, SUCCESS
+Input file: PB6, input class: PB, result class: ZR, FAILURE
+Input file: PH5, input class: PH, result class: KL, FAILURE
+Input file: PH6, input class: PH, result class: KL, FAILURE
+Input file: RB5, input class: RB, result class: RB, SUCCESS
+Input file: RB6, input class: RB, result class: RB, SUCCESS
+Input file: SP5, input class: SP, result class: AH, FAILURE
+Input file: SP6, input class: SP, result class: SP, SUCCESS
+Input file: ZR5, input class: ZR, result class: OZ, FAILURE
+Input file: ZR6, input class: ZR, result class: SP, FAILURE
+RESULT: 28/42 (66.67)
+Date: Monday, December 18, 2017 21:26
+Used word algorithm
+Extractor params: 
+	 FilterBanksCount : 10
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Input file: AB15, input class: AB1, result class: AZ, FAILURE
+Input file: AB16, input class: AB1, result class: PB, FAILURE
+Input file: AH5, input class: AH, result class: AH, SUCCESS
+Input file: AH6, input class: AH, result class: AH, SUCCESS
+Input file: AK15, input class: AK1, result class: AK1, SUCCESS
+Input file: AK16, input class: AK1, result class: AK1, SUCCESS
+Input file: AZ5, input class: AZ, result class: AZ, SUCCESS
+Input file: AZ6, input class: AZ, result class: AZ, SUCCESS
+Input file: BM5, input class: BM, result class: BM, SUCCESS
+Input file: BM6, input class: BM, result class: BM, SUCCESS
+Input file: CW5, input class: CW, result class: CW, SUCCESS
+Input file: CW6, input class: CW, result class: CW, SUCCESS
+Input file: JK5, input class: JK, result class: KL, FAILURE
+Input file: JK6, input class: JK, result class: JK, SUCCESS
+Input file: JK15, input class: JK1, result class: JK1, SUCCESS
+Input file: JK16, input class: JK1, result class: JK1, SUCCESS
+Input file: KL5, input class: KL, result class: KL, SUCCESS
+Input file: KL6, input class: KL, result class: KL, SUCCESS
+Input file: KR5, input class: KR, result class: MZ, FAILURE
+Input file: KR6, input class: KR, result class: MC, FAILURE
+Input file: LO5, input class: LO, result class: LO, SUCCESS
+Input file: LO6, input class: LO, result class: LO, SUCCESS
+Input file: MC5, input class: MC, result class: ML, FAILURE
+Input file: MC6, input class: MC, result class: MC, SUCCESS
+Input file: ML5, input class: ML, result class: ML, SUCCESS
+Input file: ML6, input class: ML, result class: ML, SUCCESS
+Input file: MO5, input class: MO, result class: MO, SUCCESS
+Input file: MO6, input class: MO, result class: MC, FAILURE
+Input file: MZ5, input class: MZ, result class: LO, FAILURE
+Input file: MZ6, input class: MZ, result class: AH, FAILURE
+Input file: OZ5, input class: OZ, result class: OZ, SUCCESS
+Input file: OZ6, input class: OZ, result class: MZ, FAILURE
+Input file: PB5, input class: PB, result class: PB, SUCCESS
+Input file: PB6, input class: PB, result class: PB, SUCCESS
+Input file: PH5, input class: PH, result class: SP, FAILURE
+Input file: PH6, input class: PH, result class: KL, FAILURE
+Input file: RB5, input class: RB, result class: RB, SUCCESS
+Input file: RB6, input class: RB, result class: RB, SUCCESS
+Input file: SP5, input class: SP, result class: AH, FAILURE
+Input file: SP6, input class: SP, result class: SP, SUCCESS
+Input file: ZR5, input class: ZR, result class: SP, FAILURE
+Input file: ZR6, input class: ZR, result class: SP, FAILURE
+RESULT: 27/42 (64.29)
+Date: Monday, December 18, 2017 21:27
+Used word close
+Extractor params: 
+	 FilterBanksCount : 10
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Input file: AB15, input class: AB1, result class: AB1, SUCCESS
+Input file: AB16, input class: AB1, result class: AB1, SUCCESS
+Input file: AH5, input class: AH, result class: AH, SUCCESS
+Input file: AH6, input class: AH, result class: AH, SUCCESS
+Input file: AK15, input class: AK1, result class: AK1, SUCCESS
+Input file: AK16, input class: AK1, result class: AK1, SUCCESS
+Input file: AZ5, input class: AZ, result class: AZ, SUCCESS
+Input file: AZ6, input class: AZ, result class: AZ, SUCCESS
+Input file: BM5, input class: BM, result class: BM, SUCCESS
+Input file: BM6, input class: BM, result class: BM, SUCCESS
+Input file: CW5, input class: CW, result class: CW, SUCCESS
+Input file: CW6, input class: CW, result class: CW, SUCCESS
+Input file: JK5, input class: JK, result class: JK, SUCCESS
+Input file: JK6, input class: JK, result class: JK, SUCCESS
+Input file: JK15, input class: JK1, result class: JK1, SUCCESS
+Input file: JK16, input class: JK1, result class: JK1, SUCCESS
+Input file: KL5, input class: KL, result class: MO, FAILURE
+Input file: KL6, input class: KL, result class: AH, FAILURE
+Input file: KR5, input class: KR, result class: KR, SUCCESS
+Input file: KR6, input class: KR, result class: CW, FAILURE
+Input file: LO5, input class: LO, result class: LO, SUCCESS
+Input file: LO6, input class: LO, result class: LO, SUCCESS
+Input file: MC5, input class: MC, result class: MC, SUCCESS
+Input file: MC6, input class: MC, result class: MC, SUCCESS
+Input file: ML5, input class: ML, result class: ML, SUCCESS
+Input file: ML6, input class: ML, result class: KR, FAILURE
+Input file: MO5, input class: MO, result class: MO, SUCCESS
+Input file: MO6, input class: MO, result class: MO, SUCCESS
+Input file: MZ5, input class: MZ, result class: MZ, SUCCESS
+Input file: MZ6, input class: MZ, result class: MZ, SUCCESS
+Input file: OZ5, input class: OZ, result class: LO, FAILURE
+Input file: OZ6, input class: OZ, result class: OZ, SUCCESS
+Input file: PB5, input class: PB, result class: PB, SUCCESS
+Input file: PB6, input class: PB, result class: PB, SUCCESS
+Input file: PH5, input class: PH, result class: JK, FAILURE
+Input file: PH6, input class: PH, result class: PH, SUCCESS
+Input file: RB5, input class: RB, result class: RB, SUCCESS
+Input file: RB6, input class: RB, result class: KR, FAILURE
+Input file: SP5, input class: SP, result class: SP, SUCCESS
+Input file: SP6, input class: SP, result class: CW, FAILURE
+Input file: ZR5, input class: ZR, result class: ZR, SUCCESS
+Input file: ZR6, input class: ZR, result class: ZR, SUCCESS
+RESULT: 34/42 (80.95)
+Date: Monday, December 18, 2017 21:27
+Used word close
+Extractor params: 
+	 FilterBanksCount : 10
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.05
+	 FrameInterval : 0.025
+Input file: AB15, input class: AB1, result class: JK, FAILURE
+Input file: AB16, input class: AB1, result class: JK, FAILURE
+Input file: AH5, input class: AH, result class: AH, SUCCESS
+Input file: AH6, input class: AH, result class: AH, SUCCESS
+Input file: AK15, input class: AK1, result class: AK1, SUCCESS
+Input file: AK16, input class: AK1, result class: AK1, SUCCESS
+Input file: AZ5, input class: AZ, result class: AZ, SUCCESS
+Input file: AZ6, input class: AZ, result class: AZ, SUCCESS
+Input file: BM5, input class: BM, result class: BM, SUCCESS
+Input file: BM6, input class: BM, result class: BM, SUCCESS
+Input file: CW5, input class: CW, result class: CW, SUCCESS
+Input file: CW6, input class: CW, result class: CW, SUCCESS
+Input file: JK5, input class: JK, result class: JK, SUCCESS
+Input file: JK6, input class: JK, result class: JK, SUCCESS
+Input file: JK15, input class: JK1, result class: JK1, SUCCESS
+Input file: JK16, input class: JK1, result class: JK1, SUCCESS
+Input file: KL5, input class: KL, result class: KL, SUCCESS
+Input file: KL6, input class: KL, result class: AH, FAILURE
+Input file: KR5, input class: KR, result class: KR, SUCCESS
+Input file: KR6, input class: KR, result class: LO, FAILURE
+Input file: LO5, input class: LO, result class: KL, FAILURE
+Input file: LO6, input class: LO, result class: LO, SUCCESS
+Input file: MC5, input class: MC, result class: KR, FAILURE
+Input file: MC6, input class: MC, result class: MC, SUCCESS
+Input file: ML5, input class: ML, result class: PB, FAILURE
+Input file: ML6, input class: ML, result class: MC, FAILURE
+Input file: MO5, input class: MO, result class: MO, SUCCESS
+Input file: MO6, input class: MO, result class: MO, SUCCESS
+Input file: MZ5, input class: MZ, result class: MZ, SUCCESS
+Input file: MZ6, input class: MZ, result class: MZ, SUCCESS
+Input file: OZ5, input class: OZ, result class: KL, FAILURE
+Input file: OZ6, input class: OZ, result class: RB, FAILURE
+Input file: PB5, input class: PB, result class: PB, SUCCESS
+Input file: PB6, input class: PB, result class: PB, SUCCESS
+Input file: PH5, input class: PH, result class: PH, SUCCESS
+Input file: PH6, input class: PH, result class: PH, SUCCESS
+Input file: RB5, input class: RB, result class: RB, SUCCESS
+Input file: RB6, input class: RB, result class: KR, FAILURE
+Input file: SP5, input class: SP, result class: SP, SUCCESS
+Input file: SP6, input class: SP, result class: AK1, FAILURE
+Input file: ZR5, input class: ZR, result class: ZR, SUCCESS
+Input file: ZR6, input class: ZR, result class: KR, FAILURE
+RESULT: 29/42 (69.05)
