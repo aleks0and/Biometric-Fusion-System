@@ -181,12 +181,12 @@ namespace AlgorithmTests
             string testComment = "";
             string dataset = "data";
             string word = "close";
-            int filterBanks = 10;
-            int coeffs = 10;
+            int filterBanks = 26;
+            int coeffs = 13;
             int testFilesPerPerson = 2;
             int trainFilesPerPerson = 4;
             float frameLength = 0.02f, frameInterval = 0.01f;
-            Window window = new GaussWindow();
+            Window window = new HammingWindow();
             var dtw = new DynamicTimeWarping(0);
             var frameMaker = new FrameMaker(frameLength, frameInterval);
             var extractor = new SpeechFeatureExtractor(window, filterBanks, coeffs);
