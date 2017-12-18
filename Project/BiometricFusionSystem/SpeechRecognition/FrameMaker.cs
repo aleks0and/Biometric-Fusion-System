@@ -10,6 +10,14 @@ namespace SpeechRecognition
     {
         private float _frameLength;
         private float _frameInterval;
+        public float FrameLength
+        {
+            get { return _frameLength; }
+        }
+        public float FrameInterval
+        {
+            get { return _frameInterval; }
+        }
         /// <summary>
         /// Constructor setting the initial values needed for frames creation
         /// </summary>

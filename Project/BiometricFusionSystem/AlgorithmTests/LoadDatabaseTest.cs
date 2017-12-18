@@ -17,12 +17,13 @@ namespace AlgorithmTests
     [TestClass]
     public class LoadDatabaseTest
     {
+        private string speechFilePath = @"..\..\..\..\..\Documentation\speechResult.txt";
         private int _finalMoment;
         private FaceFeatureExtractor _extractorFace;
         private FrameMaker _frameMaker;
         private SpeechFeatureExtractor _extractorSpeech;
         private DynamicTimeWarping _timeWarping;
-        private string _sampleDirectory = @"C:\Users\aleks\Desktop\data";
+        private string _sampleDirectory = @"C:\Users\Kornel\Desktop\dataDecember";
 
         public LoadDatabaseTest()
         {
@@ -172,6 +173,108 @@ namespace AlgorithmTests
             }
             var frames = _frameMaker.ToFrames(file.LeftChannel, sampleRate);
             return _extractorSpeech.GetFeatures(frames, sampleRate);
+        }
+
+        [TestMethod]
+        public void SpeechTestToFile()
+        {
+            string word = "algorithm";
+            int filterBanks = 10;
+            int coeffs = 10;
+            int testFilesPerPerson = 2;
+            int trainFilesPerPerson = 4;
+            float frameLength = 0.05f, frameInterval = 0.025f;
+            Window window = new HammingWindow();
+            var dtw = new DynamicTimeWarping(0);
+            var frameMaker = new FrameMaker(frameLength, frameInterval);
+            var extractor = new SpeechFeatureExtractor(window, filterBanks, coeffs);
+            TrainDtw(dtw, word, trainFilesPerPerson, extractor, frameMaker);
+            bool firstRun = true;
+            int countSuccess = 0;
+            int countTotal = 0;
+            foreach (var dir in GetDirs())
+            {
+                for (int i = 0; i < testFilesPerPerson; i++)
+                {
+                    if (File.Exists(_sampleDirectory + @"\" + word + @"\" + dir + @"\" + dir + (i + trainFilesPerPerson + 1) + ".wav"))
+                    {
+                        var path = _sampleDirectory + @"\" + word + @"\" + dir + @"\" + dir + (i + trainFilesPerPerson + 1) + ".wav";
+                        var featureVector = ExtractFeaturesVoice(path, extractor, frameMaker);
+                        var result = dtw.Classify(featureVector);
+                        bool success = SaveSpeechResult(result, extractor, frameMaker, dir, word, firstRun, i + trainFilesPerPerson + 1);
+                        if(success)
+                        {
+                            countSuccess++;
+                        }
+                        countTotal++;
+                        firstRun = false;
+                    }
+                }
+            }
+            SaveTotalResult(speechFilePath, countSuccess, countTotal);
+        }
+        private bool SaveSpeechResult(string result, SpeechFeatureExtractor extractor, FrameMaker frameMaker, string className, string word, bool firstRun, int fileId)
+        {
+            using (var resultFile = new StreamWriter(speechFilePath, true))
+            {
+                if(firstRun)
+                {
+                    resultFile.WriteLine("Date: " + DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToShortTimeString());
+                    resultFile.WriteLine("Used word " + word);
+                    resultFile.WriteLine("Extractor params: ");
+                    resultFile.WriteLine("\t {0} : {1}", nameof(extractor.FilterBanksCount), extractor.FilterBanksCount);
+                    resultFile.WriteLine("\t {0} : {1}", nameof(extractor.CoeffsLeft), extractor.CoeffsLeft);
+                    resultFile.WriteLine("\t {0} : {1}", nameof(extractor.WindowFunction), extractor.WindowFunction.GetType().FullName);
+                    resultFile.WriteLine("FrameMaker params: ");
+                    resultFile.WriteLine("\t {0} : {1}", nameof(frameMaker.FrameLength), frameMaker.FrameLength);
+                    resultFile.WriteLine("\t {0} : {1}", nameof(frameMaker.FrameInterval), frameMaker.FrameInterval);
+                }
+                resultFile.WriteLine("Input file: {0}, input class: {1}, result class: {2}, {3}", className + fileId, className, result,
+                    result == className ? "SUCCESS" : "FAILURE");
+            }
+            return result == className;
+        }
+
+        private void SaveTotalResult(string resultPath, int success, int total)
+        {
+            using (var resultFile = new StreamWriter(resultPath, true))
+            {
+                double percent = success / (double)total * 100;
+                resultFile.WriteLine("RESULT: {0}/{1} ({2})", success, total, percent.ToString("F2"));
+            }
+        }
+        private void TrainDtw(DynamicTimeWarping dtw, string word, int trainFilesPerPerson, SpeechFeatureExtractor extractor, FrameMaker frameMaker)
+        {
+            foreach (var dir in GetDirs())
+            {
+                var speechVectors = new List<List<double>>();
+                for (int i = 0; i < trainFilesPerPerson; i++)
+                {
+                    if (File.Exists(_sampleDirectory + @"\" + word + @"\" + dir + @"\" + dir + (i + 1) + ".wav"))
+                    {
+                        var path = _sampleDirectory + @"\" + word + @"\" + dir + @"\" + dir + (i + 1) + ".wav";
+                        var featureVector = ExtractFeaturesVoice(path, extractor, frameMaker);
+                        speechVectors.Add(featureVector);
+                    }
+                }
+                dtw.AddToDictionary(speechVectors, dir);
+            }
+           
+        }
+
+        private List<double> ExtractFeaturesVoice(string path, SpeechFeatureExtractor extractor, FrameMaker frameMaker)
+        {
+            var file = WavReader.Read(path);
+            var sampleRate = (int)file.Header.sampleRate;
+            var frames = frameMaker.ToFrames(file.LeftChannel, sampleRate);
+            return extractor.GetFeatures(frames, sampleRate);
+        }
+
+        private string[] GetDirs()
+        {
+            var dirs = Directory.GetDirectories(_sampleDirectory + @"\faces");
+            dirs = dirs.Select(d => Path.GetFileName(d)).ToArray();
+            return dirs;
         }
     }
 }

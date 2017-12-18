@@ -13,9 +13,10 @@ namespace SpeechRecognition
         private const double LogErr = 1E-10;
         private double _lowerFreq;
         private double _upperFreq;
-        int _filterbanksCount;
-        int _samplerate;
-        int _fourierLength;
+        private int _filterbanksCount;
+        private int _samplerate;
+        private int _fourierLength;
+        private int _coeffsLeft;
         public List<double> Filterbanks { get; private set; }
         public List<int> Filters { get; private set; }
         public List<double> Energies { get; private set; }
@@ -28,7 +29,7 @@ namespace SpeechRecognition
         /// <param name="filterbanksCount"> number of filterbanks </param>
         /// <param name="samplerate"> samplerate for the speech recording </param>
         /// <param name="fourierLength"> half the number of frames created from the speech recording</param>
-        public MelFilterbank(double lowerFreq, double upperFreq, int filterbanksCount, int samplerate, int fourierLength)
+        public MelFilterbank(double lowerFreq, double upperFreq, int filterbanksCount, int samplerate, int fourierLength, int coeffsLeft = -1)
         {
             _lowerFreq = MelConverter.ToMel(lowerFreq);
             _upperFreq = MelConverter.ToMel(upperFreq);
@@ -36,7 +37,11 @@ namespace SpeechRecognition
             _filterbanksCount = filterbanksCount;
             _samplerate = samplerate;
             _fourierLength = fourierLength;
-
+            if(coeffsLeft == -1)
+            {
+                coeffsLeft = filterbanksCount;
+            }
+            _coeffsLeft = coeffsLeft;
             Filterbanks = new List<double>();
             Filters = new List<int>();
             Energies = new List<double>();
@@ -162,7 +167,7 @@ namespace SpeechRecognition
                 dct.Add(sum);
             }
             Energies.Clear();
-            return dct;
+            return dct.Take(_coeffsLeft).ToList();
         }
     }
 }

@@ -11,10 +11,27 @@ namespace SpeechRecognition
         private const int LowerFrequency = 300;
         private Window _windowFunction;
         private int _filterbanksCount;
-
-        public SpeechFeatureExtractor(Window window, int filterbanksCount)
+        private int _coeffsLeft;
+        public Window WindowFunction
+        {
+            get { return _windowFunction; }
+        }
+        public int FilterBanksCount
+        {
+            get { return _filterbanksCount; }
+        }
+        public int CoeffsLeft
+        {
+            get { return _coeffsLeft; }
+        }
+        public SpeechFeatureExtractor(Window window, int filterbanksCount, int coeffsLeft = -1)
         {
             _filterbanksCount = filterbanksCount;
+            if(coeffsLeft == -1)
+            {
+                coeffsLeft = filterbanksCount;
+            }
+            _coeffsLeft = coeffsLeft;
             _windowFunction = window;
         }
         /// <summary>
@@ -28,7 +45,7 @@ namespace SpeechRecognition
             ApplyWindow(frames);
             var estimates = GetPeriodogramEstimates(frames);
             var melFilterbank = new MelFilterbank(LowerFrequency, sampleRate / 2,
-                _filterbanksCount, sampleRate, estimates[0].Count);
+                _filterbanksCount, sampleRate, estimates[0].Count, _coeffsLeft);
             var filterbanks = PrepareFilterbanks(melFilterbank);
             return GetMfcc(melFilterbank, filterbanks, estimates);
         }
