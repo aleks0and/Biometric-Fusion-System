@@ -23,7 +23,7 @@ namespace AlgorithmTests
         private FrameMaker _frameMaker;
         private SpeechFeatureExtractor _extractorSpeech;
         private DynamicTimeWarping _timeWarping;
-        private string _sampleDirectory = @"C:\Users\Kornel\Desktop\dataDecember";
+        private string _sampleDirectory = @"C:\Users\Kornel\Desktop\";
 
         public LoadDatabaseTest()
         {
@@ -178,30 +178,33 @@ namespace AlgorithmTests
         [TestMethod]
         public void SpeechTestToFile()
         {
+            string testComment = "";
+            string dataset = "data";
             string word = "close";
             int filterBanks = 10;
             int coeffs = 10;
             int testFilesPerPerson = 2;
             int trainFilesPerPerson = 4;
-            float frameLength = 0.05f, frameInterval = 0.025f;
+            float frameLength = 0.02f, frameInterval = 0.01f;
             Window window = new GaussWindow();
             var dtw = new DynamicTimeWarping(0);
             var frameMaker = new FrameMaker(frameLength, frameInterval);
             var extractor = new SpeechFeatureExtractor(window, filterBanks, coeffs);
-            TrainDtw(dtw, word, trainFilesPerPerson, extractor, frameMaker);
+            TrainDtw(dtw, word, trainFilesPerPerson, extractor, frameMaker, dataset);
             bool firstRun = true;
             int countSuccess = 0;
             int countTotal = 0;
-            foreach (var dir in GetDirs())
+            foreach (var dir in GetDirs(dataset))
             {
                 for (int i = 0; i < testFilesPerPerson; i++)
                 {
-                    if (File.Exists(_sampleDirectory + @"\" + word + @"\" + dir + @"\" + dir + (i + trainFilesPerPerson + 1) + ".wav"))
+                    if (File.Exists(_sampleDirectory + dataset + @"\" + word + @"\" + dir + @"\" + dir + (i + trainFilesPerPerson + 1) + ".wav"))
                     {
-                        var path = _sampleDirectory + @"\" + word + @"\" + dir + @"\" + dir + (i + trainFilesPerPerson + 1) + ".wav";
+                        var path = _sampleDirectory + dataset + @"\" + word + @"\" + dir + @"\" + dir + (i + trainFilesPerPerson + 1) + ".wav";
                         var featureVector = ExtractFeaturesVoice(path, extractor, frameMaker);
                         var result = dtw.Classify(featureVector);
-                        bool success = SaveSpeechResult(result, extractor, frameMaker, dir, word, firstRun, i + trainFilesPerPerson + 1);
+                        bool success = SaveSpeechResult(result, extractor, frameMaker, dir, word,
+                            firstRun, i + trainFilesPerPerson + 1, dataset, testComment);
                         if(success)
                         {
                             countSuccess++;
@@ -213,14 +216,15 @@ namespace AlgorithmTests
             }
             SaveTotalResult(speechFilePath, countSuccess, countTotal);
         }
-        private bool SaveSpeechResult(string result, SpeechFeatureExtractor extractor, FrameMaker frameMaker, string className, string word, bool firstRun, int fileId)
+        private bool SaveSpeechResult(string result, SpeechFeatureExtractor extractor, FrameMaker frameMaker, string className,
+            string word, bool firstRun, int fileId, string dataset, string comment)
         {
             using (var resultFile = new StreamWriter(speechFilePath, true))
             {
                 if(firstRun)
                 {
                     resultFile.WriteLine("Date: " + DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToShortTimeString());
-                    resultFile.WriteLine("Used word " + word);
+                    resultFile.WriteLine("Used word: " + word + ", dataset: " + dataset);
                     resultFile.WriteLine("Extractor params: ");
                     resultFile.WriteLine("\t {0} : {1}", nameof(extractor.FilterBanksCount), extractor.FilterBanksCount);
                     resultFile.WriteLine("\t {0} : {1}", nameof(extractor.CoeffsLeft), extractor.CoeffsLeft);
@@ -228,6 +232,7 @@ namespace AlgorithmTests
                     resultFile.WriteLine("FrameMaker params: ");
                     resultFile.WriteLine("\t {0} : {1}", nameof(frameMaker.FrameLength), frameMaker.FrameLength);
                     resultFile.WriteLine("\t {0} : {1}", nameof(frameMaker.FrameInterval), frameMaker.FrameInterval);
+                    resultFile.WriteLine("Comment: " + comment);
                 }
                 resultFile.WriteLine("Input file: {0}, input class: {1}, result class: {2}, {3}", className + fileId, className, result,
                     result == className ? "SUCCESS" : "FAILURE");
@@ -243,16 +248,17 @@ namespace AlgorithmTests
                 resultFile.WriteLine("RESULT: {0}/{1} ({2})", success, total, percent.ToString("F2"));
             }
         }
-        private void TrainDtw(DynamicTimeWarping dtw, string word, int trainFilesPerPerson, SpeechFeatureExtractor extractor, FrameMaker frameMaker)
+        private void TrainDtw(DynamicTimeWarping dtw, string word, int trainFilesPerPerson, SpeechFeatureExtractor extractor, 
+            FrameMaker frameMaker, string dataset)
         {
-            foreach (var dir in GetDirs())
+            foreach (var dir in GetDirs(dataset))
             {
                 var speechVectors = new List<List<double>>();
                 for (int i = 0; i < trainFilesPerPerson; i++)
                 {
-                    if (File.Exists(_sampleDirectory + @"\" + word + @"\" + dir + @"\" + dir + (i + 1) + ".wav"))
+                    if (File.Exists(_sampleDirectory + dataset + @"\" + word + @"\" + dir + @"\" + dir + (i + 1) + ".wav"))
                     {
-                        var path = _sampleDirectory + @"\" + word + @"\" + dir + @"\" + dir + (i + 1) + ".wav";
+                        var path = _sampleDirectory + dataset + @"\" + word + @"\" + dir + @"\" + dir + (i + 1) + ".wav";
                         var featureVector = ExtractFeaturesVoice(path, extractor, frameMaker);
                         speechVectors.Add(featureVector);
                     }
@@ -270,9 +276,9 @@ namespace AlgorithmTests
             return extractor.GetFeatures(frames, sampleRate);
         }
 
-        private string[] GetDirs()
+        private string[] GetDirs(string dataset)
         {
-            var dirs = Directory.GetDirectories(_sampleDirectory + @"\faces");
+            var dirs = Directory.GetDirectories(_sampleDirectory + dataset + @"\algorithm");
             dirs = dirs.Select(d => Path.GetFileName(d)).ToArray();
             return dirs;
         }
