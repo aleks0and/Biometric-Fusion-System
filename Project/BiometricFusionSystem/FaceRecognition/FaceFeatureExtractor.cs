@@ -10,8 +10,47 @@ namespace FaceRecognition
     //zamien operacje na bitmapach zeby byly na pointerach
     public class FaceFeatureExtractor
     {
-        
+        private double[] _lambda;
+        private double _stdX;
+        private double _stdY;
+        private int _orientations;
         int _finalMoment;
+
+        public double[] Lambda
+        {
+            get
+            {
+                return _lambda;
+            }
+        }
+        public double StdX
+        {
+            get
+            {
+                return _stdX;
+            }
+        }
+        public double StdY
+        {
+            get
+            {
+                return _stdY;
+            }
+        }
+        public int Orientations
+        {
+            get
+            {
+                return _orientations;
+            }
+        }
+        public int FinalMoment
+        {
+            get
+            {
+                return _finalMoment;
+            }
+        }
         /// <summary>
         /// constructor of the FaceFeatureExtractor class
         /// </summary>
@@ -19,6 +58,18 @@ namespace FaceRecognition
         public FaceFeatureExtractor(int finalMoment)
         {
             _finalMoment = finalMoment;
+            _lambda = new double[] { 10, 5 };
+            _stdX = 2;
+            _stdY = 1;
+            _orientations = 4;
+        }
+        public FaceFeatureExtractor(int finalMoment, double[] lambda, double stdX, double stdY, int orientations)
+        {
+            _finalMoment = finalMoment;
+            _lambda = lambda;
+            _stdX = stdX;
+            _stdY = stdY;
+            _orientations = orientations;
         }
         /// <summary>
         /// function which calculates the feature vectors (Gabor function related and Color histogram related) for a given image.
@@ -34,8 +85,8 @@ namespace FaceRecognition
             List<List<double>> histogramFeatures = hfe.CalculateMoments(_finalMoment);
             GrayscaleConverter gConverter = new GrayscaleConverter();
             bmp = gConverter.Normalize(bmp);
-            double[] lambda = { 10, 5 };
-            GaborFilter gf = new GaborFilter(2, 1, lambda, Math.PI / 2, 4, 3);
+            
+            GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, Math.PI / 2, _orientations, 3);
             List<Bitmap> gfBitmap = gf.ApplyFilter(bmp);
             bmp = CombineBitmaps(gfBitmap);
             GaborFilterMagnitudes gfm = new GaborFilterMagnitudes(bmp);
@@ -54,8 +105,8 @@ namespace FaceRecognition
             bmp = he.Normalize(bmp);
             GrayscaleConverter gConverter = new GrayscaleConverter();
             bmp = gConverter.Normalize(bmp);
-            double[] lambda = { 10, 5 };
-            GaborFilter gf = new GaborFilter(2, 1, lambda, Math.PI / 2, 4, 3);
+            
+            GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, Math.PI / 2, _orientations, 3);
             List<Bitmap> gfBitmap = gf.ApplyFilter(bmp);
             bmp = CombineBitmaps(gfBitmap);
             GaborFilterMagnitudes gfm = new GaborFilterMagnitudes(bmp);

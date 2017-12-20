@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Common;
 using FaceRecognition;
 using System.Drawing;
+using System.IO;
 
 namespace AlgorithmTests
 {
@@ -14,7 +15,8 @@ namespace AlgorithmTests
     public class FaceAlgorithmTest
     {
         // we need to change it so we keep the pictures in the DB instead of the project directory
-        private string _sampleDirPath = @"../../../../../Samples/";
+        private string _sampleDirPath = @"../../../../../../data/faces/";
+        //directory data should be placed on the desktop as well as the engineering thesis directory
         //private string _sampleDirPath = @"../../Samples/";
         private DynamicTimeWarping _timeWarping;
         private FaceFeatureExtractor _extractor;
