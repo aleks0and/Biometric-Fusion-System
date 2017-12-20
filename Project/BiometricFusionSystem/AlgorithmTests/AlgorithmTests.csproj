@@ -43,8 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FaceAlgorithmTest.cs" />
+    <Compile Include="FaceParametersGenerationTest.cs" />
     <Compile Include="LoadDatabaseTest.cs" />
-    <Compile Include="ParametersGenerationTest.cs" />
+    <Compile Include="SpeechParametersGenerationTest.cs" />
     <Compile Include="SpeechAlgorithmTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
