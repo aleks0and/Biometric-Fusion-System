@@ -174,19 +174,86 @@ namespace AlgorithmTests
             var frames = _frameMaker.ToFrames(file.LeftChannel, sampleRate);
             return _extractorSpeech.GetFeatures(frames, sampleRate);
         }
+        private class Result
+        {
+            public int FilterBanks { get; set; }
+            public int CoeffsLeft { get; set; }
+            public Window Window { get; set; }
+            public float FrameLength { get; set; }
+            public List<double> Averages { get; set; }
+        }
+        [TestMethod]
+        public void GenerateSpeechTests()
+        {
+            string[] datasets = new string[] { "data", "dataDecember" };
+            string[] words = new string[] { "algorithm", "close" };
+            Window[] windows = new Window[] { new GaussWindow(), new HammingWindow() };
+            int filterBankMin = 8;
+            int filterBankMax = 30;
+            int coeffMin = 8;
+            float frameLengthMin = 0.02f;
+            float frameLengthMax = 0.1f;
+            double bestAverage = 0;
+            Result result = new Result();
+            for (float frame = frameLengthMin; frame <= frameLengthMax; frame += 0.005f)
+            {
+                for(int filter = filterBankMin; filter <= filterBankMax; filter += 2)
+                {
+                    for(int coeff = coeffMin; coeff <= filter; coeff++)
+                    {
+                        foreach(Window w in windows)
+                        {
+                            var averages = new List<double>();
+                            foreach(var dataset in datasets)
+                            {
+                                foreach(var word in words)
+                                {
+                                    averages.Add(SpeechTestToFile(dataset, word, filter, coeff, frame, frame / 2, w));
+                                }
+                            }
+                            double avg = 0;
+                            for (int i = 0; i < datasets.Length * words.Length; i++)
+                            {
+                                avg += averages[i];
+                            }
+                            avg /= datasets.Length * words.Length;
+                            if (avg > bestAverage)
+                            {
+                                result = new Result()
+                                {
+                                    Averages = averages,
+                                    CoeffsLeft = coeff,
+                                    FilterBanks = filter,
+                                    FrameLength = frame,
+                                    Window = w
+                                };
+                                bestAverage = avg;
+                            }
+                        }
+                    }
+                }
+            }
+            using (var writer = new StreamWriter(@"..\..\..\..\..\Documentation\bestResult.txt"))
+            {
+                writer.WriteLine("Coeffs: " + result.CoeffsLeft);
+                writer.WriteLine("Filterbanks: " + result.FilterBanks);
+                writer.WriteLine("FrameLength: " + result.FrameLength);
+                writer.WriteLine("Window type: " + result.Window.GetType().FullName);
+                writer.WriteLine("Average: " + bestAverage.ToString("F2"));
+                for(int i = 0; i < result.Averages.Count; i++)
+                {
+                    writer.WriteLine("Average #{0}: {1}", i + 1, result.Averages[i].ToString("F2"));
+                }
+            }
+        }
 
         [TestMethod]
-        public void SpeechTestToFile()
+        public double SpeechTestToFile(string dataset, string word, int filterBanks, int coeffs,
+            float frameLength, float frameInterval, Window window)
         {
             string testComment = "";
-            string dataset = "data";
-            string word = "close";
-            int filterBanks = 26;
-            int coeffs = 13;
             int testFilesPerPerson = 2;
             int trainFilesPerPerson = 4;
-            float frameLength = 0.02f, frameInterval = 0.01f;
-            Window window = new HammingWindow();
             var dtw = new DynamicTimeWarping(0);
             var frameMaker = new FrameMaker(frameLength, frameInterval);
             var extractor = new SpeechFeatureExtractor(window, filterBanks, coeffs);
@@ -214,7 +281,7 @@ namespace AlgorithmTests
                     }
                 }
             }
-            SaveTotalResult(speechFilePath, countSuccess, countTotal);
+            return SaveTotalResult(speechFilePath, countSuccess, countTotal);
         }
         private bool SaveSpeechResult(string result, SpeechFeatureExtractor extractor, FrameMaker frameMaker, string className,
             string word, bool firstRun, int fileId, string dataset, string comment)
@@ -234,18 +301,19 @@ namespace AlgorithmTests
                     resultFile.WriteLine("\t {0} : {1}", nameof(frameMaker.FrameInterval), frameMaker.FrameInterval);
                     resultFile.WriteLine("Comment: " + comment);
                 }
-                resultFile.WriteLine("Input file: {0}, input class: {1}, result class: {2}, {3}", className + fileId, className, result,
-                    result == className ? "SUCCESS" : "FAILURE");
+                //resultFile.WriteLine("Input file: {0}, input class: {1}, result class: {2}, {3}", className + fileId, className, result,
+                //    result == className ? "SUCCESS" : "FAILURE");
             }
             return result == className;
         }
 
-        private void SaveTotalResult(string resultPath, int success, int total)
+        private double SaveTotalResult(string resultPath, int success, int total)
         {
             using (var resultFile = new StreamWriter(resultPath, true))
             {
                 double percent = success / (double)total * 100;
                 resultFile.WriteLine("RESULT: {0}/{1} ({2})", success, total, percent.ToString("F2"));
+                return percent;
             }
         }
         private void TrainDtw(DynamicTimeWarping dtw, string word, int trainFilesPerPerson, SpeechFeatureExtractor extractor, 
