@@ -1,8 +1,8 @@
 capturing picture
-./ffmpeg -f dshow -i video="Logitech HD Webcam C270" -qscale:v 0 -vframes 1 -s 640x480 -y "C:\Users\aleks\Desktop\ffmpeg\bin\fotka2.bmp"
+./ffmpeg -f dshow -i video="Logitech HD Webcam C270" -qscale:v 0 -vframes 1 -s 640x480 -y "output.bmp"
 
 capture audio
-./ffmpeg -f dshow -i audio="Internal Mic (IDT High Definition Audio CODEC)" -ac 1 -ar 44100 -t 10 "C:\output.wav"
+./ffmpeg -f dshow -i audio="Microphone (HD Webcam C270)" -flags bitexact -ac 1 -ar 44100 -t 3 "output.wav"
 
 show devices
 ffmpeg -list_devices true -f dshow -i dummy

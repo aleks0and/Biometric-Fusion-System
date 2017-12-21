@@ -70,7 +70,7 @@ namespace Gui.ViewModel
                 string filename = ofd.FileName;
                 if (!string.IsNullOrEmpty(filename))
                 {
-                    Person.LoadImage(filename);
+                    Person.LoadImage(filename, Options.AcquisitionMethod);
                 }
             }
         }
@@ -89,7 +89,7 @@ namespace Gui.ViewModel
                 string filename = ofd.InitialDirectory + ofd.FileName;
                 if (!string.IsNullOrEmpty(filename))
                 {
-                    Person.LoadWavFile(filename);
+                    Person.LoadWavFile(filename, Options.AcquisitionMethod);
                 }
             }
 
@@ -100,13 +100,13 @@ namespace Gui.ViewModel
         { 
             _ffmpeg.EndEvent();
             MessageBox.Show("Photo acquired");
-            Person.LoadImage(@"output.bmp");
+            Person.LoadImage(@"output.bmp", Options.AcquisitionMethod);
         }
         private void AcquireRecordingHandler(object parameter, EventArgs e)
         {
             _ffmpeg.EndEvent();
             MessageBox.Show("Recording acquired");
-            Person.LoadWavFile(@"output.wav");
+            Person.LoadWavFile(@"output.wav", Options.AcquisitionMethod);
         }
 
         private void Identify(object parameter)
