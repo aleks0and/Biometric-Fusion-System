@@ -1,0 +1,530 @@
+Date: Wednesday, December 20, 2017 17:55
+Used word: algorithm, dataset: data
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 11
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 34/48 (70.83)
+
+Date: Wednesday, December 20, 2017 17:55
+Used word: close, dataset: data
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 11
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 38/48 (79.17)
+
+Date: Wednesday, December 20, 2017 17:55
+Used word: algorithm, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 11
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 31/42 (73.81)
+
+Date: Wednesday, December 20, 2017 17:55
+Used word: close, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 11
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 38/42 (90.48)
+
+
+ Average: 78.5725
+
+
+
+Date: Thursday, December 21, 2017 4:49
+Used word: algorithm, dataset: data
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 17
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.04
+	 FrameInterval : 0.02
+Comment: 
+RESULT: 33/48 (68.75)
+
+Date: Thursday, December 21, 2017 4:49
+Used word: close, dataset: data
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 17
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.04
+	 FrameInterval : 0.02
+Comment: 
+RESULT: 38/48 (79.17)
+
+Date: Thursday, December 21, 2017 4:50
+Used word: algorithm, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 17
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.04
+	 FrameInterval : 0.02
+Comment: 
+RESULT: 32/42 (76.19)
+
+Date: Thursday, December 21, 2017 4:50
+Used word: close, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 17
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.04
+	 FrameInterval : 0.02
+Comment: 
+RESULT: 37/42 (88.10)
+
+
+ Average: 78.0525
+
+
+
+Date: Wednesday, December 20, 2017 5:34
+Used word: algorithm, dataset: data
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Comment: 
+RESULT: 35/48 (72.92)
+
+Date: Wednesday, December 20, 2017 5:34
+Used word: close, dataset: data
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Comment: 
+RESULT: 37/48 (77.08)
+
+Date: Wednesday, December 20, 2017 5:34
+Used word: algorithm, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Comment: 
+RESULT: 32/42 (76.19)
+
+Date: Wednesday, December 20, 2017 5:34
+Used word: close, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Comment: 
+RESULT: 36/42 (85.71)
+
+
+ Average: 77.975
+
+
+
+Date: Wednesday, December 20, 2017 19:48
+Used word: algorithm, dataset: data
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 33/48 (68.75)
+
+Date: Wednesday, December 20, 2017 19:48
+Used word: close, dataset: data
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 40/48 (83.33)
+
+Date: Wednesday, December 20, 2017 19:48
+Used word: algorithm, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 30/42 (71.43)
+
+Date: Wednesday, December 20, 2017 19:48
+Used word: close, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 37/42 (88.10)
+
+
+ Average: 77.9025
+
+
+
+Date: Wednesday, December 20, 2017 8:27
+Used word: algorithm, dataset: data
+Extractor params: 
+	 FilterBanksCount : 30
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Comment: 
+RESULT: 33/48 (68.75)
+
+Date: Wednesday, December 20, 2017 8:27
+Used word: close, dataset: data
+Extractor params: 
+	 FilterBanksCount : 30
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Comment: 
+RESULT: 37/48 (77.08)
+
+Date: Wednesday, December 20, 2017 8:27
+Used word: algorithm, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 30
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Comment: 
+RESULT: 32/42 (76.19)
+
+Date: Wednesday, December 20, 2017 8:27
+Used word: close, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 30
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Comment: 
+RESULT: 37/42 (88.10)
+
+
+ Average: 77.53
+
+
+
+Date: Wednesday, December 20, 2017 3:03
+Used word: algorithm, dataset: data
+Extractor params: 
+	 FilterBanksCount : 20
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Comment: 
+RESULT: 33/48 (68.75)
+
+Date: Wednesday, December 20, 2017 3:03
+Used word: close, dataset: data
+Extractor params: 
+	 FilterBanksCount : 20
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Comment: 
+RESULT: 38/48 (79.17)
+
+Date: Wednesday, December 20, 2017 3:03
+Used word: algorithm, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 20
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Comment: 
+RESULT: 31/42 (73.81)
+
+Date: Wednesday, December 20, 2017 3:04
+Used word: close, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 20
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Comment: 
+RESULT: 37/42 (88.10)
+
+
+ Average: 77.4575
+
+
+
+Date: Wednesday, December 20, 2017 17:53
+Used word: algorithm, dataset: data
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 33/48 (68.75)
+
+Date: Wednesday, December 20, 2017 17:53
+Used word: close, dataset: data
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 38/48 (79.17)
+
+Date: Wednesday, December 20, 2017 17:53
+Used word: algorithm, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 31/42 (73.81)
+
+Date: Wednesday, December 20, 2017 17:53
+Used word: close, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 10
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 37/42 (88.10)
+
+
+ Average: 77.4575
+
+
+
+Date: Wednesday, December 20, 2017 13:39
+Used word: algorithm, dataset: data
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 12
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.025
+	 FrameInterval : 0.0125
+Comment: 
+RESULT: 32/48 (66.67)
+
+Date: Wednesday, December 20, 2017 13:39
+Used word: close, dataset: data
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 12
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.025
+	 FrameInterval : 0.0125
+Comment: 
+RESULT: 38/48 (79.17)
+
+Date: Wednesday, December 20, 2017 13:40
+Used word: algorithm, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 12
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.025
+	 FrameInterval : 0.0125
+Comment: 
+RESULT: 31/42 (73.81)
+
+Date: Wednesday, December 20, 2017 13:40
+Used word: close, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 12
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.025
+	 FrameInterval : 0.0125
+Comment: 
+RESULT: 37/42 (88.10)
+
+
+ Average: 76.9375
+
+
+
+Date: Wednesday, December 20, 2017 5:46
+Used word: algorithm, dataset: data
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 15
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Comment: 
+RESULT: 33/48 (68.75)
+
+Date: Wednesday, December 20, 2017 5:46
+Used word: close, dataset: data
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 15
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Comment: 
+RESULT: 38/48 (79.17)
+
+Date: Wednesday, December 20, 2017 5:47
+Used word: algorithm, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 15
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Comment: 
+RESULT: 30/42 (71.43)
+
+Date: Wednesday, December 20, 2017 5:47
+Used word: close, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 26
+	 CoeffsLeft : 15
+	 WindowFunction : SpeechRecognition.GaussWindow
+FrameMaker params: 
+	 FrameLength : 0.02
+	 FrameInterval : 0.01
+Comment: 
+RESULT: 37/42 (88.10)
+
+
+ Average: 76.8625
+
+
+
+Date: Wednesday, December 20, 2017 17:58
+Used word: algorithm, dataset: data
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 13
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 33/48 (68.75)
+
+Date: Wednesday, December 20, 2017 17:58
+Used word: close, dataset: data
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 13
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 38/48 (79.17)
+
+Date: Wednesday, December 20, 2017 17:59
+Used word: algorithm, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 13
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 30/42 (71.43)
+
+Date: Wednesday, December 20, 2017 17:59
+Used word: close, dataset: dataDecember
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 13
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 37/42 (88.10)
+
+
+ Average: 76.8625
+
+
+
