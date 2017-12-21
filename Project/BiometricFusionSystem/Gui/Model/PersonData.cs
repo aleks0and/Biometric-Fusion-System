@@ -17,6 +17,8 @@ namespace Gui.Model
 {
     public class PersonData : BindableBase
     {
+        private string _firstName;
+        private string _lastName;
         private BitmapImage _image;
         private uint _sampleRate;
         private List<short> _samples;
@@ -26,6 +28,16 @@ namespace Gui.Model
         private string _recordingPath;
         private Uri _recordingUri;
 
+        public string FirstName
+        {
+            get { return _firstName; }
+            set { _firstName = value; Notify(); }
+        }
+        public string LastName
+        {
+            get { return _lastName; }
+            set { _lastName = value; Notify(); }
+        }
         public BitmapImage Image
         {
             get { return _image; }
@@ -65,6 +77,7 @@ namespace Gui.Model
             get { return _recordingUri; }
             set { _recordingUri = value; Notify(); }
         }
+        
         public void LoadImage(string path)
         {
             Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background,
