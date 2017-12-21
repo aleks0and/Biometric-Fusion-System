@@ -16,7 +16,7 @@ namespace AlgorithmTests
     [TestClass]
     public class FaceParametersGenerationTest
     {
-        private string _sampleDirectory = @"C:\Users\Martyna\Desktop\";
+        private string _sampleDirectory = @"C:\Users\Kornel\Desktop\";
         private string faceFilePath = @"..\..\..\..\..\Documentation\faceResult.txt";
 
         [TestMethod]
@@ -47,7 +47,18 @@ namespace AlgorithmTests
                         {
                             double[] lambdaArray = new double[] { lambdaFirst, lambda };
 
-                            FaceTestToFile(datasets[1], directory, orientations, stdx, stdy, lambdaArray);
+                            double avg = FaceTestToFile(datasets[1], directory, orientations, stdx, stdy, lambdaArray);
+                            if(avg > bestAverage)
+                            {
+                                result = new Result()
+                                {
+                                    ResStdX = stdx,
+                                    ResStdY = stdy,
+                                    ResOrientations = orientations,
+                                    ResLambda = new double[] { lambdaArray[0], lambdaArray[1] }
+                                };
+                                bestAverage = avg;
+                            }
                         }
                     }
                 }
@@ -60,10 +71,6 @@ namespace AlgorithmTests
                 writer.WriteLine("stdx: " + result.ResStdX);
                 writer.WriteLine("stdy: " + result.ResStdY);
                 writer.WriteLine("Average: " + bestAverage.ToString("F2"));
-                for (int i = 0; i < result.Averages.Count; i++)
-                {
-                    writer.WriteLine("Average #{0}: {1}", i + 1, result.Averages[i].ToString("F2"));
-                }
             }
         }
 
@@ -125,8 +132,8 @@ namespace AlgorithmTests
                     resultFile.WriteLine("\t {0} : {1}", nameof(extractor.StdY), extractor.StdY);
                     resultFile.WriteLine("Comment: " + comment);
                 }
-                resultFile.WriteLine("Input file: {0}, input class: {1}, result class: {2}, {3}", className + fileId, className, result,
-                    result == className ? "SUCCESS" : "FAILURE");
+                //resultFile.WriteLine("Input file: {0}, input class: {1}, result class: {2}, {3}", className + fileId, className, result,
+                //    result == className ? "SUCCESS" : "FAILURE");
             }
             return result == className;
         }
@@ -163,7 +170,9 @@ namespace AlgorithmTests
         private List<double> ExtractFeaturesFace(string path, FaceFeatureExtractor extractor)
         {
             var file = new Bitmap(path);
-            return extractor.GetFeatureVector(file);
+            var vector = extractor.GetFeatureVector(file);
+            file.Dispose();
+            return vector;
         }
 
         private string[] GetDirs(string dataset)
@@ -179,7 +188,6 @@ namespace AlgorithmTests
             public int ResOrientations { get; set; }
             public double ResStdX { get; set; }
             public double ResStdY { get; set; }
-            public List<double> Averages { get; set; }
         }
     }
 }

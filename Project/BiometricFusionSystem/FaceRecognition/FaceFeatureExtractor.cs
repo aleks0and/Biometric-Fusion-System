@@ -88,10 +88,16 @@ namespace FaceRecognition
             
             GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, Math.PI / 2, _orientations, 3);
             List<Bitmap> gfBitmap = gf.ApplyFilter(bmp);
+            bmp.Dispose();
             bmp = CombineBitmaps(gfBitmap);
             GaborFilterMagnitudes gfm = new GaborFilterMagnitudes(bmp);
             List<double> magnitudesFeatures = gfm.CalculateFeatureVector();
             histogramFeatures.Add(magnitudesFeatures);
+            foreach(var b in gfBitmap)
+            {
+                b.Dispose();
+            }
+            bmp.Dispose();
             return histogramFeatures.SelectMany(n => n).ToList();
         }
         /// <summary>
