@@ -27,12 +27,32 @@ namespace AlgorithmTests
             double[] lambdamin = new double[] { };
             double[] lambdamax = new double[] { };
             int orientationMin = 4;
-            int orientationMax = 8;
-            double stdxMin = 0;
-            double stdxMax = 10;
+            int orientationMax = 11;
+            double stdxMin = 1;
+            double stdxMax = 8;
+            double stdyMin = 1;
+            double stdyMax = 8;
+            double lambdaMin = 1;
+            double lambdaMax = 8;
+            double lambdaFirst = 20;
             double bestAverage = 0;
             Result result = new Result();
+            for (int orientations = orientationMin; orientations < orientationMax; orientations++)
+            {
+                for(double stdx = stdxMin; stdx < stdxMax; stdx += 0.5)
+                {
+                    for (double stdy = stdyMin; stdy < stdyMax; stdy += 0.5)
+                    {
+                        for(double lambda = lambdaMin; lambda < lambdaMax; lambda++)
+                        {
+                            double[] lambdaArray = new double[] { lambdaFirst, lambda };
 
+                            FaceTestToFile(datasets[1], directory, orientations, stdx, stdy, lambdaArray);
+                        }
+                    }
+                }
+
+            }
             using (var writer = new StreamWriter(@"..\..\..\..\..\Documentation\bestFaceResult.txt"))
             {
                 writer.WriteLine("Lambda: " + result.ResLambda);
