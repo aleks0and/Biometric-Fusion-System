@@ -77,21 +77,27 @@ namespace Gui.Model
             get { return _recordingUri; }
             set { _recordingUri = value; Notify(); }
         }
-        
-        public void LoadImage(string path)
+        public void LoadImage(string path, AcquisitionMethod acquisitionMethod)
         {
             Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background,
                 new Action(() =>
                 {
-                    //path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\" + path;
+                    if(acquisitionMethod == AcquisitionMethod.FromCamera)
+                    { 
+                        path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\" + path;
+                    }
                     Image = new BitmapImage(new Uri(path));
                     ImagePath = "Path: " + path;
                     ImageSize = "Image width: " + (int)Image.Width + ", height: " + (int)Image.Height;
                 }));
         }
 
-        public void LoadWavFile(string path)
+        public void LoadWavFile(string path, AcquisitionMethod acquisitionMethod)
         {
+            if (acquisitionMethod == AcquisitionMethod.FromCamera)
+            {
+                path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\" + path;
+            }
             //var wavFile = WavReader.Read(@"bin\" + path);
             var wavFile = WavReader.Read(path);
             _sampleRate = wavFile.Header.sampleRate;
