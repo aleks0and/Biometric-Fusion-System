@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,8 +29,10 @@ namespace Common
         public DbConnection ()
         {
             _sqlConnection = new SqlConnection();
-            //external DBConnectionString = @"Data Source=DESKTOP-BDCV57Q\SQLEXPRESS;Initial Catalog=BiometricDB;Integrated Security=True";
-            ConnectionString = "Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = \"C:\\Users\\aleks\\Desktop\\Engineering Thesis\\Project\\BiometricFusionSystem\\Common\\biometricDB.mdf\"; Integrated Security = True;";
+            var path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            var databaseName = "biometricDB.mdf";
+            path = "\"" + path + "\\" + databaseName + "\"";
+            ConnectionString = "Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + path + "; Integrated Security = True;";
             _sqlConnection.ConnectionString = ConnectionString;
             _sqlConnection.FireInfoMessageEventOnUserErrors = false;
         }

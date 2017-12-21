@@ -16,6 +16,7 @@ namespace Gui.ViewModel
 {
     public class MainViewModel : BindableBase
     {
+        private Verification _verification;
         private Identification _identification;
         private Ffmpeg _ffmpeg;
         public ICommand OpenOptionsCommand { get; set; }
@@ -43,9 +44,10 @@ namespace Gui.ViewModel
         public MainViewModel(DbConnection dbConnection)
         {
             _ffmpeg = new Ffmpeg();
+            _verification = new Verification(dbConnection, 200000, 200000);
             _identification = new Identification(dbConnection);
             OpenOptionsCommand = new RelayCommand(OpenOptions, canExecute => true);
-            OpenVerificationCommand = new RelayCommand(OpenVerification, canExecute => true);
+            OpenVerificationCommand = new RelayCommand(OpenVerification, p => Person.Image != null && Person.Samples != null);
             AcquirePhotoCommand = new RelayCommand(AcquirePhoto, _ffmpeg.IsBusy);
             AcquireRecordingCommand = new RelayCommand(AcquireRecording, _ffmpeg.IsBusy);
             IdentifyCommand = new RelayCommand(Identify, p => Person.Image != null && Person.Samples != null);
@@ -70,7 +72,7 @@ namespace Gui.ViewModel
                 string filename = ofd.FileName;
                 if (!string.IsNullOrEmpty(filename))
                 {
-                    Person.LoadImage(filename);
+                    Person.LoadImage(filename, Options.AcquisitionMethod);
                 }
             }
         }
@@ -89,7 +91,7 @@ namespace Gui.ViewModel
                 string filename = ofd.InitialDirectory + ofd.FileName;
                 if (!string.IsNullOrEmpty(filename))
                 {
-                    Person.LoadWavFile(filename);
+                    Person.LoadWavFile(filename, Options.AcquisitionMethod);
                 }
             }
 
@@ -100,18 +102,17 @@ namespace Gui.ViewModel
         { 
             _ffmpeg.EndEvent();
             MessageBox.Show("Photo acquired");
-            Person.LoadImage(@"output.bmp");
+            Person.LoadImage(@"output.bmp", Options.AcquisitionMethod);
         }
         private void AcquireRecordingHandler(object parameter, EventArgs e)
         {
             _ffmpeg.EndEvent();
             MessageBox.Show("Recording acquired");
-            Person.LoadWavFile(@"output.wav");
+            Person.LoadWavFile(@"output.wav", Options.AcquisitionMethod);
         }
 
         private void Identify(object parameter)
         {
-
             var result = _identification.Identify(Person, Options.IdentificationMethod);
             MessageBox.Show(string.Format("Face result: {0}\nSpeech result: {1}", result.Item1, result.Item2),
                 "Results", MessageBoxButton.OK);
@@ -124,6 +125,9 @@ namespace Gui.ViewModel
         private void OpenVerification(object parameter)
         {
             WindowService.OpenVerification(this);
+            var result = _verification.Verify(Person, Options.VerificationMethod);
+            MessageBox.Show(string.Format("Face result: {0}\nSpeech result: {1}", result.Item1, result.Item2),
+                "Results", MessageBoxButton.OK);
         }
     }
 }

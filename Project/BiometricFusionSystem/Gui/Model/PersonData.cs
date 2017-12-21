@@ -17,6 +17,8 @@ namespace Gui.Model
 {
     public class PersonData : BindableBase
     {
+        private string _firstName;
+        private string _lastName;
         private BitmapImage _image;
         private uint _sampleRate;
         private List<short> _samples;
@@ -26,6 +28,16 @@ namespace Gui.Model
         private string _recordingPath;
         private Uri _recordingUri;
 
+        public string FirstName
+        {
+            get { return _firstName; }
+            set { _firstName = value; Notify(); }
+        }
+        public string LastName
+        {
+            get { return _lastName; }
+            set { _lastName = value; Notify(); }
+        }
         public BitmapImage Image
         {
             get { return _image; }
@@ -65,20 +77,27 @@ namespace Gui.Model
             get { return _recordingUri; }
             set { _recordingUri = value; Notify(); }
         }
-        public void LoadImage(string path)
+        public void LoadImage(string path, AcquisitionMethod acquisitionMethod)
         {
             Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background,
                 new Action(() =>
                 {
-                    //path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\" + path;
+                    if(acquisitionMethod == AcquisitionMethod.FromCamera)
+                    { 
+                        path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\" + path;
+                    }
                     Image = new BitmapImage(new Uri(path));
                     ImagePath = "Path: " + path;
                     ImageSize = "Image width: " + (int)Image.Width + ", height: " + (int)Image.Height;
                 }));
         }
 
-        public void LoadWavFile(string path)
+        public void LoadWavFile(string path, AcquisitionMethod acquisitionMethod)
         {
+            if (acquisitionMethod == AcquisitionMethod.FromCamera)
+            {
+                path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\" + path;
+            }
             //var wavFile = WavReader.Read(@"bin\" + path);
             var wavFile = WavReader.Read(path);
             _sampleRate = wavFile.Header.sampleRate;

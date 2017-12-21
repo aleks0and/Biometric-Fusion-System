@@ -64,6 +64,7 @@
     <Compile Include="Model\Identification.cs" />
     <Compile Include="Model\Options.cs" />
     <Compile Include="Model\PersonData.cs" />
+    <Compile Include="Model\Verification.cs" />
     <Compile Include="Model\WindowService.cs" />
     <Compile Include="RestoreDbWindow.xaml.cs">
       <DependentUpon>RestoreDbWindow.xaml</DependentUpon>

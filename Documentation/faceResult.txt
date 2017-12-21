@@ -1,0 +1,408 @@
+Date: 20 December 2017 7:13 PM
+Used dataset: dataDecember
+Extractor params: 
+	 Lambda : 10 , 5
+	 Orientations : 4
+	 StdX : 2
+	 StdY : 1
+Comment: 
+Input file: AB15, input class: AB1, result class: JK, FAILURE
+Input file: AB16, input class: AB1, result class: JK, FAILURE
+Input file: AH5, input class: AH, result class: AH, SUCCESS
+Input file: AH6, input class: AH, result class: AH, SUCCESS
+Input file: AK15, input class: AK1, result class: AK1, SUCCESS
+Input file: AK16, input class: AK1, result class: AK1, SUCCESS
+Input file: AZ5, input class: AZ, result class: AZ, SUCCESS
+Input file: AZ6, input class: AZ, result class: AZ, SUCCESS
+Input file: BM5, input class: BM, result class: CW, FAILURE
+Input file: BM6, input class: BM, result class: AK1, FAILURE
+Input file: CW5, input class: CW, result class: AK1, FAILURE
+Input file: CW6, input class: CW, result class: MC, FAILURE
+Input file: JK5, input class: JK, result class: JK, SUCCESS
+Input file: JK6, input class: JK, result class: JK, SUCCESS
+Input file: JK15, input class: JK1, result class: PB, FAILURE
+Input file: JK16, input class: JK1, result class: PH, FAILURE
+Input file: KL5, input class: KL, result class: KL, SUCCESS
+Input file: KL6, input class: KL, result class: KL, SUCCESS
+Input file: KR5, input class: KR, result class: SP, FAILURE
+Input file: KR6, input class: KR, result class: KR, SUCCESS
+Input file: LO5, input class: LO, result class: BM, FAILURE
+Input file: LO6, input class: LO, result class: LO, SUCCESS
+Input file: MC5, input class: MC, result class: OZ, FAILURE
+Input file: MC6, input class: MC, result class: AK1, FAILURE
+Input file: ML5, input class: ML, result class: ML, SUCCESS
+Input file: ML6, input class: ML, result class: ML, SUCCESS
+Input file: MO5, input class: MO, result class: SP, FAILURE
+Input file: MO6, input class: MO, result class: LO, FAILURE
+Input file: MZ5, input class: MZ, result class: MZ, SUCCESS
+Input file: MZ6, input class: MZ, result class: MZ, SUCCESS
+Input file: OZ5, input class: OZ, result class: SP, FAILURE
+Input file: OZ6, input class: OZ, result class: SP, FAILURE
+Input file: PB5, input class: PB, result class: PB, SUCCESS
+Input file: PB6, input class: PB, result class: PB, SUCCESS
+Input file: PH5, input class: PH, result class: RB, FAILURE
+Input file: PH6, input class: PH, result class: RB, FAILURE
+Input file: RB5, input class: RB, result class: RB, SUCCESS
+Input file: RB6, input class: RB, result class: KL, FAILURE
+Input file: SP5, input class: SP, result class: SP, SUCCESS
+Input file: SP6, input class: SP, result class: SP, SUCCESS
+Input file: ZR5, input class: ZR, result class: AH, FAILURE
+Input file: ZR6, input class: ZR, result class: RB, FAILURE
+RESULT: 21/42 (50.00)
+Date: 20 December 2017 7:33 PM
+Used dataset: dataDecember
+Extractor params: 
+	 Lambda : 10 , 5
+	 Orientations : 6
+	 StdX : 1
+	 StdY : 1
+Comment: 
+Input file: AB15, input class: AB1, result class: JK, FAILURE
+Input file: AB16, input class: AB1, result class: JK, FAILURE
+Input file: AH5, input class: AH, result class: AH, SUCCESS
+Input file: AH6, input class: AH, result class: AH, SUCCESS
+Input file: AK15, input class: AK1, result class: OZ, FAILURE
+Input file: AK16, input class: AK1, result class: AK1, SUCCESS
+Input file: AZ5, input class: AZ, result class: AZ, SUCCESS
+Input file: AZ6, input class: AZ, result class: AZ, SUCCESS
+Input file: BM5, input class: BM, result class: CW, FAILURE
+Input file: BM6, input class: BM, result class: AK1, FAILURE
+Input file: CW5, input class: CW, result class: AK1, FAILURE
+Input file: CW6, input class: CW, result class: MC, FAILURE
+Input file: JK5, input class: JK, result class: AH, FAILURE
+Input file: JK6, input class: JK, result class: AH, FAILURE
+Input file: JK15, input class: JK1, result class: PB, FAILURE
+Input file: JK16, input class: JK1, result class: PH, FAILURE
+Input file: KL5, input class: KL, result class: KL, SUCCESS
+Input file: KL6, input class: KL, result class: KL, SUCCESS
+Input file: KR5, input class: KR, result class: SP, FAILURE
+Input file: KR6, input class: KR, result class: KR, SUCCESS
+Input file: LO5, input class: LO, result class: BM, FAILURE
+Input file: LO6, input class: LO, result class: LO, SUCCESS
+Input file: MC5, input class: MC, result class: OZ, FAILURE
+Input file: MC6, input class: MC, result class: AK1, FAILURE
+Input file: ML5, input class: ML, result class: ML, SUCCESS
+Input file: ML6, input class: ML, result class: ML, SUCCESS
+Input file: MO5, input class: MO, result class: SP, FAILURE
+Input file: MO6, input class: MO, result class: LO, FAILURE
+Input file: MZ5, input class: MZ, result class: MZ, SUCCESS
+Input file: MZ6, input class: MZ, result class: MZ, SUCCESS
+Input file: OZ5, input class: OZ, result class: SP, FAILURE
+Input file: OZ6, input class: OZ, result class: SP, FAILURE
+Input file: PB5, input class: PB, result class: PB, SUCCESS
+Input file: PB6, input class: PB, result class: PB, SUCCESS
+Input file: PH5, input class: PH, result class: RB, FAILURE
+Input file: PH6, input class: PH, result class: RB, FAILURE
+Input file: RB5, input class: RB, result class: RB, SUCCESS
+Input file: RB6, input class: RB, result class: KL, FAILURE
+Input file: SP5, input class: SP, result class: SP, SUCCESS
+Input file: SP6, input class: SP, result class: SP, SUCCESS
+Input file: ZR5, input class: ZR, result class: AH, FAILURE
+Input file: ZR6, input class: ZR, result class: RB, FAILURE
+RESULT: 18/42 (42.86)
+Date: 20 December 2017 7:44 PM
+Used dataset: dataDecember
+Extractor params: 
+	 Lambda : 10 , 5
+	 Orientations : 6
+	 StdX : 3
+	 StdY : 2
+Comment: 
+Input file: AB15, input class: AB1, result class: JK, FAILURE
+Input file: AB16, input class: AB1, result class: AB1, SUCCESS
+Input file: AH5, input class: AH, result class: AH, SUCCESS
+Input file: AH6, input class: AH, result class: AH, SUCCESS
+Input file: AK15, input class: AK1, result class: AK1, SUCCESS
+Input file: AK16, input class: AK1, result class: AK1, SUCCESS
+Input file: AZ5, input class: AZ, result class: AZ, SUCCESS
+Input file: AZ6, input class: AZ, result class: AZ, SUCCESS
+Input file: BM5, input class: BM, result class: OZ, FAILURE
+Input file: BM6, input class: BM, result class: AK1, FAILURE
+Input file: CW5, input class: CW, result class: MC, FAILURE
+Input file: CW6, input class: CW, result class: MC, FAILURE
+Input file: JK5, input class: JK, result class: JK, SUCCESS
+Input file: JK6, input class: JK, result class: JK, SUCCESS
+Input file: JK15, input class: JK1, result class: PB, FAILURE
+Input file: JK16, input class: JK1, result class: PH, FAILURE
+Input file: KL5, input class: KL, result class: KL, SUCCESS
+Input file: KL6, input class: KL, result class: KL, SUCCESS
+Input file: KR5, input class: KR, result class: SP, FAILURE
+Input file: KR6, input class: KR, result class: KR, SUCCESS
+Input file: LO5, input class: LO, result class: BM, FAILURE
+Input file: LO6, input class: LO, result class: LO, SUCCESS
+Input file: MC5, input class: MC, result class: OZ, FAILURE
+Input file: MC6, input class: MC, result class: MC, SUCCESS
+Input file: ML5, input class: ML, result class: ML, SUCCESS
+Input file: ML6, input class: ML, result class: ML, SUCCESS
+Input file: MO5, input class: MO, result class: SP, FAILURE
+Input file: MO6, input class: MO, result class: LO, FAILURE
+Input file: MZ5, input class: MZ, result class: MZ, SUCCESS
+Input file: MZ6, input class: MZ, result class: MZ, SUCCESS
+Input file: OZ5, input class: OZ, result class: SP, FAILURE
+Input file: OZ6, input class: OZ, result class: SP, FAILURE
+Input file: PB5, input class: PB, result class: PB, SUCCESS
+Input file: PB6, input class: PB, result class: PB, SUCCESS
+Input file: PH5, input class: PH, result class: RB, FAILURE
+Input file: PH6, input class: PH, result class: PH, SUCCESS
+Input file: RB5, input class: RB, result class: RB, SUCCESS
+Input file: RB6, input class: RB, result class: RB, SUCCESS
+Input file: SP5, input class: SP, result class: SP, SUCCESS
+Input file: SP6, input class: SP, result class: SP, SUCCESS
+Input file: ZR5, input class: ZR, result class: AH, FAILURE
+Input file: ZR6, input class: ZR, result class: KL, FAILURE
+RESULT: 25/42 (59.52)
+Date: 20 December 2017 7:54 PM
+Used dataset: dataDecember
+Extractor params: 
+	 Lambda : 10 , 5
+	 Orientations : 6
+	 StdX : 4
+	 StdY : 3
+Comment: 
+Input file: AB15, input class: AB1, result class: JK, FAILURE
+Input file: AB16, input class: AB1, result class: AB1, SUCCESS
+Input file: AH5, input class: AH, result class: AH, SUCCESS
+Input file: AH6, input class: AH, result class: AH, SUCCESS
+Input file: AK15, input class: AK1, result class: AK1, SUCCESS
+Input file: AK16, input class: AK1, result class: AK1, SUCCESS
+Input file: AZ5, input class: AZ, result class: AZ, SUCCESS
+Input file: AZ6, input class: AZ, result class: AZ, SUCCESS
+Input file: BM5, input class: BM, result class: OZ, FAILURE
+Input file: BM6, input class: BM, result class: AK1, FAILURE
+Input file: CW5, input class: CW, result class: MC, FAILURE
+Input file: CW6, input class: CW, result class: MC, FAILURE
+Input file: JK5, input class: JK, result class: JK, SUCCESS
+Input file: JK6, input class: JK, result class: JK, SUCCESS
+Input file: JK15, input class: JK1, result class: PB, FAILURE
+Input file: JK16, input class: JK1, result class: PB, FAILURE
+Input file: KL5, input class: KL, result class: KL, SUCCESS
+Input file: KL6, input class: KL, result class: KL, SUCCESS
+Input file: KR5, input class: KR, result class: SP, FAILURE
+Input file: KR6, input class: KR, result class: KR, SUCCESS
+Input file: LO5, input class: LO, result class: BM, FAILURE
+Input file: LO6, input class: LO, result class: LO, SUCCESS
+Input file: MC5, input class: MC, result class: MO, FAILURE
+Input file: MC6, input class: MC, result class: MC, SUCCESS
+Input file: ML5, input class: ML, result class: ML, SUCCESS
+Input file: ML6, input class: ML, result class: ML, SUCCESS
+Input file: MO5, input class: MO, result class: SP, FAILURE
+Input file: MO6, input class: MO, result class: LO, FAILURE
+Input file: MZ5, input class: MZ, result class: MZ, SUCCESS
+Input file: MZ6, input class: MZ, result class: MZ, SUCCESS
+Input file: OZ5, input class: OZ, result class: SP, FAILURE
+Input file: OZ6, input class: OZ, result class: SP, FAILURE
+Input file: PB5, input class: PB, result class: PB, SUCCESS
+Input file: PB6, input class: PB, result class: PB, SUCCESS
+Input file: PH5, input class: PH, result class: RB, FAILURE
+Input file: PH6, input class: PH, result class: PH, SUCCESS
+Input file: RB5, input class: RB, result class: RB, SUCCESS
+Input file: RB6, input class: RB, result class: RB, SUCCESS
+Input file: SP5, input class: SP, result class: SP, SUCCESS
+Input file: SP6, input class: SP, result class: SP, SUCCESS
+Input file: ZR5, input class: ZR, result class: AH, FAILURE
+Input file: ZR6, input class: ZR, result class: KL, FAILURE
+RESULT: 25/42 (59.52)
+Date: 20 December 2017 8:04 PM
+Used dataset: dataDecember
+Extractor params: 
+	 Lambda : 10 , 5
+	 Orientations : 9
+	 StdX : 4
+	 StdY : 3
+Comment: 
+Input file: AB15, input class: AB1, result class: AB1, SUCCESS
+Input file: AB16, input class: AB1, result class: AB1, SUCCESS
+Input file: AH5, input class: AH, result class: AH, SUCCESS
+Input file: AH6, input class: AH, result class: AH, SUCCESS
+Input file: AK15, input class: AK1, result class: AK1, SUCCESS
+Input file: AK16, input class: AK1, result class: AK1, SUCCESS
+Input file: AZ5, input class: AZ, result class: AZ, SUCCESS
+Input file: AZ6, input class: AZ, result class: AZ, SUCCESS
+Input file: BM5, input class: BM, result class: OZ, FAILURE
+Input file: BM6, input class: BM, result class: AK1, FAILURE
+Input file: CW5, input class: CW, result class: MC, FAILURE
+Input file: CW6, input class: CW, result class: MC, FAILURE
+Input file: JK5, input class: JK, result class: JK, SUCCESS
+Input file: JK6, input class: JK, result class: JK, SUCCESS
+Input file: JK15, input class: JK1, result class: PB, FAILURE
+Input file: JK16, input class: JK1, result class: PB, FAILURE
+Input file: KL5, input class: KL, result class: KL, SUCCESS
+Input file: KL6, input class: KL, result class: KL, SUCCESS
+Input file: KR5, input class: KR, result class: SP, FAILURE
+Input file: KR6, input class: KR, result class: KR, SUCCESS
+Input file: LO5, input class: LO, result class: BM, FAILURE
+Input file: LO6, input class: LO, result class: LO, SUCCESS
+Input file: MC5, input class: MC, result class: OZ, FAILURE
+Input file: MC6, input class: MC, result class: MC, SUCCESS
+Input file: ML5, input class: ML, result class: ML, SUCCESS
+Input file: ML6, input class: ML, result class: ML, SUCCESS
+Input file: MO5, input class: MO, result class: AK1, FAILURE
+Input file: MO6, input class: MO, result class: LO, FAILURE
+Input file: MZ5, input class: MZ, result class: MZ, SUCCESS
+Input file: MZ6, input class: MZ, result class: MZ, SUCCESS
+Input file: OZ5, input class: OZ, result class: SP, FAILURE
+Input file: OZ6, input class: OZ, result class: SP, FAILURE
+Input file: PB5, input class: PB, result class: PB, SUCCESS
+Input file: PB6, input class: PB, result class: PB, SUCCESS
+Input file: PH5, input class: PH, result class: PH, SUCCESS
+Input file: PH6, input class: PH, result class: PH, SUCCESS
+Input file: RB5, input class: RB, result class: RB, SUCCESS
+Input file: RB6, input class: RB, result class: RB, SUCCESS
+Input file: SP5, input class: SP, result class: SP, SUCCESS
+Input file: SP6, input class: SP, result class: SP, SUCCESS
+Input file: ZR5, input class: ZR, result class: AH, FAILURE
+Input file: ZR6, input class: ZR, result class: KL, FAILURE
+RESULT: 27/42 (64.29)
+Date: 20 December 2017 8:22 PM
+Used dataset: dataDecember
+Extractor params: 
+	 Lambda : 10 , 5
+	 Orientations : 11
+	 StdX : 4
+	 StdY : 3
+Comment: 
+Input file: AB15, input class: AB1, result class: AB1, SUCCESS
+Input file: AB16, input class: AB1, result class: AB1, SUCCESS
+Input file: AH5, input class: AH, result class: AH, SUCCESS
+Input file: AH6, input class: AH, result class: AH, SUCCESS
+Input file: AK15, input class: AK1, result class: AK1, SUCCESS
+Input file: AK16, input class: AK1, result class: AK1, SUCCESS
+Input file: AZ5, input class: AZ, result class: AZ, SUCCESS
+Input file: AZ6, input class: AZ, result class: AZ, SUCCESS
+Input file: BM5, input class: BM, result class: OZ, FAILURE
+Input file: BM6, input class: BM, result class: AK1, FAILURE
+Input file: CW5, input class: CW, result class: KR, FAILURE
+Input file: CW6, input class: CW, result class: MC, FAILURE
+Input file: JK5, input class: JK, result class: JK, SUCCESS
+Input file: JK6, input class: JK, result class: JK, SUCCESS
+Input file: JK15, input class: JK1, result class: PB, FAILURE
+Input file: JK16, input class: JK1, result class: PB, FAILURE
+Input file: KL5, input class: KL, result class: KL, SUCCESS
+Input file: KL6, input class: KL, result class: KL, SUCCESS
+Input file: KR5, input class: KR, result class: SP, FAILURE
+Input file: KR6, input class: KR, result class: KR, SUCCESS
+Input file: LO5, input class: LO, result class: BM, FAILURE
+Input file: LO6, input class: LO, result class: LO, SUCCESS
+Input file: MC5, input class: MC, result class: OZ, FAILURE
+Input file: MC6, input class: MC, result class: MC, SUCCESS
+Input file: ML5, input class: ML, result class: ML, SUCCESS
+Input file: ML6, input class: ML, result class: ML, SUCCESS
+Input file: MO5, input class: MO, result class: AK1, FAILURE
+Input file: MO6, input class: MO, result class: LO, FAILURE
+Input file: MZ5, input class: MZ, result class: MZ, SUCCESS
+Input file: MZ6, input class: MZ, result class: MZ, SUCCESS
+Input file: OZ5, input class: OZ, result class: SP, FAILURE
+Input file: OZ6, input class: OZ, result class: SP, FAILURE
+Input file: PB5, input class: PB, result class: PB, SUCCESS
+Input file: PB6, input class: PB, result class: PB, SUCCESS
+Input file: PH5, input class: PH, result class: PH, SUCCESS
+Input file: PH6, input class: PH, result class: PH, SUCCESS
+Input file: RB5, input class: RB, result class: RB, SUCCESS
+Input file: RB6, input class: RB, result class: RB, SUCCESS
+Input file: SP5, input class: SP, result class: SP, SUCCESS
+Input file: SP6, input class: SP, result class: SP, SUCCESS
+Input file: ZR5, input class: ZR, result class: AH, FAILURE
+Input file: ZR6, input class: ZR, result class: KL, FAILURE
+RESULT: 27/42 (64.29)
+Date: 20 December 2017 8:34 PM
+Used dataset: dataDecember
+Extractor params: 
+	 Lambda : 10 , 8
+	 Orientations : 9
+	 StdX : 4
+	 StdY : 3
+Comment: 
+Input file: AB15, input class: AB1, result class: JK, FAILURE
+Input file: AB16, input class: AB1, result class: AB1, SUCCESS
+Input file: AH5, input class: AH, result class: AH, SUCCESS
+Input file: AH6, input class: AH, result class: AH, SUCCESS
+Input file: AK15, input class: AK1, result class: AK1, SUCCESS
+Input file: AK16, input class: AK1, result class: AK1, SUCCESS
+Input file: AZ5, input class: AZ, result class: AZ, SUCCESS
+Input file: AZ6, input class: AZ, result class: AZ, SUCCESS
+Input file: BM5, input class: BM, result class: OZ, FAILURE
+Input file: BM6, input class: BM, result class: AK1, FAILURE
+Input file: CW5, input class: CW, result class: KR, FAILURE
+Input file: CW6, input class: CW, result class: MC, FAILURE
+Input file: JK5, input class: JK, result class: JK, SUCCESS
+Input file: JK6, input class: JK, result class: JK, SUCCESS
+Input file: JK15, input class: JK1, result class: PB, FAILURE
+Input file: JK16, input class: JK1, result class: PH, FAILURE
+Input file: KL5, input class: KL, result class: KL, SUCCESS
+Input file: KL6, input class: KL, result class: KL, SUCCESS
+Input file: KR5, input class: KR, result class: SP, FAILURE
+Input file: KR6, input class: KR, result class: KR, SUCCESS
+Input file: LO5, input class: LO, result class: BM, FAILURE
+Input file: LO6, input class: LO, result class: LO, SUCCESS
+Input file: MC5, input class: MC, result class: OZ, FAILURE
+Input file: MC6, input class: MC, result class: AK1, FAILURE
+Input file: ML5, input class: ML, result class: ML, SUCCESS
+Input file: ML6, input class: ML, result class: ML, SUCCESS
+Input file: MO5, input class: MO, result class: SP, FAILURE
+Input file: MO6, input class: MO, result class: LO, FAILURE
+Input file: MZ5, input class: MZ, result class: MZ, SUCCESS
+Input file: MZ6, input class: MZ, result class: MZ, SUCCESS
+Input file: OZ5, input class: OZ, result class: SP, FAILURE
+Input file: OZ6, input class: OZ, result class: SP, FAILURE
+Input file: PB5, input class: PB, result class: PB, SUCCESS
+Input file: PB6, input class: PB, result class: PB, SUCCESS
+Input file: PH5, input class: PH, result class: RB, FAILURE
+Input file: PH6, input class: PH, result class: PH, SUCCESS
+Input file: RB5, input class: RB, result class: RB, SUCCESS
+Input file: RB6, input class: RB, result class: RB, SUCCESS
+Input file: SP5, input class: SP, result class: SP, SUCCESS
+Input file: SP6, input class: SP, result class: SP, SUCCESS
+Input file: ZR5, input class: ZR, result class: AH, FAILURE
+Input file: ZR6, input class: ZR, result class: KL, FAILURE
+RESULT: 24/42 (57.14)
+Date: 20 December 2017 8:44 PM
+Used dataset: dataDecember
+Extractor params: 
+	 Lambda : 11 , 4
+	 Orientations : 9
+	 StdX : 4
+	 StdY : 3
+Comment: 
+Input file: AB15, input class: AB1, result class: AB1, SUCCESS
+Input file: AB16, input class: AB1, result class: AB1, SUCCESS
+Input file: AH5, input class: AH, result class: AH, SUCCESS
+Input file: AH6, input class: AH, result class: AH, SUCCESS
+Input file: AK15, input class: AK1, result class: AK1, SUCCESS
+Input file: AK16, input class: AK1, result class: AK1, SUCCESS
+Input file: AZ5, input class: AZ, result class: AZ, SUCCESS
+Input file: AZ6, input class: AZ, result class: AZ, SUCCESS
+Input file: BM5, input class: BM, result class: OZ, FAILURE
+Input file: BM6, input class: BM, result class: AK1, FAILURE
+Input file: CW5, input class: CW, result class: MC, FAILURE
+Input file: CW6, input class: CW, result class: MC, FAILURE
+Input file: JK5, input class: JK, result class: JK, SUCCESS
+Input file: JK6, input class: JK, result class: JK, SUCCESS
+Input file: JK15, input class: JK1, result class: PB, FAILURE
+Input file: JK16, input class: JK1, result class: PB, FAILURE
+Input file: KL5, input class: KL, result class: KL, SUCCESS
+Input file: KL6, input class: KL, result class: KL, SUCCESS
+Input file: KR5, input class: KR, result class: SP, FAILURE
+Input file: KR6, input class: KR, result class: KR, SUCCESS
+Input file: LO5, input class: LO, result class: BM, FAILURE
+Input file: LO6, input class: LO, result class: LO, SUCCESS
+Input file: MC5, input class: MC, result class: OZ, FAILURE
+Input file: MC6, input class: MC, result class: MC, SUCCESS
+Input file: ML5, input class: ML, result class: ML, SUCCESS
+Input file: ML6, input class: ML, result class: ML, SUCCESS
+Input file: MO5, input class: MO, result class: AK1, FAILURE
+Input file: MO6, input class: MO, result class: LO, FAILURE
+Input file: MZ5, input class: MZ, result class: MZ, SUCCESS
+Input file: MZ6, input class: MZ, result class: MZ, SUCCESS
+Input file: OZ5, input class: OZ, result class: SP, FAILURE
+Input file: OZ6, input class: OZ, result class: SP, FAILURE
+Input file: PB5, input class: PB, result class: PB, SUCCESS
+Input file: PB6, input class: PB, result class: PB, SUCCESS
+Input file: PH5, input class: PH, result class: PH, SUCCESS
+Input file: PH6, input class: PH, result class: PH, SUCCESS
+Input file: RB5, input class: RB, result class: RB, SUCCESS
+Input file: RB6, input class: RB, result class: RB, SUCCESS
+Input file: SP5, input class: SP, result class: SP, SUCCESS
+Input file: SP6, input class: SP, result class: SP, SUCCESS
+Input file: ZR5, input class: ZR, result class: AH, FAILURE
+Input file: ZR6, input class: ZR, result class: KL, FAILURE
+RESULT: 27/42 (64.29)
