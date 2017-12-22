@@ -27,8 +27,8 @@ namespace Gui.Utility
                 {
                     X1 = renderPos,
                     X2 = renderPos,
-                    Y1 = Math.Abs(samples[i]),
-                    Y2 = 2 * Math.Abs(samples[i])
+                    Y1 = Math.Abs((double)samples[i]),
+                    Y2 = 2 * Math.Abs((double)samples[i])
                 };
                 lines.Add(line);
                 renderPos++;
