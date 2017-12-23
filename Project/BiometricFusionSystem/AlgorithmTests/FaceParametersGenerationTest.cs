@@ -16,8 +16,8 @@ namespace AlgorithmTests
     [TestClass]
     public class FaceParametersGenerationTest
     {
-        private string _sampleDirectory = @"C:\Users\Kornel\Desktop\";
-        private string faceFilePath = @"..\..\..\..\..\Documentation\faceResult.txt";
+        private string _sampleDirectory = @"C:\Users\aleks\Desktop\";
+        private string faceFilePath = @"..\..\..\..\..\Documentation\faceResultOrientations.txt";
 
         [TestMethod]
         public void GenerateGaborFilterParemeters()
@@ -66,10 +66,109 @@ namespace AlgorithmTests
             }
             using (var writer = new StreamWriter(@"..\..\..\..\..\Documentation\bestFaceResult.txt"))
             {
-                writer.WriteLine("Lambda: " + result.ResLambda);
+                writer.WriteLine("Lambda: " + result.ResLambda[0] + " , " + result.ResLambda[1]);
                 writer.WriteLine("Orientation count: " + result.ResOrientations);
                 writer.WriteLine("stdx: " + result.ResStdX);
                 writer.WriteLine("stdy: " + result.ResStdY);
+                writer.WriteLine("Average: " + bestAverage.ToString("F2"));
+            }
+        }
+
+        [TestMethod]
+        public void ExtractBestFaceResult()
+        {
+            List<Result> BestParameters = new List<Result>();
+            List<string> resultContent = new List<string>();
+            double[] Lambda = new double[] { 0, 0 };
+            int orientation = 0;
+            double stdX = 0;
+            double stdY = 0;
+            double average = 0;
+            double currentAverage = 0;
+            bool read = false;
+            foreach (string line in File.ReadLines(@"..\..\..\..\..\Documentation\faceResultExtract.txt"))
+            {
+                resultContent.Add(line);
+                string[] content = line.Split(' ');
+                if (content[0] == "RESULT:")
+                {
+                    currentAverage = Double.Parse(content[2].Substring(1, 2)) + Double.Parse(content[2].Substring(4, 2)) / 100;
+                    if (average <= currentAverage)
+                    {
+                        average = currentAverage;
+                        read = true;
+                    }
+                    else resultContent.Clear();
+                }
+                if (read)
+                {
+                    foreach (string resultValue in resultContent)
+                    {
+                        string[] value = resultValue.Split(' ');
+                        if (value[1] == "Lambda")
+                        {
+                            Lambda = new double[] { Double.Parse(value[3]), Double.Parse(value[5]) };
+                        }
+                        if (value[1] == "Orientations")
+                        {
+                            orientation = Int32.Parse(value[3]);
+                        }
+                        if (value[1] == "StdX")
+                        {
+                            stdX = Double.Parse(value[3]);
+                        }
+                        if (value[1] == "StdY")
+                        {
+                            stdY = Double.Parse(value[3]);
+                        }
+
+                    }
+                    Result res = new Result();
+                    res.ResLambda = Lambda;
+                    res.ResOrientations = orientation;
+                    res.ResStdX = stdX;
+                    res.ResStdY = stdY;
+                    res.ResAverage = currentAverage;
+                    BestParameters.Add(res);
+                    read = false;
+                    resultContent.Clear();
+                }
+            }
+            for (int i = BestParameters.Count - 1; i >= 0; i--)
+            {
+                if (BestParameters[i].ResAverage < average)
+                    BestParameters.RemoveAt(i);
+            }
+            string dataset = "dataDecember";
+            string directory = "faces";
+            double bestAverage = 0;
+            int orientationMin = 5;
+            int orientationMax = 11;
+            Result bestResult = new Result();
+            for (int orientations = orientationMin; orientations < orientationMax; orientations++)
+            {
+                foreach (var localBest in BestParameters)
+                {
+                    double avg = FaceTestToFile(dataset, directory, orientations, localBest.ResStdX, localBest.ResStdY, localBest.ResLambda);
+                    if (avg > bestAverage)
+                    {
+                        bestResult = new Result()
+                        {
+                            ResStdX = localBest.ResStdX,
+                            ResStdY = localBest.ResStdY,
+                            ResOrientations = orientations,
+                            ResLambda = new double[] { localBest.ResLambda[0], localBest.ResLambda[1] }
+                        };
+                        bestAverage = avg;
+                    }
+                }
+            }
+            using (var writer = new StreamWriter(@"..\..\..\..\..\Documentation\bestFaceResult.txt"))
+            {
+                writer.WriteLine("Lambda: " + bestResult.ResLambda[0] + " , " + bestResult.ResLambda[1]);
+                writer.WriteLine("Orientation count: " + bestResult.ResOrientations);
+                writer.WriteLine("stdx: " + bestResult.ResStdX);
+                writer.WriteLine("stdy: " + bestResult.ResStdY);
                 writer.WriteLine("Average: " + bestAverage.ToString("F2"));
             }
         }
@@ -188,6 +287,7 @@ namespace AlgorithmTests
             public int ResOrientations { get; set; }
             public double ResStdX { get; set; }
             public double ResStdY { get; set; }
+            public double ResAverage { get; set; }
         }
     }
 }
