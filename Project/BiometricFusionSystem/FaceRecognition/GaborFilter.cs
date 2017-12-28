@@ -14,7 +14,7 @@ namespace FaceRecognition
     {
         private double _stdDevX;
         private double _stdDevY;
-        private double[] _lambda;
+        private double _lambda;
         private double _phase;
         private int _n;
         private int _kernelSize;
@@ -27,7 +27,7 @@ namespace FaceRecognition
         /// <param name="phase"> phase for the calculation of orientation</param>
         /// <param name="n"> maximal number of orientations</param>
         /// <param name="kernelSize"> kernel size</param>
-        public GaborFilter(double stdDevX, double stdDevY, double[] lambda, double phase, int n, int kernelSize)
+        public GaborFilter(double stdDevX, double stdDevY, double lambda, double phase, int n, int kernelSize)
         {
             _stdDevX = stdDevX;
             _stdDevY = stdDevY;
@@ -92,12 +92,9 @@ namespace FaceRecognition
         public List<Bitmap> ApplyFilter(Bitmap b)
         {
             List<Bitmap> lb = new List<Bitmap>();
-            for (int l = 0; l < _lambda.Count(); l++)
+            for (int k = 1; k <= _n; k++)
             {
-                for (int k = 1; k <= _n; k++)
-                {
-                    lb.Add(CalculateGaborFilter(b, k, _lambda[l]));
-                }
+                lb.Add(CalculateGaborFilter(b, k, _lambda));
             }
             return lb;
         }
