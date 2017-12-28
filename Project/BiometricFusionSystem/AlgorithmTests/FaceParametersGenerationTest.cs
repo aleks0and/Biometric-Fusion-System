@@ -79,7 +79,7 @@ namespace AlgorithmTests
         {
             List<Result> BestParameters = new List<Result>();
             List<string> resultContent = new List<string>();
-            double[] Lambda = new double[] { 0, 0 };
+            double[] Lambda = new double[] { 0 };
             int orientation = 0;
             double stdX = 0;
             double stdY = 0;
@@ -107,7 +107,7 @@ namespace AlgorithmTests
                         string[] value = resultValue.Split(' ');
                         if (value[1] == "Lambda")
                         {
-                            Lambda = new double[] { Double.Parse(value[3]), Double.Parse(value[5]) };
+                            Lambda = new double[] { Double.Parse(value[3]) };
                         }
                         if (value[1] == "Orientations")
                         {
@@ -157,15 +157,15 @@ namespace AlgorithmTests
                             ResStdX = localBest.ResStdX,
                             ResStdY = localBest.ResStdY,
                             ResOrientations = orientations,
-                            ResLambda = new double[] { localBest.ResLambda[0], localBest.ResLambda[1] }
+                            ResLambda = new double[] { localBest.ResLambda[0] }
                         };
                         bestAverage = avg;
                     }
                 }
             }
-            using (var writer = new StreamWriter(@"..\..\..\..\..\Documentation\bestFaceResult.txt"))
+            using (var writer = new StreamWriter(@"..\..\..\..\..\Documentation\bestFaceResult.txt",append: true))
             {
-                writer.WriteLine("Lambda: " + bestResult.ResLambda[0] + " , " + bestResult.ResLambda[1]);
+                writer.WriteLine("Lambda: " + bestResult.ResLambda[0]);
                 writer.WriteLine("Orientation count: " + bestResult.ResOrientations);
                 writer.WriteLine("stdx: " + bestResult.ResStdX);
                 writer.WriteLine("stdy: " + bestResult.ResStdY);
