@@ -13,6 +13,9 @@ namespace FaceRecognition
         {
             get { return _classes; }
         }
+        /// <summary>
+        /// Constructor creating dictionary of classes
+        /// </summary>
         public MinimumDistanceClassifier()
         {
             _classes = new Dictionary<string, List<double>>();
@@ -41,7 +44,7 @@ namespace FaceRecognition
         /// <summary>
         /// function classifies the input feature vector
         /// </summary>
-        /// <param name="fv"></param>
+        /// <param name="fv">feature vector</param>
         /// <returns>returns name of the class where the feature vector belongs</returns>
         public string Classify(List<double> fv)
         {

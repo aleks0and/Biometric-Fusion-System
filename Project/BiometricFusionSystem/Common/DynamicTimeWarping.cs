@@ -27,7 +27,7 @@ namespace Common
             _classes = new Dictionary<string, List<double>>();
         }
         /// <summary>
-        /// function which finds the absolute difference bewtween two numbers
+        /// function which finds the absolute difference between two numbers
         /// </summary>
         public double GetDistance(double a, double b)
         {
@@ -119,7 +119,7 @@ namespace Common
         /// <summary>
         /// function classifies the input feature vector
         /// </summary>
-        /// <param name="input"></param>
+        /// <param name="input">input feature vector</param>
         /// <returns>returns name of the class where the feature vector belongs</returns>
         public string Classify(List<double> input)
         {

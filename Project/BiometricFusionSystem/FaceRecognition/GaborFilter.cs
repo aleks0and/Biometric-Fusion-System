@@ -23,7 +23,7 @@ namespace FaceRecognition
         /// </summary>
         /// <param name="stdDevX"> Standard deviation of the Gausian envelope along x </param>
         /// <param name="stdDevY"> Standard deviation of the Gausian envelope along x </param>
-        /// <param name="lambda"> wavelengths used for the calculation of GF</param>
+        /// <param name="lambda"> wavelength used for the calculation of GF</param>
         /// <param name="phase"> phase for the calculation of orientation</param>
         /// <param name="n"> maximal number of orientations</param>
         /// <param name="kernelSize"> kernel size</param>

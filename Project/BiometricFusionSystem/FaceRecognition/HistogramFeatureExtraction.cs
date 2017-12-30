@@ -17,8 +17,6 @@ namespace FaceRecognition
         /// <summary>
         /// Constructor for the class setting the initial values
         /// </summary>
-        /// <param name="width"> width of the bitmap</param>
-        /// <param name="height"> height of the bitmap</param>
         /// <param name="bmp"> initial bitmap </param>
         public HistogramFeatureExtraction(Bitmap bmp)
         {

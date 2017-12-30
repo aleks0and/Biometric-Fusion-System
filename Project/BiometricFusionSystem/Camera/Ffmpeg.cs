@@ -16,7 +16,11 @@ namespace Camera
         private Process _process;
         private EventHandler _handler;
         //handle exited event on process to know when it ends
-
+        /// <summary>
+        /// Takes picture using camera
+        /// </summary>
+        /// <param name="outputPath">name of the output file</param>
+        /// <param name="handler">event handler to Exited event</param>
         public void TakePicture(string outputPath, EventHandler handler)
         {
             _handler = handler;
@@ -36,10 +40,11 @@ namespace Camera
             
         }
         /// <summary>
+        /// records a person using camera
         /// before using this function one has to remove the output.wav file if such previously existed
         /// </summary>
-        /// <param name="outputPath"></param>
-        /// <param name="handler"></param>
+        /// <param name="outputPath">name of the output file</param>
+        /// <param name="handler">event handler to Exited event</param>
         public void RecordAudio(string outputPath, EventHandler handler)
         {
             var path = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
@@ -58,12 +63,18 @@ namespace Camera
             _process.Exited += _handler;
             _process.Start();
         }
-
+        /// <summary>
+        /// Function returning state of the camera process
+        /// </summary>
+        /// <param name="parameter">always null</param>
+        /// <returns>true if picture/recording is still being taken</returns>
         public bool IsBusy (object parameter)
         {
             return _process == null;
         }
-
+        /// <summary>
+        /// Function clearing eventhandler, always call after finishing the TakePicture/RecordAudio function
+        /// </summary>
         public void EndEvent()
         {
             _process.Exited -= _handler;
