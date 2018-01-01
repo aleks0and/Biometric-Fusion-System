@@ -17,7 +17,7 @@ namespace AlgorithmTests
     public class FaceParametersGenerationTest
     {
         private string _sampleDirectory = @"C:\Users\aleks\Desktop\";
-        private string faceFilePath = @"..\..\..\..\..\Documentation\faceResultOrientations.txt";
+        private string faceFilePath = @"..\..\..\..\..\Documentation\bestFaceResult.txt";
 
         [TestMethod]
         public void GenerateGaborFilterParemeters()
@@ -225,7 +225,7 @@ namespace AlgorithmTests
                     resultFile.WriteLine("Date: " + DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToShortTimeString());
                     resultFile.WriteLine("Used dataset: " + dataset);
                     resultFile.WriteLine("Extractor params: ");
-                    resultFile.WriteLine("\t {0} : {1} , {2}", nameof(extractor.Lambda), extractor.Lambda[0], extractor.Lambda[1]);
+                    resultFile.WriteLine("\t {0} : {1}", nameof(extractor.Lambda), extractor.Lambda[0]);
                     resultFile.WriteLine("\t {0} : {1}", nameof(extractor.Orientations), extractor.Orientations);
                     resultFile.WriteLine("\t {0} : {1}", nameof(extractor.StdX), extractor.StdX);
                     resultFile.WriteLine("\t {0} : {1}", nameof(extractor.StdY), extractor.StdY);
