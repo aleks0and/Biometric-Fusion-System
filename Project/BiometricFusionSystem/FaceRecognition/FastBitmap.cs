@@ -36,7 +36,7 @@ namespace FaceRecognition
         {
             if (_data == null)
             {
-                _data = _bmp.LockBits(_rect, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+                _data = _bmp.LockBits(_rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             }
         }
         public void End()
@@ -55,7 +55,7 @@ namespace FaceRecognition
         public unsafe Color GetPixel(int x, int y)
         {
             Byte* img = (Byte*)_data.Scan0.ToPointer();
-            var offset = _data.Stride * y + x * 4;
+            var offset = _data.Stride * y + x * 3;
             var b = img[offset];
             var g = img[offset + 1];
             var r = img[offset + 2];
@@ -65,7 +65,7 @@ namespace FaceRecognition
         public unsafe void SetPixel(int x, int y, Color c)
         {
             Byte* img = (Byte*)_data.Scan0.ToPointer();
-            var offset = _data.Stride * y + x * 4;
+            var offset = _data.Stride * y + x * 3;
             img[offset] = c.B;
             img[offset + 1] = c.G;
             img[offset + 2] = c.R;
