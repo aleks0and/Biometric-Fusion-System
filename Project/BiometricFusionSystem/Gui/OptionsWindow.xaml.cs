@@ -1,4 +1,5 @@
-﻿using Gui.Utility;
+﻿using Gui.Model;
+using Gui.Utility;
 using Gui.ViewModel;
 using System;
 using System.Collections.Generic;

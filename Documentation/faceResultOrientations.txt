@@ -1,0 +1,9 @@
+Date: sobota, 23 grudnia 2017 19:00
+Used dataset: dataDecember
+Extractor params: 
+	 Lambda : 20 , 4
+	 Orientations : 5
+	 StdX : 2,5
+	 StdY : 3,5
+Comment: 
+RESULT: 24/42 (57,14)
