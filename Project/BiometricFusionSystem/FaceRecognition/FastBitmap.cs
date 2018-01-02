@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace FaceRecognition
 {
+    /// <summary>
+    /// Class encapsulating standard .Net bitmap, using fast pointer arithmetic
+    /// to perform operations on the image
+    /// </summary>
     public unsafe class FastBitmap : IDisposable
     {
         private Bitmap _bmp;
@@ -26,12 +30,19 @@ namespace FaceRecognition
         {
             get { return _bmp; }
         }
+        /// <summary>
+        /// Constructor passing bitmap to be encapsulated
+        /// </summary>
+        /// <param name="bmp"></param>
         public FastBitmap(Bitmap bmp)
         {
             _bmp = bmp;
             _rect = new Rectangle(Point.Empty, bmp.Size);
         }
-
+        /// <summary>
+        /// Locks bitmap in order to perform unsafe operations.
+        /// Always use before performing any other operation on FastBitmap
+        /// </summary>
         public void Start()
         {
             if (_data == null)
@@ -39,6 +50,10 @@ namespace FaceRecognition
                 _data = _bmp.LockBits(_rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             }
         }
+        /// <summary>
+        /// Unlocks bitmap pixels
+        /// Always use after finishing operations on the FastBitmap
+        /// </summary>
         public void End()
         {
             if (_data != null)
@@ -51,7 +66,12 @@ namespace FaceRecognition
         {
             _bmp.Dispose();
         }
-
+        /// <summary>
+        /// Gets RGB color of pixel at given coordinates
+        /// </summary>
+        /// <param name="x">horizontal coordinate</param>
+        /// <param name="y">vertical coordinate</param>
+        /// <returns></returns>
         public unsafe Color GetPixel(int x, int y)
         {
             Byte* img = (Byte*)_data.Scan0.ToPointer();
@@ -61,7 +81,12 @@ namespace FaceRecognition
             var r = img[offset + 2];
             return Color.FromArgb(r, g, b);
         }
-
+        /// <summary>
+        /// Sets RGB color of pixel at given coordinates
+        /// </summary>
+        /// <param name="x">horizontal coordinate</param>
+        /// <param name="y">vertical coordinate</param>
+        /// <param name="c">color to be set</param>
         public unsafe void SetPixel(int x, int y, Color c)
         {
             Byte* img = (Byte*)_data.Scan0.ToPointer();

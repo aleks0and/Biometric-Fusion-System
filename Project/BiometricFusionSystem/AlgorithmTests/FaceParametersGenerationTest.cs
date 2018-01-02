@@ -33,8 +33,7 @@ namespace AlgorithmTests
             double stdyMin = 1;
             double stdyMax = 8;
             double lambdaMin = 1;
-            double lambdaMax = 8;
-            double lambdaFirst = 20;
+            double lambdaMax = 11;
             double bestAverage = 0;
             Result result = new Result();
             for (int orientations = orientationMin; orientations < orientationMax; orientations++)
@@ -45,9 +44,7 @@ namespace AlgorithmTests
                     {
                         for(double lambda = lambdaMin; lambda < lambdaMax; lambda++)
                         {
-                            double[] lambdaArray = new double[] { lambdaFirst, lambda };
-
-                            double avg = FaceTestToFile(datasets[1], directory, orientations, stdx, stdy, lambdaArray);
+                            double avg = FaceTestToFile(datasets[1], directory, orientations, stdx, stdy, lambda);
                             if(avg > bestAverage)
                             {
                                 result = new Result()
@@ -55,7 +52,7 @@ namespace AlgorithmTests
                                     ResStdX = stdx,
                                     ResStdY = stdy,
                                     ResOrientations = orientations,
-                                    ResLambda = new double[] { lambdaArray[0], lambdaArray[1] }
+                                    ResLambda = lambda
                                 };
                                 bestAverage = avg;
                             }
@@ -66,7 +63,7 @@ namespace AlgorithmTests
             }
             using (var writer = new StreamWriter(@"..\..\..\..\..\Documentation\bestFaceResult.txt"))
             {
-                writer.WriteLine("Lambda: " + result.ResLambda[0] + " , " + result.ResLambda[1]);
+                writer.WriteLine("Lambda: " + result.ResLambda);
                 writer.WriteLine("Orientation count: " + result.ResOrientations);
                 writer.WriteLine("stdx: " + result.ResStdX);
                 writer.WriteLine("stdy: " + result.ResStdY);
@@ -176,12 +173,12 @@ namespace AlgorithmTests
         [TestMethod]
         public void FaceTestToFileTest()
         {
-            FaceTestToFile("dataDecember", "faces", 9, 4, 3, new double[] { 11, 4 });
+            FaceTestToFile("dataDecember", "faces", 9, 4, 3, 11);
         }
 
         [TestMethod]
         public double FaceTestToFile(string dataset, string directory, int orientation,
-            double stdx, double stdy, double[] lambda)
+            double stdx, double stdy, double lambda)
         {
             int finalMoment = 3;
             string testComment = "";
@@ -225,7 +222,7 @@ namespace AlgorithmTests
                     resultFile.WriteLine("Date: " + DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToShortTimeString());
                     resultFile.WriteLine("Used dataset: " + dataset);
                     resultFile.WriteLine("Extractor params: ");
-                    resultFile.WriteLine("\t {0} : {1}", nameof(extractor.Lambda), extractor.Lambda[0]);
+                    resultFile.WriteLine("\t {0} : {1}", nameof(extractor.Lambda), extractor.Lambda);
                     resultFile.WriteLine("\t {0} : {1}", nameof(extractor.Orientations), extractor.Orientations);
                     resultFile.WriteLine("\t {0} : {1}", nameof(extractor.StdX), extractor.StdX);
                     resultFile.WriteLine("\t {0} : {1}", nameof(extractor.StdY), extractor.StdY);
@@ -283,7 +280,7 @@ namespace AlgorithmTests
 
         private class Result
         {
-            public double[] ResLambda { get; set; }
+            public double ResLambda { get; set; }
             public int ResOrientations { get; set; }
             public double ResStdX { get; set; }
             public double ResStdY { get; set; }

@@ -11,13 +11,13 @@ namespace UnitTests
         private Bitmap _bmp;
         private int _width = 4;
         private int _height = 4;
-        private double[] _lambda = { 10, 5 };
+        private double _lambda = 9;
         private int _stdX = 2;
         private int _stdY = 1;
         private double _phase = Math.PI / 2;
-        private int _n = 4;
+        //private int _n = 4;
         private int _kernelSize = 3;
-        private GaborFilter _gabor;
+        //private GaborFilter _gabor;
         [TestInitialize]
         public void Init()
         {
@@ -36,7 +36,7 @@ namespace UnitTests
         [TestMethod]
         public void GaborAngle0Phase90Wave5N2()
         {
-            GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, Math.PI / 2, 2, 3);
+            GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, _phase, 2, _kernelSize);
             double actual = gf.GetGaborValue(1, 1, 0, 5);
             double expected = -0.272;
             Assert.AreEqual(expected, actual, 0.01);
@@ -44,7 +44,7 @@ namespace UnitTests
         [TestMethod]
         public void GaborAngle135Phase90Wave5N2()
         {
-            GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, Math.PI / 2, 2, 3);
+            GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, _phase, 2, _kernelSize);
             double actual = gf.GetGaborValue(1, 1, 3, 5);
             double expected = 0.272;
             Assert.AreEqual(expected, actual, 0.01);
@@ -52,7 +52,7 @@ namespace UnitTests
         [TestMethod]
         public void GaborAngle0Phase45Wave5N2()
         {
-            GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, Math.PI / 4, 2, 3);
+            GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, _phase / 2, 2, _kernelSize);
             double actual = gf.GetGaborValue(1, 1, 0, 5);
             double expected = -0.129;
             Assert.AreEqual(expected, actual, 0.01);
@@ -60,7 +60,7 @@ namespace UnitTests
         [TestMethod]
         public void GaborAngle135Phase45Wave5N2()
         {
-            GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, Math.PI / 4, 2, 3);
+            GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, _phase / 2, 2, _kernelSize);
             double actual = gf.GetGaborValue(1, 1, 3, 5);
             double expected = 0.255;
             Assert.AreEqual(expected, actual, 0.01);
@@ -68,7 +68,7 @@ namespace UnitTests
         [TestMethod]
         public void GaborAngle135Phase90Wave5N3()
         {
-            GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, Math.PI / 2, 3, 3);
+            GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, _phase, 3, _kernelSize);
             double actual = gf.GetGaborValue(1, 1, 3, 5);
             double expected = 0.272;
             Assert.AreEqual(expected, actual, 0.01);
@@ -76,7 +76,7 @@ namespace UnitTests
         [TestMethod]
         public void GaborMagnitudeMean()
         {
-            GaborFilter gf = new GaborFilter(_stdX, _stdY, new double[] { 5 }, Math.PI / 2, 1, 3);
+            GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, _phase, 1, _kernelSize);
             var bmp = gf.ApplyFilter(_bmp);
             GaborFilterMagnitudes magnitudes = new GaborFilterMagnitudes(bmp[0]);
             double actual = magnitudes.CalculateMean();
@@ -86,7 +86,7 @@ namespace UnitTests
         [TestMethod]
         public void GaborMagnitudeStd()
         {
-            GaborFilter gf = new GaborFilter(_stdX, _stdY, new double[] { 5 }, Math.PI / 2, 1, 3);
+            GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, _phase, 1, _kernelSize);
             var bmp = gf.ApplyFilter(_bmp);
             GaborFilterMagnitudes magnitudes = new GaborFilterMagnitudes(bmp[0]);
             double mean = 127.5;
@@ -97,7 +97,7 @@ namespace UnitTests
         [TestMethod]
         public void GaborMagnitudeSkewness()
         {
-            GaborFilter gf = new GaborFilter(_stdX, _stdY, new double[] { 5 }, Math.PI / 2, 1, 3);
+            GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, _phase, 1, _kernelSize);
             var bmp = gf.ApplyFilter(_bmp);
             GaborFilterMagnitudes magnitudes = new GaborFilterMagnitudes(bmp[0]);
             double mean = 127.5;

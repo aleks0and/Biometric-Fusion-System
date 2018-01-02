@@ -17,13 +17,12 @@ namespace AlgorithmTests
     [TestClass]
     public class LoadDatabaseTest
     {
-        private string speechFilePath = @"..\..\..\..\..\Documentation\speechResult.txt";
         private int _finalMoment;
         private FaceFeatureExtractor _extractorFace;
         private FrameMaker _frameMaker;
         private SpeechFeatureExtractor _extractorSpeech;
         private DynamicTimeWarping _timeWarping;
-        private string _sampleDirectory = @"C:\Users\Kornel\Desktop\";
+        private string _sampleDirectory = @"C:\Users\aleks\Desktop\data";
 
         public LoadDatabaseTest()
         {
@@ -40,7 +39,7 @@ namespace AlgorithmTests
             var dirs = Directory.GetDirectories(_sampleDirectory + @"\faces");
             dirs = dirs.Select(d => Path.GetFileName(d)).ToArray();
             var classifier = new MinimumDistanceClassifier();
-            DbConnection db = new DbConnection();
+            DbConnection db = new DbConnection(true);
             var personRepository = new PersonRepository(db);
             DynamicTimeWarping dtwAlgorithm = new DynamicTimeWarping(threshold: 0.25);
             DynamicTimeWarping dtwClose = new DynamicTimeWarping(threshold: 0.25);
