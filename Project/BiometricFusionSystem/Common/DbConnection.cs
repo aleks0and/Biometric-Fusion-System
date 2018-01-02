@@ -36,6 +36,28 @@ namespace Common
             _sqlConnection.ConnectionString = ConnectionString;
             _sqlConnection.FireInfoMessageEventOnUserErrors = false;
         }
+        /// <summary>
+        /// Constructor setting connection string to database in assembly location
+        /// or to predefined path if a test is run
+        /// </summary>
+        /// <param name="isTest">if true then a predefined path is set, else a dynamic path to assembly is used</param>
+        public DbConnection(bool isTest)
+        {
+            _sqlConnection = new SqlConnection();
+            if (isTest)
+            {
+                ConnectionString = "Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = \"C:\\Users\\aleks\\Desktop\\Engineering Thesis\\Project\\BiometricFusionSystem\\Common\\biometricDB.mdf\"; Integrated Security = True;";
+            }
+            else
+            {
+                var path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                var databaseName = "biometricDB.mdf";
+                path = "\"" + path + "\\" + databaseName + "\"";
+                ConnectionString = "Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = " + path + "; Integrated Security = True;";
+            }
+            _sqlConnection.ConnectionString = ConnectionString;
+            _sqlConnection.FireInfoMessageEventOnUserErrors = false;
+        }
 
         public DbConnection(string dataSource)
         {

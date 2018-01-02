@@ -1,6 +1,6 @@
-﻿drop table Person
-drop table FaceBiometric
+﻿drop table FaceBiometric
 drop table VoiceBiometric
+drop table Person
 
 create table Person
 (

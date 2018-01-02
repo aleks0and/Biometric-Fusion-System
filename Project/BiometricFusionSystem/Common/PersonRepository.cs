@@ -8,14 +8,27 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+    /// <summary>
+    /// Class responsible for interaction with biometric database(Person, FaceBiometric, VoiceBiometric tables)
+    /// </summary>
     public class PersonRepository
     {
         private DbConnection _connection;
         private const int MaxNameLength = 50;
+        /// <summary>
+        /// Constructor for the class 
+        /// </summary>
+        /// <param name="connection">connection string to database</param>
         public PersonRepository(DbConnection connection)
         {
             _connection = connection;
         }
+        /// <summary>
+        /// function returning a Person object given parameters
+        /// </summary>
+        /// <param name="firstName">first name of the person</param>
+        /// <param name="lastName">last name of the person</param>
+        /// <returns>person object with feature vectors (null if person does not exist)</returns>
         public Person GetPerson(string firstName, string lastName)
         {
             Person p = null;
@@ -52,6 +65,11 @@ namespace Common
             }
             return p;
         }
+        /// <summary>
+        /// Function returning list of persons with their feature vectors
+        /// </summary>
+        /// <param name="recordedWord">word of which voice feature vector has to be included in each person object</param>
+        /// <returns>list of persons (null on fail/not existing word)</returns>
         public List<Person> SelectPersons(string recordedWord)
         {
             List<Person> persons = new List<Person>();
@@ -91,6 +109,11 @@ namespace Common
             }
             return persons;
         }
+        /// <summary>
+        /// function enrolling new person to database
+        /// </summary>
+        /// <param name="person">Person object with feature vectors</param>
+        /// <param name="recordedWord">word of voice feature vector in person object</param>
         public void AddPerson(Person person, string recordedWord)
         {
             try
@@ -113,7 +136,10 @@ namespace Common
                 _connection.SqlConnection.Close();
             }
         }
-
+        /// <summary>
+        /// Function adding person to Person table
+        /// </summary>
+        /// <param name="person">person to be added</param>
         private void AddPerson(Person person)
         {
             var cmdInsert = new SqlCommand("INSERT INTO Person (FirstName,LastName) values(@FirstName,@LastName)");
@@ -125,7 +151,12 @@ namespace Common
             cmdInsert.ExecuteNonQuery();
             person.Id = GetPersonId(person.FirstName, person.LastName);
         }
-
+        /// <summary>
+        /// Function returning id of person if this person exists in database
+        /// </summary>
+        /// <param name="firstName">first name of the person</param>
+        /// <param name="lastName">last name of the person</param>
+        /// <returns>id of the found person (-1 on fail/person not found)</returns>
         private int GetPersonId(string firstName, string lastName)
         {
             int ret = -1;
@@ -146,7 +177,10 @@ namespace Common
             }
             return ret;
         }
-
+        /// <summary>
+        /// Adds face feature vector of given person to FaceBiometric table
+        /// </summary>
+        /// <param name="person">person containing a face feature vector</param>
         private void AddFace(Person person)
         {
             var insert = new SqlCommand("INSERT INTO FaceBiometric (Id,FeatureVector) values(@Id,@FeatureVector)");
@@ -158,6 +192,11 @@ namespace Common
 
             insert.ExecuteNonQuery();
         }
+        /// <summary>
+        /// Adds voice feature vector of given person to VoiceBiometric table
+        /// </summary>
+        /// <param name="person">person containing a voice feature vector</param>
+        /// <param name="recordedWord">word represented by the voice feature vector</param>
         private void AddSpeech(Person person, string recordedWord)
         {
             var insert = new SqlCommand("INSERT INTO VoiceBiometric (Id,FeatureVector,RecordedWord) values(@Id,@FeatureVector,@RecordedWord)");

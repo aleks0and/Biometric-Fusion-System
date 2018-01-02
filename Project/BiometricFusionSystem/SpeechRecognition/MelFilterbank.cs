@@ -127,7 +127,7 @@ namespace SpeechRecognition
             return fbs;
         }
         /// <summary>
-        /// function which filteres the spectral densities through the filterbanks
+        /// function which filters the spectral densities through the filterbanks
         /// </summary>
         /// <param name="est"> spectral density estimates </param>
         /// <param name="fbs"> list of filterbanks </param>

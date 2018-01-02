@@ -10,13 +10,13 @@ namespace FaceRecognition
     //zamien operacje na bitmapach zeby byly na pointerach
     public class FaceFeatureExtractor
     {
-        private double[] _lambda;
+        private double _lambda;
         private double _stdX;
         private double _stdY;
         private int _orientations;
         int _finalMoment;
 
-        public double[] Lambda
+        public double Lambda
         {
             get
             {
@@ -58,12 +58,12 @@ namespace FaceRecognition
         public FaceFeatureExtractor(int finalMoment)
         {
             _finalMoment = finalMoment;
-            _lambda = new double[] { 10, 5 };
+            _lambda =  9;
             _stdX = 2;
             _stdY = 1;
             _orientations = 4;
         }
-        public FaceFeatureExtractor(int finalMoment, double[] lambda, double stdX, double stdY, int orientations)
+        public FaceFeatureExtractor(int finalMoment, double lambda, double stdX, double stdY, int orientations)
         {
             _finalMoment = finalMoment;
             _lambda = lambda;

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SpeechRecognition
 {
+    /// <summary>
+    /// Class extracting Mel Frequency Cepstral Coefficients from a voice recording
+    /// </summary>
     public class SpeechFeatureExtractor
     {
         private const int LowerFrequency = 300;
@@ -24,6 +27,12 @@ namespace SpeechRecognition
         {
             get { return _coeffsLeft; }
         }
+        /// <summary>
+        /// Constructor for the class with specified changeable parameters 
+        /// </summary>
+        /// <param name="window">Gaussian/Hamming window to be used on recording samples</param>
+        /// <param name="filterbanksCount">number of filterbanks used in mfcc extraction(number of mfccs per frame)</param>
+        /// <param name="coeffsLeft">number of mfccs per frame that are returned on extraction(by default(-1) all coefficients are returned</param>
         public SpeechFeatureExtractor(Window window, int filterbanksCount, int coeffsLeft = -1)
         {
             _filterbanksCount = filterbanksCount;
