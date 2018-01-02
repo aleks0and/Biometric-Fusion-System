@@ -22,7 +22,7 @@ namespace AlgorithmTests
         private FrameMaker _frameMaker;
         private SpeechFeatureExtractor _extractorSpeech;
         private DynamicTimeWarping _timeWarping;
-        private string _sampleDirectory = @"C:\Users\aleks\Desktop\data";
+        private string _sampleDirectory = @"C:\Users\Martyna\Desktop\data60";
 
         public LoadDatabaseTest()
         {
