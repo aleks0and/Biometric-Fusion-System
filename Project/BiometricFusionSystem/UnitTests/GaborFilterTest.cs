@@ -80,7 +80,7 @@ namespace UnitTests
             var bmp = gf.ApplyFilter(_bmp);
             GaborFilterMagnitudes magnitudes = new GaborFilterMagnitudes(bmp[0]);
             double actual = magnitudes.CalculateMean();
-            double expected = 127.5;
+            double expected = 168;
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
@@ -89,9 +89,9 @@ namespace UnitTests
             GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, _phase, 1, _kernelSize);
             var bmp = gf.ApplyFilter(_bmp);
             GaborFilterMagnitudes magnitudes = new GaborFilterMagnitudes(bmp[0]);
-            double mean = 127.5;
+            double mean = 168;
             double actual = magnitudes.CalculateStd(mean);
-            double expected = 147.2;
+            double expected = 100.46;
             Assert.AreEqual(expected, actual, 0.1);
         }
         [TestMethod]
@@ -100,8 +100,8 @@ namespace UnitTests
             GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, _phase, 1, _kernelSize);
             var bmp = gf.ApplyFilter(_bmp);
             GaborFilterMagnitudes magnitudes = new GaborFilterMagnitudes(bmp[0]);
-            double mean = 127.5;
-            double std = 147.2;
+            double mean = 168;
+            double std = 100.46;
             double actual = magnitudes.CalculateSkew(mean, std);
             double expected = 0;
             Assert.AreEqual(expected, actual);
