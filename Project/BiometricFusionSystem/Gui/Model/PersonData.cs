@@ -86,9 +86,17 @@ namespace Gui.Model
                     { 
                         path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\" + path;
                     }
-                    Image = new BitmapImage(new Uri(path));
-                    ImagePath = "Path: " + path;
-                    ImageSize = "Image width: " + (int)Image.Width + ", height: " + (int)Image.Height;
+                    if (File.Exists(path))
+                    {
+                        Image = new BitmapImage(new Uri(path));
+                        ImagePath = "Path: " + path;
+                        ImageSize = "Image width: " + (int)Image.Width + ", height: " + (int)Image.Height;
+                        MessageBox.Show("Photo acquired");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Camera was not found. Try to load a picture from the disk.");
+                    }
                 }));
         }
 
@@ -99,16 +107,23 @@ namespace Gui.Model
                 path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\" + path;
             }
             //var wavFile = WavReader.Read(@"bin\" + path);
-            var wavFile = WavReader.Read(path);
-            _sampleRate = wavFile.Header.sampleRate;
-            Samples = wavFile.LeftChannel;
-            RecordingPath = "Path: " + path;
-            RecordingUri = new Uri(path);
-            double seconds = Samples.Count / (double)SampleRate;
-            double milliseconds = (seconds - Math.Floor(seconds)) * 1000;
-            var time = new DateTime(1, 1, 1, 0, 0, (int)seconds, (int)milliseconds);
-
-            RecordingLength = "Length: " + time.ToString("mm:ss:fff");
+            if (File.Exists(path))
+            {
+                var wavFile = WavReader.Read(path);
+                _sampleRate = wavFile.Header.sampleRate;
+                Samples = wavFile.LeftChannel;
+                RecordingPath = "Path: " + path;
+                RecordingUri = new Uri(path);
+                double seconds = Samples.Count / (double)SampleRate;
+                double milliseconds = (seconds - Math.Floor(seconds)) * 1000;
+                var time = new DateTime(1, 1, 1, 0, 0, (int)seconds, (int)milliseconds);
+                RecordingLength = "Length: " + time.ToString("mm:ss:fff");
+                MessageBox.Show("Recording acquired");
+            }
+            else
+            {
+                MessageBox.Show("Microphone was not found. Try to load a recording from the disk.");
+            }
         }
 
         public void RemoveSilence(Model.SilenceRemoval silenceRemoval)
