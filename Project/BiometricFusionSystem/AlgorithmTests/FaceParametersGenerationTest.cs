@@ -249,12 +249,20 @@ namespace AlgorithmTests
         [TestMethod]
         public void FaceValidVerification()
         {
-            VerificationValidAcceptance("data60", "faces", orientation: 7, stdx: 6, stdy: 7.5, lambda: 4, threshold: 14);
+            var datasets = new string[] { "data20", "data40", "data60" };
+            foreach (var dataset in datasets)
+            {
+                VerificationValidAcceptance(dataset, "faces", orientation: 7, stdx: 6, stdy: 7.5, lambda: 4, threshold: 14);
+            }
         }
         [TestMethod]
         public void FaceInvalidVerification()
         {
-            VerificationInvalidAcceptance("data60", "faces", orientation: 7, stdx: 6, stdy: 7.5, lambda: 4, threshold: 14);
+            var datasets = new string[] { "data20", "data40", "data60" };
+            foreach (var dataset in datasets)
+            {
+                VerificationInvalidAcceptance(dataset, "faces", orientation: 7, stdx: 6, stdy: 7.5, lambda: 4, threshold: 14);
+            }
         }
         [TestMethod]
         private void VerificationValidAcceptance(string dataset, string directory, int orientation,
@@ -288,7 +296,7 @@ namespace AlgorithmTests
             }
             else
             {
-                SaveVerificationThresholdedResult(_validVerificationPath, threshold, results);
+                SaveVerificationThresholdedResult(_validVerificationPath, threshold, results, dataset);
             }
         }
         private void VerificationInvalidAcceptance(string dataset, string directory, int orientation,
@@ -328,7 +336,7 @@ namespace AlgorithmTests
             }
             else
             {
-                SaveVerificationThresholdedResult(_invalidVerificationPath, threshold, results);
+                SaveVerificationThresholdedResult(_invalidVerificationPath, threshold, results, dataset);
             }
 
         }
@@ -344,11 +352,11 @@ namespace AlgorithmTests
             }
         }
 
-        private void SaveVerificationThresholdedResult(string path, double threshold, List<double> results)
+        private void SaveVerificationThresholdedResult(string path, double threshold, List<double> results, string dataset)
         {
             using (var resultFile = new StreamWriter(path, true))
             {
-                resultFile.WriteLine("THRESHOLD: {0}", threshold);
+                resultFile.WriteLine("THRESHOLD: {0}, DATASET: {1}", threshold, dataset);
                 int belowThreshold = results.Count(n => n < threshold);
                 double percent = belowThreshold / (double)results.Count * 100;
                 resultFile.WriteLine("RESULT: {0} ({1}/{2})", percent.ToString("F2"), belowThreshold, results.Count);

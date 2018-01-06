@@ -88,8 +88,17 @@ namespace AlgorithmTests
         [TestMethod]
         public void SpeechIdentification()
         {
-            SpeechTestToFile("data20", word: "close", filterBanks: 18, coeffs: 11,
-                frameLength: 0.03f, frameInterval: 0.015f, window: new HammingWindow());
+            var datasets = new string[] { "data20", "data40", "data60" };
+            var words = new string[] { "algorithm", "close" };
+            foreach(var dataset in datasets)
+            {
+                foreach (var w in words)
+                {
+                    SpeechTestToFile(dataset, word: w, filterBanks: 18, coeffs: 11,
+                        frameLength: 0.03f, frameInterval: 0.015f, window: new HammingWindow());
+                }
+            }
+            
         }
         [TestMethod]
         public double SpeechTestToFile(string dataset, string word, int filterBanks, int coeffs,
