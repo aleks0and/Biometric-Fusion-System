@@ -16,8 +16,10 @@ namespace AlgorithmTests
     [TestClass]
     public class FaceParametersGenerationTest
     {
-        private string _sampleDirectory = @"C:\Users\aleks\Desktop\";
+        private string _sampleDirectory = @"C:\Users\Kornel\Desktop\data_all\";
         private string faceFilePath = @"..\..\..\..\..\Documentation\bestFaceResult.txt";
+        private string _validVerificationPath = @"..\..\..\..\..\Documentation\faceValidVerification.txt";
+        private string _invalidVerificationPath = @"..\..\..\..\..\Documentation\faceInvalidVerification.txt";
 
         [TestMethod]
         public void GenerateGaborFilterParemeters()
@@ -241,6 +243,116 @@ namespace AlgorithmTests
                 double percent = success / (double)total * 100;
                 resultFile.WriteLine("RESULT: {0}/{1} ({2})", success, total, percent.ToString("F2"));
                 return percent;
+            }
+        }
+
+        [TestMethod]
+        public void FaceValidVerification()
+        {
+            VerificationValidAcceptance("data60", "faces", orientation: 7, stdx: 6, stdy: 7.5, lambda: 4, threshold: 14);
+        }
+        [TestMethod]
+        public void FaceInvalidVerification()
+        {
+            VerificationInvalidAcceptance("data60", "faces", orientation: 7, stdx: 6, stdy: 7.5, lambda: 4, threshold: 14);
+        }
+        [TestMethod]
+        private void VerificationValidAcceptance(string dataset, string directory, int orientation,
+            double stdx, double stdy, double lambda, double threshold = -1)
+        {
+            int finalMoment = 3;
+            string testComment = "";
+            int testFilesPerPerson = 2;
+            int trainFilesPerPerson = 4;
+            var MDC = new MinimumDistanceClassifier();
+            var extractor = new FaceFeatureExtractor(finalMoment, lambda, stdx, stdy, orientation);
+            TrainMDC(MDC, directory, trainFilesPerPerson, extractor, dataset);
+            var results = new List<double>();
+            foreach (var dir in GetDirs(dataset))
+            {
+                for (int i = 0; i < testFilesPerPerson; i++)
+                {
+                    var path = _sampleDirectory + dataset + @"\" + directory + @"\" + dir + @"\" + dir + (i + trainFilesPerPerson + 1) + ".bmp";
+                    if (File.Exists(path))
+                    {
+                        var featureVector = ExtractFeaturesFace(path, extractor);
+                        double result = MDC.FindEuclideanDistance(featureVector, MDC.Classes[dir]);
+                        results.Add(result);
+                    }
+                }
+            }
+            if(threshold == -1)
+            {
+                results = results.OrderBy(n => n).ToList();
+                SaveVerificationResult(_validVerificationPath, results);
+            }
+            else
+            {
+                SaveVerificationThresholdedResult(_validVerificationPath, threshold, results);
+            }
+
+        }
+        private void VerificationInvalidAcceptance(string dataset, string directory, int orientation,
+            double stdx, double stdy, double lambda, double threshold = -1)
+        {
+            int finalMoment = 3;
+            string testComment = "";
+            int testFilesPerPerson = 2;
+            int trainFilesPerPerson = 4;
+            var MDC = new MinimumDistanceClassifier();
+            var extractor = new FaceFeatureExtractor(finalMoment, lambda, stdx, stdy, orientation);
+            TrainMDC(MDC, directory, trainFilesPerPerson, extractor, dataset);
+            var results = new List<double>();
+            foreach (var dir in GetDirs(dataset))
+            {
+                for (int i = 0; i < testFilesPerPerson; i++)
+                {
+                    var path = _sampleDirectory + dataset + @"\" + directory + @"\" + dir + @"\" + dir + (i + trainFilesPerPerson + 1) + ".bmp";
+                    if (File.Exists(path))
+                    {
+                        var featureVector = ExtractFeaturesFace(path, extractor);
+                        foreach(var d in GetDirs(dataset))
+                        {
+                            if(d != dir)
+                            {
+                                double result = MDC.FindEuclideanDistance(featureVector, MDC.Classes[d]);
+                                results.Add(result);
+                            }
+                        }
+                    }
+                }
+            }
+            if(threshold == -1)
+            {
+                results = results.OrderBy(n => n).ToList();
+                SaveVerificationResult(_invalidVerificationPath, results);
+            }
+            else
+            {
+                SaveVerificationThresholdedResult(_invalidVerificationPath, threshold, results);
+            }
+
+        }
+
+        private void SaveVerificationResult(string path, List<double> results)
+        {
+            using (var resultFile = new StreamWriter(path, true))
+            {
+                foreach(var result in results)
+                {
+                    resultFile.WriteLine(result);
+                }
+            }
+        }
+
+        private void SaveVerificationThresholdedResult(string path, double threshold, List<double> results)
+        {
+            using (var resultFile = new StreamWriter(path, true))
+            {
+                resultFile.WriteLine("THRESHOLD: {0}", threshold);
+                int belowThreshold = results.Count(n => n < threshold);
+                double percent = belowThreshold / (double)results.Count * 100;
+                resultFile.WriteLine("RESULT: {0} ({1}/{2})", percent.ToString("F2"), belowThreshold, results.Count);
             }
         }
 
