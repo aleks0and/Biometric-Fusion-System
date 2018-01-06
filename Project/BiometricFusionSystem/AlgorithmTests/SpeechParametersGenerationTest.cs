@@ -16,9 +16,11 @@ namespace AlgorithmTests
     [TestClass]
     public class SpeechParametersGenerationTest
     {
-        private string _sampleDirectory = @"C:\Users\Martyna\Desktop\";
-        private string speechFilePath = @"..\..\..\..\..\Documentation\speechResult.txt";
-        
+        private string _sampleDirectory = @"C:\Users\Kornel\Desktop\data_all\";
+        private string speechFilePath = @"..\..\..\..\..\Documentation\speechResult2.txt";
+        private string _validVerificationPath = @"..\..\..\..\..\Documentation\speechValidVerification.txt";
+        private string _invalidVerificationPath = @"..\..\..\..\..\Documentation\speechInvalidVerification.txt";
+
         [TestMethod]
         public void GenerateSpeechTests()
         {
@@ -83,7 +85,12 @@ namespace AlgorithmTests
                 }
             }
         }
-        
+        [TestMethod]
+        public void SpeechIdentification()
+        {
+            SpeechTestToFile("data20", word: "close", filterBanks: 18, coeffs: 11,
+                frameLength: 0.03f, frameInterval: 0.015f, window: new HammingWindow());
+        }
         [TestMethod]
         public double SpeechTestToFile(string dataset, string word, int filterBanks, int coeffs,
             float frameLength, float frameInterval, Window window)
@@ -154,7 +161,128 @@ namespace AlgorithmTests
                 return percent;
             }
         }
+        [TestMethod]
+        public void SpeechValidVerification()
+        {
+            var datasets = new string[] { "data20", "data40", "data60" };
+            var words = new string[] { "algorithm", "close" };
+            foreach(var dataset in datasets)
+            {
+                foreach(var word in words)
+                {
+                    VerificationValidAcceptance(dataset, word: word, filterBanks: 18, coeffs: 11,
+                        frameLength: 0.03f, frameInterval: 0.015f, window: new HammingWindow(), threshold: 3000);
+                }
+            }
+        }
+        [TestMethod]
+        public void SpeechInvalidVerification()
+        {
+            var datasets = new string[] { "data20", "data40", "data60" };
+            var words = new string[] { "algorithm", "close" };
+            foreach (var dataset in datasets)
+            {
+                foreach (var word in words)
+                {
+                    VerificationInvalidAcceptance(dataset, word: word, filterBanks: 18, coeffs: 11,
+                        frameLength: 0.03f, frameInterval: 0.015f, window: new HammingWindow(), threshold: 3000);
+                }
+            }
+        }
+        private void VerificationValidAcceptance(string dataset, string word, int filterBanks, int coeffs,
+            float frameLength, float frameInterval, Window window, double threshold = -1)
+        {
+            int testFilesPerPerson = 2;
+            int trainFilesPerPerson = 4;
+            var dtw = new DynamicTimeWarping(0);
+            var frameMaker = new FrameMaker(frameLength, frameInterval);
+            var extractor = new SpeechFeatureExtractor(window, filterBanks, coeffs);
+            TrainDtw(dtw, word, trainFilesPerPerson, extractor, frameMaker, dataset);
+            var results = new List<double>();
+            foreach (var dir in GetDirs(dataset))
+            {
+                for (int i = 0; i < testFilesPerPerson; i++)
+                {
+                    var path = _sampleDirectory + dataset + @"\" + word + @"\" + dir + @"\" + dir + (i + trainFilesPerPerson + 1) + ".wav";
+                    if (File.Exists(path))
+                    {
+                        var featureVector = ExtractFeaturesVoice(path, extractor, frameMaker);
+                        var result = dtw.Compare(featureVector, dtw.Classes[dir]);
+                        results.Add(result);
+                    }
+                }
+            }
+            if (threshold == -1)
+            {
+                results = results.OrderBy(n => n).ToList();
+                SaveVerificationResult(_validVerificationPath, results);
+            }
+            else
+            {
+                SaveVerificationThresholdedResult(_validVerificationPath, threshold, results, word, dataset);
+            }
+        }
+        private void VerificationInvalidAcceptance(string dataset, string word, int filterBanks, int coeffs,
+            float frameLength, float frameInterval, Window window, double threshold = -1)
+        {
+            int testFilesPerPerson = 2;
+            int trainFilesPerPerson = 4;
+            var dtw = new DynamicTimeWarping(0);
+            var frameMaker = new FrameMaker(frameLength, frameInterval);
+            var extractor = new SpeechFeatureExtractor(window, filterBanks, coeffs);
+            TrainDtw(dtw, word, trainFilesPerPerson, extractor, frameMaker, dataset);
+            var results = new List<double>();
+            foreach (var dir in GetDirs(dataset))
+            {
+                for (int i = 0; i < testFilesPerPerson; i++)
+                {
+                    var path = _sampleDirectory + dataset + @"\" + word + @"\" + dir + @"\" + dir + (i + trainFilesPerPerson + 1) + ".wav";
+                    if (File.Exists(path))
+                    {
+                        var featureVector = ExtractFeaturesVoice(path, extractor, frameMaker);
+                        foreach(var d in GetDirs(dataset))
+                        {
+                            if(d != dir)
+                            {
+                                double result = dtw.Compare(featureVector, dtw.Classes[d]);
+                                results.Add(result);
+                            }
+                        }
+                    }
+                }
+            }
+            if (threshold == -1)
+            {
+                results = results.OrderBy(n => n).ToList();
+                SaveVerificationResult(_invalidVerificationPath, results);
+            }
+            else
+            {
+                SaveVerificationThresholdedResult(_invalidVerificationPath, threshold, results, word, dataset);
+            }
+        }
 
+        private void SaveVerificationResult(string path, List<double> results)
+        {
+            using (var resultFile = new StreamWriter(path, true))
+            {
+                foreach (var result in results)
+                {
+                    resultFile.WriteLine(result);
+                }
+            }
+        }
+
+        private void SaveVerificationThresholdedResult(string path, double threshold, List<double> results, string word, string dataset)
+        {
+            using (var resultFile = new StreamWriter(path, true))
+            {
+                resultFile.WriteLine("THRESHOLD: {0}, WORD: {1}, DATASET: {2}", threshold, word, dataset);
+                int belowThreshold = results.Count(n => n < threshold);
+                double percent = belowThreshold / (double)results.Count * 100;
+                resultFile.WriteLine("RESULT: {0} ({1}/{2})", percent.ToString("F2"), belowThreshold, results.Count);
+            }
+        }
         private void TrainDtw(DynamicTimeWarping dtw, string word, int trainFilesPerPerson, SpeechFeatureExtractor extractor,
             FrameMaker frameMaker, string dataset)
         {

@@ -290,7 +290,6 @@ namespace AlgorithmTests
             {
                 SaveVerificationThresholdedResult(_validVerificationPath, threshold, results);
             }
-
         }
         private void VerificationInvalidAcceptance(string dataset, string directory, int orientation,
             double stdx, double stdy, double lambda, double threshold = -1)

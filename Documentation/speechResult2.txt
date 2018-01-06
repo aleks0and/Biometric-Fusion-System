@@ -1,0 +1,22 @@
+Date: Saturday, January 6, 2018 21:13
+Used word: close, dataset: data60
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 11
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 55/78 (70.51)
+Date: Saturday, January 6, 2018 21:14
+Used word: close, dataset: data20
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 11
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 38/42 (90.48)
