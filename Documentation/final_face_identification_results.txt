@@ -1,0 +1,27 @@
+Date: niedziela, 7 stycznia 2018 12:10
+Used dataset: data20
+Extractor params: 
+	 Lambda : 4
+	 Orientations : 7
+	 StdX : 6
+	 StdY : 7,5
+Comment: 
+RESULT: 27/42 (64,29)
+Date: niedziela, 7 stycznia 2018 12:13
+Used dataset: data40
+Extractor params: 
+	 Lambda : 4
+	 Orientations : 7
+	 StdX : 6
+	 StdY : 7,5
+Comment: 
+RESULT: 24/42 (57,14)
+Date: niedziela, 7 stycznia 2018 12:16
+Used dataset: data60
+Extractor params: 
+	 Lambda : 4
+	 Orientations : 7
+	 StdX : 6
+	 StdY : 7,5
+Comment: 
+RESULT: 37/78 (47,44)

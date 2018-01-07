@@ -1,0 +1,66 @@
+Date: Saturday, January 6, 2018 22:00
+Used word: algorithm, dataset: data20
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 11
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 31/42 (73.81)
+Date: Saturday, January 6, 2018 22:01
+Used word: close, dataset: data20
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 11
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 38/42 (90.48)
+Date: Saturday, January 6, 2018 22:01
+Used word: algorithm, dataset: data40
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 11
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 30/42 (71.43)
+Date: Saturday, January 6, 2018 22:01
+Used word: close, dataset: data40
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 11
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 37/42 (88.10)
+Date: Saturday, January 6, 2018 22:02
+Used word: algorithm, dataset: data60
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 11
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 56/78 (71.79)
+Date: Saturday, January 6, 2018 22:03
+Used word: close, dataset: data60
+Extractor params: 
+	 FilterBanksCount : 18
+	 CoeffsLeft : 11
+	 WindowFunction : SpeechRecognition.HammingWindow
+FrameMaker params: 
+	 FrameLength : 0.03
+	 FrameInterval : 0.015
+Comment: 
+RESULT: 55/78 (70.51)
