@@ -16,8 +16,8 @@ namespace AlgorithmTests
     [TestClass]
     public class FaceParametersGenerationTest
     {
-        private string _sampleDirectory = @"C:\Users\Kornel\Desktop\data_all\";
-        private string faceFilePath = @"..\..\..\..\..\Documentation\bestFaceResult.txt";
+        private string _sampleDirectory = @"C:\Users\aleks\Desktop\";
+        private string faceFilePath = @"..\..\..\..\..\Documentation\final_face_identification_results.txt";
         private string _validVerificationPath = @"..\..\..\..\..\Documentation\faceValidVerification.txt";
         private string _invalidVerificationPath = @"..\..\..\..\..\Documentation\faceInvalidVerification.txt";
 
@@ -178,10 +178,7 @@ namespace AlgorithmTests
             var datasets = new string[] { "data20", "data40", "data60" };
             foreach (var dataset in datasets)
             {
-                foreach (var w in words)
-                {
-                    FaceTestToFile(dataset, "faces", 9, 4, 3, 11);
-                }
+                FaceTestToFile(dataset, "faces", 7, 6, 7.5, 4);
             }
 
         }
