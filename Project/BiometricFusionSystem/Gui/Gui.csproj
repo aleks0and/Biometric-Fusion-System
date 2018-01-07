@@ -57,6 +57,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddPerson.xaml.cs">
+      <DependentUpon>AddPerson.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataAcquisitionSettingsWindow.xaml.cs">
       <DependentUpon>DataAcquisitionSettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -64,6 +67,7 @@
     <Compile Include="Model\Identification.cs" />
     <Compile Include="Model\Options.cs" />
     <Compile Include="Model\PersonData.cs" />
+    <Compile Include="Model\PersonToAdd.cs" />
     <Compile Include="Model\Verification.cs" />
     <Compile Include="Model\WindowService.cs" />
     <Compile Include="RestoreDbWindow.xaml.cs">
@@ -72,17 +76,23 @@
     <Compile Include="Utility\BindableBase.cs" />
     <Compile Include="Utility\BitmapSourceToBitmapConverter.cs" />
     <Compile Include="Utility\EnumToBoolConverter.cs" />
+    <Compile Include="Utility\InputDataProcessing.cs" />
     <Compile Include="Utility\RelayCommand.cs" />
     <Compile Include="Utility\SamplesToLineListConverter.cs" />
     <Compile Include="Utility\UriToBoolConverter.cs" />
     <Compile Include="VerificationWindow.xaml.cs">
       <DependentUpon>VerificationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AddPersonViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\RestoreDbVm.cs" />
     <Compile Include="WaveForm.xaml.cs">
       <DependentUpon>WaveForm.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddPerson.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DataAcquisitionSettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -58,10 +58,10 @@ namespace FaceRecognition
         public FaceFeatureExtractor(int finalMoment)
         {
             _finalMoment = finalMoment;
-            _lambda =  9;
-            _stdX = 2;
-            _stdY = 1;
-            _orientations = 4;
+            _lambda =  4;
+            _stdX = 6;
+            _stdY = 7.5;
+            _orientations = 7;
         }
         public FaceFeatureExtractor(int finalMoment, double lambda, double stdX, double stdY, int orientations)
         {

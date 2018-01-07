@@ -25,6 +25,7 @@
             </Grid.ColumnDefinitions>
             <Menu Grid.Row="0"  Grid.ColumnSpan="2">
                 <MenuItem Header="Options" Command="{Binding OpenOptionsCommand}" />
+                <MenuItem Header="Add person" Command="{Binding OpenAddPersonCommand}" />
             </Menu>
             <Grid Grid.Row="1" Grid.Column="0" Margin="5,0,5,0">
                 <Grid.RowDefinitions>

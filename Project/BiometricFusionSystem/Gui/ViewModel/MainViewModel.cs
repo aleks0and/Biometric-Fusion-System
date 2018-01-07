@@ -19,11 +19,13 @@ namespace Gui.ViewModel
         private Verification _verification;
         private Identification _identification;
         private Ffmpeg _ffmpeg;
+        private readonly DbConnection _connection; 
         public ICommand OpenOptionsCommand { get; set; }
         public ICommand OpenVerificationCommand { get; set; }
         public ICommand AcquirePhotoCommand { get; set; }
         public ICommand AcquireRecordingCommand { get; set; }
         public ICommand IdentifyCommand { get; set; }
+        public ICommand OpenAddPersonCommand { get; set; }
         //public ICommand RemoveSilenceCommand { get; set; }
         //public ICommand NormalizeCommand { get; set; }
 
@@ -43,10 +45,12 @@ namespace Gui.ViewModel
 
         public MainViewModel(DbConnection dbConnection)
         {
+            _connection = dbConnection;
             _ffmpeg = new Ffmpeg();
-            _verification = new Verification(dbConnection, 200000, 200000);
-            _identification = new Identification(dbConnection);
+            _verification = new Verification(_connection, 200000, 200000);
+            _identification = new Identification(_connection);
             OpenOptionsCommand = new RelayCommand(OpenOptions, canExecute => true);
+            OpenAddPersonCommand = new RelayCommand(OpenAddPerson, canExecute => true);
             OpenVerificationCommand = new RelayCommand(OpenVerification, p => ActivateConditionVerification() == true);
             AcquirePhotoCommand = new RelayCommand(AcquirePhoto, _ffmpeg.IsBusy);
             AcquireRecordingCommand = new RelayCommand(AcquireRecording, _ffmpeg.IsBusy);
@@ -161,6 +165,11 @@ namespace Gui.ViewModel
                 "Results", MessageBoxButton.OK);
         }
         
+        public void OpenAddPerson(object parameter)
+        {
+            WindowService.OpenAddPerson(_connection);
+        }
+
         private void OpenOptions(object parameter)
         {
             WindowService.OpenOptions(this);

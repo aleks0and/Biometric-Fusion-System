@@ -115,7 +115,7 @@ namespace Common
         /// </summary>
         /// <param name="person">Person object with feature vectors</param>
         /// <param name="recordedWord">word of voice feature vector in person object</param>
-        public bool AddPerson(Person person, string recordedWord)
+        public bool AddPerson(Person person, string recordedWord, bool loadFace = true, bool LoadSpeech = true)
         {
             bool success = false;
             try
@@ -125,8 +125,10 @@ namespace Common
                 if(person.Id == -1)
                 {
                     AddPerson(person);
-                    AddFace(person);
-                    AddSpeech(person, recordedWord);
+                    if (loadFace)
+                        AddFace(person);
+                    if (LoadSpeech)
+                        AddSpeech(person, recordedWord);
                     success = true;
                 }
             }
@@ -140,6 +142,7 @@ namespace Common
             }
             return success;
         }
+
         /// <summary>
         /// Function adding person to Person table
         /// </summary>
@@ -260,6 +263,7 @@ namespace Common
 
             return success;
         }
+
         public List<string> SelectAllWords()
         {
             var words = new List<string>();
