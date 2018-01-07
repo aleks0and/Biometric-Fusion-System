@@ -30,18 +30,20 @@ namespace Common
         /// <param name="firstName">first name of the person</param>
         /// <param name="lastName">last name of the person</param>
         /// <returns>person object with feature vectors (null if person does not exist)</returns>
-        public Person GetPerson(string firstName, string lastName)
+        public Person GetPerson(string firstName, string lastName, string word)
         {
             Person p = null;
             try
             { 
                 var select = new SqlCommand("select p.Id, p.FirstName, p.LastName, f.FeatureVector FaceFeatureVector, v.FeatureVector VoiceFeatureVector from Person p " 
-                    + "join FaceBiometric f on p.Id = f.Id join VoiceBiometric v on p.Id = v.Id where p.FirstName=@FirstName and p.LastName=@LastName");
+                    + "join FaceBiometric f on p.Id = f.Id join VoiceBiometric v on p.Id = v.Id where p.FirstName=@FirstName and p.LastName=@LastName and v.RecordedWord=@RecordedWord");
                 select.Connection = _connection.SqlConnection;
                 select.Parameters.Add("@FirstName", System.Data.SqlDbType.VarChar, MaxNameLength);
                 select.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar, MaxNameLength);
+                select.Parameters.Add("@RecordedWord", System.Data.SqlDbType.VarChar, MaxNameLength);
                 select.Parameters["@FirstName"].Value = firstName;
                 select.Parameters["@LastName"].Value = lastName;
+                select.Parameters["@RecordedWord"].Value = word;
                 _connection.SqlConnection.Open();
                 using (var reader = select.ExecuteReader())
                 {

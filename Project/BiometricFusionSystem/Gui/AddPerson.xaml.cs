@@ -26,5 +26,12 @@ namespace Gui
             InitializeComponent();
             this.DataContext = new AddPersonViewModel(dbConnection);
         }
+
+        private void TextBoxTextChanged(object sender, TextChangedEventArgs e)
+        {
+            var textbox = e.Source as TextBox;
+            MultiBindingExpression binding = BindingOperations.GetMultiBindingExpression(textbox, TextBox.TextProperty);
+            binding.UpdateSource();
+        }
     }
 }
