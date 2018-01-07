@@ -155,8 +155,8 @@ namespace AlgorithmTests
                     resultFile.WriteLine("\t {0} : {1}", nameof(frameMaker.FrameInterval), frameMaker.FrameInterval);
                     resultFile.WriteLine("Comment: " + comment);
                 }
-                //resultFile.WriteLine("Input file: {0}, input class: {1}, result class: {2}, {3}", className + fileId, className, result,
-                //    result == className ? "SUCCESS" : "FAILURE");
+                resultFile.WriteLine("Input file: {0}, input class: {1}, result class: {2}, {3}", className + fileId, className, result,
+                    result == className ? "SUCCESS" : "FAILURE");
             }
             return result == className;
         }

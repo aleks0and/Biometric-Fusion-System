@@ -22,14 +22,14 @@ namespace AlgorithmTests
         private FrameMaker _frameMaker;
         private SpeechFeatureExtractor _extractorSpeech;
         private DynamicTimeWarping _timeWarping;
-        private string _sampleDirectory = @"C:\Users\Martyna\Desktop\data60";
+        private string _sampleDirectory = @"C:\Users\Kornel\Desktop\data_all\data60";
 
         public LoadDatabaseTest()
         {
             _finalMoment = 3;
             _extractorFace = new FaceFeatureExtractor(_finalMoment);
-            _frameMaker = new FrameMaker(frameLength: 0.05f, frameInterval: 0.025f);
-            _extractorSpeech = new SpeechFeatureExtractor(window: new HammingWindow(), filterbanksCount: 10);
+            _frameMaker = new FrameMaker(frameLength: 0.03f, frameInterval: 0.015f);
+            _extractorSpeech = new SpeechFeatureExtractor(window: new HammingWindow(), filterbanksCount: 18, coeffsLeft: 11);
             _timeWarping = new DynamicTimeWarping(threshold: 0.25);
         }
 
