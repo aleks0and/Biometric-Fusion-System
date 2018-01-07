@@ -40,7 +40,7 @@ namespace Gui
         private void StopMedia(object sender, RoutedEventArgs e)
         {
             mediaPlayer.Stop();
+            mediaPlayer.Source = null;
         }
-
     }
 }

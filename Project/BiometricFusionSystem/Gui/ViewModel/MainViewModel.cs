@@ -134,10 +134,9 @@ namespace Gui.ViewModel
                 if (!string.IsNullOrEmpty(filename))
                 {
                     Person.LoadWavFile(filename, Options.AcquisitionMethod);
+                    Person.RemoveSilence(Options.SilenceRemoval);
                 }
             }
-
-            Person.RemoveSilence(Options.SilenceRemoval);
         }
 
         private void AcquirePhotoHandler(object parameter, EventArgs e)
@@ -152,6 +151,7 @@ namespace Gui.ViewModel
             _ffmpeg.EndEvent();
             
             Person.LoadWavFile(@"output.wav", Options.AcquisitionMethod);
+            Person.RemoveSilence(Options.SilenceRemoval);
         }
 
         public void Identify(object parameter)

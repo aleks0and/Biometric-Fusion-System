@@ -68,7 +68,7 @@ namespace Camera
             _process.StartInfo.RedirectStandardError = true;
             _process.StartInfo.FileName = path + @"\ffmpeg.exe";
 
-            _process.StartInfo.Arguments = "-f dshow -flags bitexact -i audio=\"" + _microphoneName + "\" -ac 1 -ar 44100 -t 3 \"" + outputPath + "\"";
+            _process.StartInfo.Arguments = "-f dshow -i audio=\"" + _microphoneName + "\" -flags bitexact -ac 1 -ar 44100 -t 3 \"" + outputPath + "\"";
 
             _process.StartInfo.UseShellExecute = false;
             _process.StartInfo.CreateNoWindow = true;
