@@ -80,9 +80,9 @@ namespace AlgorithmTests
                 person.VoiceFeatureVector = dtwAlgorithm.Classes[dir];
                 person.FirstName = dir[0].ToString();
                 person.LastName = dir.Substring(1);
-                personRepository.AddPerson(person, "algorithm");
+                personRepository.AddPersonTest(person, "algorithm");
                 person.VoiceFeatureVector = dtwClose.Classes[dir];
-                personRepository.AddPerson(person, "close");
+                personRepository.AddPersonTest(person, "close");
             }
         }
 
@@ -133,9 +133,9 @@ namespace AlgorithmTests
                 person.VoiceFeatureVector = dtwAlgorithm.Classes[dir];
                 person.FirstName = dir[0].ToString();
                 person.LastName = dir.Substring(1);
-                personRepository.AddPerson(person, "algorithm");
+                personRepository.AddPersonTest(person, "algorithm");
                 person.VoiceFeatureVector = dtwClose.Classes[dir];
-                personRepository.AddPerson(person, "close");
+                personRepository.AddPersonTest(person, "close");
             }
         }
 
@@ -198,7 +198,7 @@ namespace AlgorithmTests
                 FaceFeatureVector = new List<double>() { 0 },
                 VoiceFeatureVector = new List<double>() { 0 }
             };
-            bool result = personRepo.AddPerson(person, "algorithm");
+            bool result = personRepo.AddPersonTest(person, "algorithm");
             Assert.IsTrue(result);
         }
         [TestMethod]
@@ -213,8 +213,8 @@ namespace AlgorithmTests
                 FaceFeatureVector = new List<double>() { 0 },
                 VoiceFeatureVector = new List<double>() { 0 }
             };
-            personRepo.AddPerson(person, "algorithm");
-            bool result = personRepo.AddPerson(person, "close");
+            personRepo.AddPersonTest(person, "algorithm");
+            bool result = personRepo.AddPersonTest(person, "close");
             Assert.IsFalse(result);
         }
         [TestMethod]
@@ -229,7 +229,7 @@ namespace AlgorithmTests
                 FaceFeatureVector = new List<double>() { 0 },
                 VoiceFeatureVector = new List<double>() { 0 }
             };
-            personRepo.AddPerson(person, "algorithm");
+            personRepo.AddPersonTest(person, "algorithm");
             bool result = personRepo.AddSpeechToExistingPerson(person, "close");
             Assert.IsTrue(result);
         }
@@ -245,7 +245,7 @@ namespace AlgorithmTests
                 FaceFeatureVector = new List<double>() { 0 },
                 VoiceFeatureVector = new List<double>() { 0 }
             };
-            personRepo.AddPerson(person, "algorithm");
+            personRepo.AddPersonTest(person, "algorithm");
             bool result = personRepo.AddSpeechToExistingPerson(person, "algorithm");
         }
     }

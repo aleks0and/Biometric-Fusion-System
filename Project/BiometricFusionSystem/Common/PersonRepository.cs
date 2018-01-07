@@ -144,7 +144,35 @@ namespace Common
             }
             return success;
         }
-
+        public bool AddPersonTest(Person person, string recordedWord)
+        {
+            bool success = false;
+            try
+            {
+                _connection.SqlConnection.Open();
+                person.Id = GetPersonId(person.FirstName, person.LastName);
+                if (person.Id == -1)
+                {
+                    AddPerson(person);
+                    AddFace(person);
+                    AddSpeech(person, recordedWord);
+                    success = true;
+                }
+                else
+                {
+                    AddSpeech(person, recordedWord);
+                }
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                _connection.SqlConnection.Close();
+            }
+            return success;
+        }
         /// <summary>
         /// Function adding person to Person table
         /// </summary>
