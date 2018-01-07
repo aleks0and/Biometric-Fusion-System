@@ -173,9 +173,17 @@ namespace AlgorithmTests
         }
 
         [TestMethod]
-        public void FaceTestToFileTest()
+        public void FaceIdentification()
         {
-            FaceTestToFile("dataDecember", "faces", 9, 4, 3, 11);
+            var datasets = new string[] { "data20", "data40", "data60" };
+            foreach (var dataset in datasets)
+            {
+                foreach (var w in words)
+                {
+                    FaceTestToFile(dataset, "faces", 9, 4, 3, 11);
+                }
+            }
+
         }
 
         [TestMethod]
