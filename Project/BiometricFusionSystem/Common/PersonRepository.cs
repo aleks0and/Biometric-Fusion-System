@@ -23,6 +23,7 @@ namespace Common
         {
             _connection = connection;
         }
+
         /// <summary>
         /// function returning a Person object given parameters
         /// </summary>
@@ -114,8 +115,9 @@ namespace Common
         /// </summary>
         /// <param name="person">Person object with feature vectors</param>
         /// <param name="recordedWord">word of voice feature vector in person object</param>
-        public void AddPerson(Person person, string recordedWord)
+        public bool AddPerson(Person person, string recordedWord)
         {
+            bool success = false;
             try
             {
                 _connection.SqlConnection.Open();
@@ -124,8 +126,9 @@ namespace Common
                 {
                     AddPerson(person);
                     AddFace(person);
+                    AddSpeech(person, recordedWord);
+                    success = true;
                 }
-                AddSpeech(person, recordedWord);
             }
             catch (SqlException ex)
             {
@@ -135,6 +138,7 @@ namespace Common
             {
                 _connection.SqlConnection.Close();
             }
+            return success;
         }
         /// <summary>
         /// Function adding person to Person table
@@ -208,6 +212,80 @@ namespace Common
             insert.Parameters["@FeatureVector"].Value = person.VoiceFeatureVectorToString(' ');
             insert.Parameters["@RecordedWord"].Value = recordedWord;
             insert.ExecuteNonQuery();
+        }
+        private bool CheckIfSpeechExists(Person person, string recordedWord)
+        {
+            var cmd = new SqlCommand("SELECT v.VoiceId FROM VoiceBiometric v WHERE v.Id=@Id AND v.RecordedWord=@RecordedWord");
+            cmd.Connection = _connection.SqlConnection;
+            cmd.Parameters.Add("@Id", System.Data.SqlDbType.Int);
+            cmd.Parameters.Add("@RecordedWord", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@Id"].Value = person.Id;
+            cmd.Parameters["@RecordedWord"].Value = recordedWord;
+
+            int id = -1;
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    id = (int)reader[0];
+                }
+            }
+            return id != -1;
+        }
+        public bool AddSpeechToExistingPerson(Person person, string recordedWord)
+        {
+            bool success = false;
+            try
+            {
+                _connection.SqlConnection.Open();
+                if (GetPersonId(person.FirstName, person.LastName) == -1
+                    || CheckIfSpeechExists(person, recordedWord))
+                {
+                    success = false;
+                }
+                else
+                {
+                    AddSpeech(person, recordedWord);
+                    success = true;
+                }
+            }
+            catch(Exception e)
+            {
+                success = false;
+            }
+            finally
+            {
+                _connection.SqlConnection.Close();
+            }
+
+            return success;
+        }
+        public List<string> SelectAllWords()
+        {
+            var words = new List<string>();
+            try
+            {
+                _connection.SqlConnection.Open();
+                var select = new SqlCommand("SELECT DISTINCT v.RecordedWord FROM VoiceBiometric v");
+                select.Connection = _connection.SqlConnection;
+                using (var reader = select.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string word = (string)reader[0];
+                        words.Add(word);
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                words = null;
+            }
+            finally
+            {
+                _connection.SqlConnection.Close();
+            }
+            return words;
         }
     }
 }
