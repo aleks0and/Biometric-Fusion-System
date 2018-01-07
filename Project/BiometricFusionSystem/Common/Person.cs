@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,7 +64,7 @@ namespace Common
 
             for(int i = 0; i < q.Length - 1; i++)
             {
-                double w = double.Parse(q[i]);
+                double w = double.Parse(q[i], new CultureInfo("en-US"));
                 ffv.Add(w);
             }
 
