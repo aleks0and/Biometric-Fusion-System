@@ -23,24 +23,27 @@ namespace Common
         {
             _connection = connection;
         }
+
         /// <summary>
         /// function returning a Person object given parameters
         /// </summary>
         /// <param name="firstName">first name of the person</param>
         /// <param name="lastName">last name of the person</param>
         /// <returns>person object with feature vectors (null if person does not exist)</returns>
-        public Person GetPerson(string firstName, string lastName)
+        public Person GetPerson(string firstName, string lastName, string word)
         {
             Person p = null;
             try
             { 
                 var select = new SqlCommand("select p.Id, p.FirstName, p.LastName, f.FeatureVector FaceFeatureVector, v.FeatureVector VoiceFeatureVector from Person p " 
-                    + "join FaceBiometric f on p.Id = f.Id join VoiceBiometric v on p.Id = v.Id where p.FirstName=@FirstName and p.LastName=@LastName");
+                    + "join FaceBiometric f on p.Id = f.Id join VoiceBiometric v on p.Id = v.Id where p.FirstName=@FirstName and p.LastName=@LastName and v.RecordedWord=@RecordedWord");
                 select.Connection = _connection.SqlConnection;
                 select.Parameters.Add("@FirstName", System.Data.SqlDbType.VarChar, MaxNameLength);
                 select.Parameters.Add("@LastName", System.Data.SqlDbType.VarChar, MaxNameLength);
+                select.Parameters.Add("@RecordedWord", System.Data.SqlDbType.VarChar, MaxNameLength);
                 select.Parameters["@FirstName"].Value = firstName;
                 select.Parameters["@LastName"].Value = lastName;
+                select.Parameters["@RecordedWord"].Value = word;
                 _connection.SqlConnection.Open();
                 using (var reader = select.ExecuteReader())
                 {
@@ -114,8 +117,9 @@ namespace Common
         /// </summary>
         /// <param name="person">Person object with feature vectors</param>
         /// <param name="recordedWord">word of voice feature vector in person object</param>
-        public void AddPerson(Person person, string recordedWord)
+        public bool AddPerson(Person person, string recordedWord, bool loadFace = true, bool LoadSpeech = true)
         {
+            bool success = false;
             try
             {
                 _connection.SqlConnection.Open();
@@ -123,9 +127,12 @@ namespace Common
                 if(person.Id == -1)
                 {
                     AddPerson(person);
-                    AddFace(person);
+                    if (loadFace)
+                        AddFace(person);
+                    if (LoadSpeech)
+                        AddSpeech(person, recordedWord);
+                    success = true;
                 }
-                AddSpeech(person, recordedWord);
             }
             catch (SqlException ex)
             {
@@ -135,7 +142,9 @@ namespace Common
             {
                 _connection.SqlConnection.Close();
             }
+            return success;
         }
+
         /// <summary>
         /// Function adding person to Person table
         /// </summary>
@@ -208,6 +217,81 @@ namespace Common
             insert.Parameters["@FeatureVector"].Value = person.VoiceFeatureVectorToString(' ');
             insert.Parameters["@RecordedWord"].Value = recordedWord;
             insert.ExecuteNonQuery();
+        }
+        private bool CheckIfSpeechExists(Person person, string recordedWord)
+        {
+            var cmd = new SqlCommand("SELECT v.VoiceId FROM VoiceBiometric v WHERE v.Id=@Id AND v.RecordedWord=@RecordedWord");
+            cmd.Connection = _connection.SqlConnection;
+            cmd.Parameters.Add("@Id", System.Data.SqlDbType.Int);
+            cmd.Parameters.Add("@RecordedWord", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@Id"].Value = person.Id;
+            cmd.Parameters["@RecordedWord"].Value = recordedWord;
+
+            int id = -1;
+            using (var reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    id = (int)reader[0];
+                }
+            }
+            return id != -1;
+        }
+        public bool AddSpeechToExistingPerson(Person person, string recordedWord)
+        {
+            bool success = false;
+            try
+            {
+                _connection.SqlConnection.Open();
+                if (GetPersonId(person.FirstName, person.LastName) == -1
+                    || CheckIfSpeechExists(person, recordedWord))
+                {
+                    success = false;
+                }
+                else
+                {
+                    AddSpeech(person, recordedWord);
+                    success = true;
+                }
+            }
+            catch(Exception e)
+            {
+                success = false;
+            }
+            finally
+            {
+                _connection.SqlConnection.Close();
+            }
+
+            return success;
+        }
+
+        public List<string> SelectAllWords()
+        {
+            var words = new List<string>();
+            try
+            {
+                _connection.SqlConnection.Open();
+                var select = new SqlCommand("SELECT DISTINCT v.RecordedWord FROM VoiceBiometric v");
+                select.Connection = _connection.SqlConnection;
+                using (var reader = select.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string word = (string)reader[0];
+                        words.Add(word);
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                words = null;
+            }
+            finally
+            {
+                _connection.SqlConnection.Close();
+            }
+            return words;
         }
     }
 }

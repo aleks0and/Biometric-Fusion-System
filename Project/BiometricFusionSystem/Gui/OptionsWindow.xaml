@@ -7,7 +7,7 @@
         xmlns:localModel="clr-namespace:Gui.Model"
         xmlns:utility="clr-namespace:Gui.Utility"
         mc:Ignorable="d"
-        Title="Options" Height="200" Width="300">
+        Title="Options" Height="250" Width="300">
     <Window.Resources>
         <utility:EnumToBoolConverter x:Key="EnumToBoolConverter" />
     </Window.Resources>
@@ -16,7 +16,8 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -65,6 +66,8 @@
                 Converter={StaticResource EnumToBoolConverter}, 
                 ConverterParameter={x:Static localModel:SilenceRemoval.No}}" Content="No" GroupName="SilenceRemoval" />
         </StackPanel>
-        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Ok" Click="CloseWindow"/>
+        <ComboBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Options.Words}"
+                  SelectedValue="{Binding Options.CurrentWord}" />
+        <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Content="Ok" Click="CloseWindow"/>
     </Grid>
 </Window>

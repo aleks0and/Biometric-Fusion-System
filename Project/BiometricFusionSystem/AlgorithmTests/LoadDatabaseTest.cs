@@ -174,5 +174,79 @@ namespace AlgorithmTests
             return _extractorSpeech.GetFeatures(frames, sampleRate);
         }
 
+        [TestMethod]
+        public void GetAllWords()
+        {
+            var connection = new DbConnection(true);
+            var personRepo = new PersonRepository(connection);
+            var words = personRepo.SelectAllWords();
+            string[] expectedWords = new string[] { "algorithm", "close" };
+            foreach(var expected in expectedWords)
+            {
+                Assert.IsTrue(words.Contains(expected));
+            }
+        }
+        [TestMethod]
+        public void AddNewPersonToDb()
+        {
+            var connection = new DbConnection(true);
+            var personRepo = new PersonRepository(connection);
+            Person person = new Person()
+            {
+                FirstName = "TEST",
+                LastName = "TEST",
+                FaceFeatureVector = new List<double>() { 0 },
+                VoiceFeatureVector = new List<double>() { 0 }
+            };
+            bool result = personRepo.AddPerson(person, "algorithm");
+            Assert.IsTrue(result);
+        }
+        [TestMethod]
+        public void AddExistingPersonToDb()
+        {
+            var connection = new DbConnection(true);
+            var personRepo = new PersonRepository(connection);
+            Person person = new Person()
+            {
+                FirstName = "TEST1",
+                LastName = "TEST1",
+                FaceFeatureVector = new List<double>() { 0 },
+                VoiceFeatureVector = new List<double>() { 0 }
+            };
+            personRepo.AddPerson(person, "algorithm");
+            bool result = personRepo.AddPerson(person, "close");
+            Assert.IsFalse(result);
+        }
+        [TestMethod]
+        public void AddSpeechToExistingPerson()
+        {
+            var connection = new DbConnection(true);
+            var personRepo = new PersonRepository(connection);
+            Person person = new Person()
+            {
+                FirstName = "TEST2",
+                LastName = "TEST2",
+                FaceFeatureVector = new List<double>() { 0 },
+                VoiceFeatureVector = new List<double>() { 0 }
+            };
+            personRepo.AddPerson(person, "algorithm");
+            bool result = personRepo.AddSpeechToExistingPerson(person, "close");
+            Assert.IsTrue(result);
+        }
+        [TestMethod]
+        public void AddExistingSpeechToExistingPerson()
+        {
+            var connection = new DbConnection(true);
+            var personRepo = new PersonRepository(connection);
+            Person person = new Person()
+            {
+                FirstName = "TEST3",
+                LastName = "TEST3",
+                FaceFeatureVector = new List<double>() { 0 },
+                VoiceFeatureVector = new List<double>() { 0 }
+            };
+            personRepo.AddPerson(person, "algorithm");
+            bool result = personRepo.AddSpeechToExistingPerson(person, "algorithm");
+        }
     }
 }

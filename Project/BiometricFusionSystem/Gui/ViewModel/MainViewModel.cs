@@ -19,11 +19,14 @@ namespace Gui.ViewModel
         private Verification _verification;
         private Identification _identification;
         private Ffmpeg _ffmpeg;
+        private PersonRepository _personRepository;
+        private readonly DbConnection _connection; 
         public ICommand OpenOptionsCommand { get; set; }
         public ICommand OpenVerificationCommand { get; set; }
         public ICommand AcquirePhotoCommand { get; set; }
         public ICommand AcquireRecordingCommand { get; set; }
         public ICommand IdentifyCommand { get; set; }
+        public ICommand OpenAddPersonCommand { get; set; }
         //public ICommand RemoveSilenceCommand { get; set; }
         //public ICommand NormalizeCommand { get; set; }
 
@@ -43,10 +46,13 @@ namespace Gui.ViewModel
 
         public MainViewModel(DbConnection dbConnection)
         {
+            _connection = dbConnection;
+            _personRepository = new PersonRepository(dbConnection);
             _ffmpeg = new Ffmpeg();
-            _verification = new Verification(dbConnection, 200000, 200000);
-            _identification = new Identification(dbConnection);
+            _verification = new Verification(_connection, faceThreshold: 14, voiceThreshold: 3000);
+            _identification = new Identification(_connection);
             OpenOptionsCommand = new RelayCommand(OpenOptions, canExecute => true);
+            OpenAddPersonCommand = new RelayCommand(OpenAddPerson, canExecute => true);
             OpenVerificationCommand = new RelayCommand(OpenVerification, p => ActivateConditionVerification() == true);
             AcquirePhotoCommand = new RelayCommand(AcquirePhoto, _ffmpeg.IsBusy);
             AcquireRecordingCommand = new RelayCommand(AcquireRecording, _ffmpeg.IsBusy);
@@ -156,21 +162,43 @@ namespace Gui.ViewModel
 
         public void Identify(object parameter)
         {
-            var result = _identification.Identify(Person, Options.IdentificationMethod);
+            if (string.IsNullOrEmpty(Options.CurrentWord))
+            {
+                LoadOptionsWords();
+            }
+            var result = _identification.Identify(Person, Options.IdentificationMethod, Options.CurrentWord);
             MessageBox.Show(string.Format("Face result: {0}\nSpeech result: {1}", result.Item1, result.Item2),
                 "Results", MessageBoxButton.OK);
         }
         
+        public void OpenAddPerson(object parameter)
+        {
+            WindowService.OpenAddPerson(_connection);
+        }
+
         private void OpenOptions(object parameter)
         {
+            LoadOptionsWords();
             WindowService.OpenOptions(this);
         }
         public void OpenVerification(object parameter)
         {
             WindowService.OpenVerification(this);
-            var result = _verification.Verify(Person, Options.VerificationMethod);
+            if(string.IsNullOrEmpty(Options.CurrentWord))
+            {
+                LoadOptionsWords();
+            }
+            var result = _verification.Verify(Person, Options.VerificationMethod, Options.CurrentWord);
             MessageBox.Show(string.Format("Face result: {0}\nSpeech result: {1}", result.Item1, result.Item2),
                 "Results", MessageBoxButton.OK);
+        }
+        public void LoadOptionsWords()
+        {
+            Options.Words = new System.Collections.ObjectModel.ObservableCollection<string>(_personRepository.SelectAllWords());
+            if (string.IsNullOrEmpty(Options.CurrentWord))
+            {
+                Options.CurrentWord = Options.Words[0];
+            }
         }
     }
 }

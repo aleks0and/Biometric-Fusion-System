@@ -46,7 +46,7 @@ namespace Common
             _sqlConnection = new SqlConnection();
             if (isTest)
             {
-                ConnectionString = "Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = \"C:\\_eng_th\\Biometric-Fusion-System\\Project\\BiometricFusionSystem\\Common\\biometricDB.mdf\"; Integrated Security = True;";
+                ConnectionString = "Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename = \"C:\\Users\\Kornel\\Desktop\\G\\Biometric-Fusion-System\\Project\\BiometricFusionSystem\\Common\\biometricDB.mdf\"; Integrated Security = True;";
             }
             else
             {

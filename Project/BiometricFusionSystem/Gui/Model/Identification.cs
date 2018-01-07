@@ -16,22 +16,25 @@ namespace Gui.Model
         private FrameMaker _frameMaker;
         private SpeechFeatureExtractor _speechFeatureExtractor;
         private DynamicTimeWarping _dynamicTimeWarping;
+        private string _lastWord = "";
 
         public Identification(DbConnection dbConnection)
         {
             _persons = new List<Person>();
             _personRepository = new PersonRepository(dbConnection);
             _mdc = new MinimumDistanceClassifier();
-            _frameMaker = new FrameMaker(frameLength: 0.05f, frameInterval: 0.025f);
-            _speechFeatureExtractor = new SpeechFeatureExtractor(window: new HammingWindow(), filterbanksCount: 10);
-            _dynamicTimeWarping = new DynamicTimeWarping(threshold: 0.25);
+            _frameMaker = new FrameMaker(frameLength: 0.03f, frameInterval: 0.015f);
+            _speechFeatureExtractor = new SpeechFeatureExtractor(window: new HammingWindow(), filterbanksCount: 18, coeffsLeft: 11);
+            _dynamicTimeWarping = new DynamicTimeWarping(threshold: 0);
         }
 
-        public void LoadPersonsList()
+        public void LoadPersonsList(string word)
         {
-            if(_persons.Count == 0)
+            if(_persons.Count == 0 || _lastWord != word)
             {
-                _persons = _personRepository.SelectPersons("algorithm");
+                _mdc.Classes.Clear();
+                _dynamicTimeWarping.Classes.Clear();
+                _persons = _personRepository.SelectPersons(word);
                 for (int i = 0; i < _persons.Count; i++)
                 {
                     _mdc.Classes.Add(_persons[i].FirstName + _persons[i].LastName, _persons[i].FaceFeatureVector);
@@ -56,9 +59,9 @@ namespace Gui.Model
             return _mdc.Classify(fv);
         }
 
-        public Tuple<string, string> Identify(PersonData person, IdentificationMethod identificationMethod)
+        public Tuple<string, string> Identify(PersonData person, IdentificationMethod identificationMethod, string word)
         {
-            LoadPersonsList();
+            LoadPersonsList(word);
             string faceResult = "no result"; 
             string speechResult = "no result";
             

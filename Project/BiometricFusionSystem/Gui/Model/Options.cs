@@ -1,6 +1,7 @@
 ﻿using Gui.Utility;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,7 +37,18 @@ namespace Gui.Model
             get { return _identificationMethod; }
             set { _identificationMethod = value; Notify(); }
         }
-
+        private ObservableCollection<string> _words;
+        public ObservableCollection<string> Words
+        {
+            get { return _words; }
+            set { _words = value; Notify(); }
+        }
+        private string _currentWord;
+        public string CurrentWord
+        {
+            get { return _currentWord; }
+            set { _currentWord = value; Notify(); }
+        }
         public Options(AcquisitionMethod acquisition, SilenceRemoval silence, 
             VerificationMethod verification, IdentificationMethod identification)
         {

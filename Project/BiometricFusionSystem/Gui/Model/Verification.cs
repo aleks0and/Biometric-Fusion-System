@@ -26,9 +26,9 @@ namespace Gui.Model
         {
             _personRepository = new PersonRepository(dbConnection);
             _mdc = new MinimumDistanceClassifier();
-            _frameMaker = new FrameMaker(frameLength: 0.05f, frameInterval: 0.025f);
-            _speechFeatureExtractor = new SpeechFeatureExtractor(window: new HammingWindow(), filterbanksCount: 10);
-            _dynamicTimeWarping = new DynamicTimeWarping(threshold: 0.25);
+            _frameMaker = new FrameMaker(frameLength: 0.03f, frameInterval: 0.015f);
+            _speechFeatureExtractor = new SpeechFeatureExtractor(window: new HammingWindow(), filterbanksCount: 18, coeffsLeft: 11);
+            _dynamicTimeWarping = new DynamicTimeWarping(threshold: 0);
             _faceThreshold = faceThreshold;
             _voiceThreshold = voiceThreshold;
         }
@@ -73,12 +73,12 @@ namespace Gui.Model
             return result;
         }
 
-        public Tuple<bool, bool> Verify(PersonData input, VerificationMethod verificationMethod)
+        public Tuple<bool, bool> Verify(PersonData input, VerificationMethod verificationMethod, string word)
         {
             bool faceResult = false;
             bool speechResult = false;
 
-            _personTemplate = _personRepository.GetPerson(input.FirstName, input.LastName);
+            _personTemplate = _personRepository.GetPerson(input.FirstName, input.LastName, word);
 
             if (verificationMethod == VerificationMethod.FaceOnly || verificationMethod == VerificationMethod.FaceAndSpeech)
             {

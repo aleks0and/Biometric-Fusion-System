@@ -24,6 +24,12 @@ namespace Gui.Model
             window.ShowDialog();
         }
 
+        public static void OpenAddPerson(DbConnection dbConnection)
+        {
+            var addPersonWindow = new AddPerson(dbConnection);
+            addPersonWindow.ShowDialog();
+        }
+
         public static void OpenDatabaseRestore()
         {
             _dbWindow = new RestoreDbWindow();
@@ -41,5 +47,9 @@ namespace Gui.Model
             _dbWindow.Close();
             _dbWindow = null;
         }
+
+
+
+       
     }
 }
