@@ -58,7 +58,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <MediaElement Name="mediaPlayer" MediaEnded="StopMedia" Source="{Binding Person.RecordingUri}" LoadedBehavior="Manual" UnloadedBehavior="Stop" Visibility="Collapsed"/>
+                <MediaElement Name="mediaPlayer" Source="{Binding Person.RecordingUri}" LoadedBehavior="Manual" UnloadedBehavior="Stop" MediaEnded="StopMedia"  Visibility="Collapsed"/>
                 <local:WaveForm Grid.Row="0" Height="175" Width="200" Grid.ColumnSpan="2" Samples="{Binding Path=Person.Samples, Converter={StaticResource SamplesToLineListConverter}}" />
                 <!--<Button Grid.Row="1" Grid.Column="0" Content="Remove silence" Command="{Binding RemoveSilenceCommand}" />
                 <Button Grid.Row="1" Grid.Column="1" Content="normalize" Command="{Binding NormalizeCommand}" />-->
