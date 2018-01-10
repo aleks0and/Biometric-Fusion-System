@@ -100,6 +100,29 @@ namespace FaceRecognition
             bmp.Dispose();
             return histogramFeatures.SelectMany(n => n).ToList();
         }
+        public List<double> GetFeatureVectorWithoutColorBasedFeatures(Bitmap bmp)
+        {
+            HistogramEqualization he = new HistogramEqualization();
+            bmp = he.Normalize(bmp);
+            HistogramFeatureExtraction hfe = new HistogramFeatureExtraction(bmp);
+            List<List<double>> histogramFeatures = hfe.CalculateMoments(_finalMoment);
+            GrayscaleConverter gConverter = new GrayscaleConverter();
+            bmp = gConverter.Normalize(bmp);
+
+            GaborFilter gf = new GaborFilter(_stdX, _stdY, _lambda, Math.PI / 2, _orientations, 3);
+            List<Bitmap> gfBitmap = gf.ApplyFilter(bmp);
+            bmp.Dispose();
+            bmp = CombineBitmaps(gfBitmap);
+            GaborFilterMagnitudes gfm = new GaborFilterMagnitudes(bmp);
+            List<double> magnitudesFeatures = gfm.CalculateFeatureVector();
+            histogramFeatures.Add(magnitudesFeatures);
+            foreach (var b in gfBitmap)
+            {
+                b.Dispose();
+            }
+            bmp.Dispose();
+            return magnitudesFeatures.ToList();
+        }
         /// <summary>
         /// function which calculates the feature vectors only for the gabor function for a given image.
         /// </summary>

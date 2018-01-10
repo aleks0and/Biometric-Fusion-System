@@ -16,7 +16,7 @@ namespace AlgorithmTests
     [TestClass]
     public class FaceParametersGenerationTest
     {
-        private string _sampleDirectory = @"C:\Users\aleks\Desktop\";
+        private string _sampleDirectory = @"C:\Users\Martyna\Desktop\data_all\";
         private string faceFilePath = @"..\..\..\..\..\Documentation\final_face_identification_results.txt";
         private string _validVerificationPath = @"..\..\..\..\..\Documentation\faceValidVerification.txt";
         private string _invalidVerificationPath = @"..\..\..\..\..\Documentation\faceInvalidVerification.txt";
@@ -46,7 +46,7 @@ namespace AlgorithmTests
                     {
                         for(double lambda = lambdaMin; lambda < lambdaMax; lambda++)
                         {
-                            double avg = FaceTestToFile(datasets[1], directory, orientations, stdx, stdy, lambda);
+                            double avg = FaceTestToFileWithoutColorBasedFeatures(datasets[1], directory, orientations, stdx, stdy, lambda);
                             if(avg > bestAverage)
                             {
                                 result = new Result()
@@ -205,6 +205,50 @@ namespace AlgorithmTests
                     if (File.Exists(path))
                     {
                         var featureVector = ExtractFeaturesFace(path, extractor);
+                        var result = MDC.Classify(featureVector);
+                        bool success = SaveFaceResult(result, extractor, dir, firstRun,
+                            i + trainFilesPerPerson + 1, dataset, testComment);
+                        if (success)
+                        {
+                            countSuccess++;
+                        }
+                        countTotal++;
+                        firstRun = false;
+                    }
+                }
+            }
+            return SaveTotalResult(faceFilePath, countSuccess, countTotal);
+        }
+
+        [TestMethod]
+        public void TestFaceWithoutColor()
+        {
+            double percent = FaceTestToFileWithoutColorBasedFeatures("data60", "faces", 7, 6, 7.5, 4);
+
+        }
+
+        [TestMethod]
+        public double FaceTestToFileWithoutColorBasedFeatures(string dataset, string directory, int orientation,
+            double stdx, double stdy, double lambda)
+        {
+            int finalMoment = 3;
+            string testComment = "";
+            int testFilesPerPerson = 2;
+            int trainFilesPerPerson = 4;
+            var MDC = new MinimumDistanceClassifier();
+            var extractor = new FaceFeatureExtractor(finalMoment, lambda, stdx, stdy, orientation);
+            TrainMDC(MDC, directory, trainFilesPerPerson, extractor, dataset);
+            bool firstRun = true;
+            int countSuccess = 0;
+            int countTotal = 0;
+            foreach (var dir in GetDirs(dataset))
+            {
+                for (int i = 0; i < testFilesPerPerson; i++)
+                {
+                    var path = _sampleDirectory + dataset + @"\" + directory + @"\" + dir + @"\" + dir + (i + trainFilesPerPerson + 1) + ".bmp";
+                    if (File.Exists(path))
+                    {
+                        var featureVector = ExtractFeaturesFaceWithoutColorBasedFeatures(path, extractor);
                         var result = MDC.Classify(featureVector);
                         bool success = SaveFaceResult(result, extractor, dir, firstRun,
                             i + trainFilesPerPerson + 1, dataset, testComment);
@@ -379,7 +423,7 @@ namespace AlgorithmTests
                     if (File.Exists(_sampleDirectory + dataset + @"\" + directory + @"\" + dir + @"\" + dir + (i + 1) + ".bmp"))
                     {
                         var path = _sampleDirectory + dataset + @"\" + directory + @"\" + dir + @"\" + dir + (i + 1) + ".bmp";
-                        var featureVector = ExtractFeaturesFace(path, extractor);
+                        var featureVector = ExtractFeaturesFaceWithoutColorBasedFeatures(path, extractor);
                         facevectors.Add(featureVector);
                     }
                 }
@@ -391,6 +435,14 @@ namespace AlgorithmTests
         {
             var file = new Bitmap(path);
             var vector = extractor.GetFeatureVector(file);
+            file.Dispose();
+            return vector;
+        }
+
+        private List<double> ExtractFeaturesFaceWithoutColorBasedFeatures(string path, FaceFeatureExtractor extractor)
+        {
+            var file = new Bitmap(path);
+            var vector = extractor.GetFeatureVectorWithoutColorBasedFeatures(file);
             file.Dispose();
             return vector;
         }

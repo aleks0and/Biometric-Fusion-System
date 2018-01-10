@@ -25,3 +25,12 @@ Extractor params:
 	 StdY : 7,5
 Comment: 
 RESULT: 37/78 (47,44)
+Date: 10 January 2018 6:50 PM
+Used dataset: data60
+Extractor params: 
+	 Lambda : 4
+	 Orientations : 7
+	 StdX : 6
+	 StdY : 7.5
+Comment: 
+RESULT: 25/78 (32.05)
